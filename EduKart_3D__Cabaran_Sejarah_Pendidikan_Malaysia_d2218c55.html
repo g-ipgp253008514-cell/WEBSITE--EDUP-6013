@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>EduKart 3D</title><style>
+*{box-sizing:border-box}html,body{height:100%;margin:0;overflow:hidden;background:#87ceeb;font-family:'Trebuchet MS','Segoe UI',sans-serif;color:#fff;user-select:none;touch-action:none}
+canvas#c{position:fixed;inset:0;width:100%;height:100%}
+.s{position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:12px;background:rgba(20,10,80,.55);z-index:5;overflow:auto}
+.s.on{display:flex;animation:pop .4s}.s.low{background:none;justify-content:flex-end;pointer-events:none}.s.low .box{pointer-events:auto}
+@keyframes pop{from{transform:scale(.85);opacity:0}}
+.box{background:linear-gradient(#3b2fb5,#1b1464);border:4px solid #ffd23f;border-radius:20px;padding:16px 20px;max-width:640px;width:100%;box-shadow:0 8px 0 #0008;margin:6px}
+h1{font-size:clamp(34px,9vw,76px);margin:0;color:#ffd23f;text-shadow:0 5px 0 #e63946,0 9px 0 #0006;letter-spacing:2px}
+h2{margin:6px 0;color:#ffd23f}p{margin:6px 0}
+.b{font:inherit;font-weight:900;font-size:19px;background:#e63946;color:#fff;border:3px solid #fff;border-radius:14px;padding:11px 22px;margin:5px;cursor:pointer;box-shadow:0 5px 0 #8d0f1c}
+.b:active{transform:translateY(4px);box-shadow:0 1px 0}.b.g{background:#2ecc71;box-shadow:0 5px 0 #17803f}.b.y{background:#f4b400;color:#222;box-shadow:0 5px 0 #a37600}
+input{font:inherit;font-size:22px;padding:10px;border-radius:12px;border:3px solid #ffd23f;text-align:center;width:80%;max-width:320px;margin:8px}
+.o{display:block;width:100%;text-align:left;font:inherit;font-weight:700;font-size:17px;background:#fff;color:#1b1464;border:3px solid #ffd23f;border-radius:12px;padding:10px 14px;margin:6px 0;cursor:pointer}
+.o.ok{background:#2ecc71;color:#fff}.o.no{background:#e63946;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:15px}td,th{padding:4px 6px;border-bottom:1px solid #fff4}tr.me{background:#ffd23f;color:#222;font-weight:900}
+.chs{display:flex;flex-wrap:wrap;justify-content:center}.chs .b{font-size:15px;padding:8px 12px}.chs .b.sel{outline:4px solid #ffd23f}
+#hud{position:fixed;inset:0;pointer-events:none;display:none;z-index:3;padding-top:env(safe-area-inset-top,0)}
+.pn{position:absolute;left:8px;top:8px;background:#0007;border:3px solid #ffd23f;border-radius:14px;padding:6px 12px;font-weight:900;font-size:clamp(12px,2.6vw,17px);line-height:1.5;text-shadow:0 2px 0 #000}
+#mm{position:absolute;right:8px;top:8px;width:130px;height:130px;background:#0008;border:3px solid #fff;border-radius:14px}
+#bar{position:absolute;left:50%;top:8px;transform:translateX(-50%);pointer-events:auto}
+#bar .b{font-size:16px;padding:5px 12px;margin:2px}
+#cd{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(60px,18vw,160px);font-weight:900;color:#ffd23f;text-shadow:0 6px 0 #e63946}
+#tc{position:fixed;inset:auto 0 12px 0;display:none;justify-content:space-between;padding:0 12px;z-index:4;pointer-events:none}
+#tc div{display:flex;gap:10px;pointer-events:auto}#tc button{width:70px;height:70px;border-radius:50%;border:3px solid #fff;background:#e63946aa;color:#fff;font-size:26px;font-weight:900}
+@media(pointer:coarse){#tc.on{display:flex}}
+</style></head><body><canvas id="c"></canvas>
+<div id="hud"><div class="pn" id="hl"></div><canvas id="mm" width="130" height="130"></canvas><div id="bar"><button class="b y" id="bp">⏸</button><button class="b y" id="bs">🔊</button></div><div id="cd"></div></div>
+<div id="tc"><div><button data-k="ArrowLeft">◀</button><button data-k="ArrowRight">▶</button></div><div><button data-k=" ">🔥</button><button data-k="ArrowDown">■</button><button data-k="ArrowUp">▲</button></div></div>
+
+<div class="s on" id="menu"><h1>EduKart 3D</h1><h2>Cabaran Sejarah Pendidikan Malaysia</h2><div class="box"><input id="nm" maxlength="14" placeholder="Masukkan nama anda"><br><button class="b g" id="go">🏁 MULA</button><button class="b y" id="rk">🏆 RANKING</button><div id="lb0"></div></div></div>
+<div class="s low" id="chars"><div class="box"><h2 id="cn"></h2><p>Seret skrin untuk memutar model 3D</p><div class="chs" id="cl"></div><button class="b g" id="cok">SAHKAN KARAKTER</button></div></div>
+<div class="s" id="how"><div class="box"><h2>CARA BERMAIN EDUKART 3D</h2><p style="text-align:left;line-height:1.6">⬆️ <b>W / ↑</b> memecut &nbsp; ⬇️ <b>S / ↓</b> memperlahankan<br>⬅️➡️ <b>A D / ← →</b> belok<br>🔥 <b>Spacebar</b> drift &amp; turbo<br>📱 Telefon: butang sentuh di skrin<br><br>1️⃣ Capai garisan penamat (2 pusingan)<br>2️⃣ Kutip bola 🔮 → jawab kuiz, +100 markah<br>3️⃣ Elak halangan: setiap perlanggaran hilang 1 ❤️ (3 nyawa)<br>4️⃣ Tamatkan stage untuk buka stage seterusnya<br>5️⃣ Jadi nombor 1 dalam leaderboard!</p><button class="b g" id="hok">MULA PERLUMBAAN</button></div></div>
+<div class="s" id="intro"><div class="box"><h2 id="it"></h2><p id="id"></p><button class="b g" id="iok">MULA!</button></div></div>
+<div class="s low" id="quiz"><div class="box"><p id="qs" style="font-weight:900;font-size:19px"></p><div id="qo"></div><p id="qe"></p><button class="b g" id="qc" style="display:none">TERUSKAN PERLUMBAAN</button></div></div>
+<div class="s" id="clear"><div class="box"><h1 style="font-size:46px">STAGE CLEARED!</h1><p id="ct"></p><button class="b g" id="cn2">TERUSKAN</button></div></div>
+<div class="s" id="end"><div class="box"><h2 id="et"></h2><p id="es" style="line-height:1.6"></p><div id="lb1"></div><button class="b" id="e1">LIHAT LEADERBOARD</button><button class="b g" id="e2">MAIN SEMULA</button><button class="b y" id="e3">KEMBALI KE MENU UTAMA</button></div></div>
+<div class="s" id="rank"><div class="box"><h2>🏆 RANKING PELAJAR</h2><div id="lb2"></div><button class="b y" id="rb">KEMBALI</button><button class="b" id="rd">PADAM REKOD</button></div></div>
+<div class="s" id="pause"><div class="box"><h2>⏸ DIJEDA</h2><button class="b g" id="pr">RESUME</button></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=i=>document.getElementById(i),R=Math.random,PI=Math.PI;
+const Q=[
+[0,"Apakah matlamat utama sekolah vernakular Melayu zaman British?",["Melahirkan pegawai tinggi kerajaan","Memberi pendidikan asas membaca, menulis dan mengira","Menyediakan murid ke universiti","Melatih tenaga kerja perindustrian"],1,"Sekolah Melayu menekankan kemahiran asas 3M dan tidak menyediakan laluan ke pendidikan tinggi."],
+[0,"Sekolah vernakular Cina pada awalnya banyak merujuk kepada kurikulum dan guru dari mana?",["India","England","China","Indonesia"],2,"Sekolah Cina mengikut kurikulum, buku teks dan guru dari negara China."],
+[0,"Di Sabah, pendidikan di bawah SBUB banyak dikendalikan oleh siapa?",["Pertubuhan mubaligh Kristian","Kerajaan Persekutuan","Sultan Brunei","Persatuan guru Melayu"],0,"SBUB (Syarikat Borneo Utara British) menyerahkan banyak urusan pendidikan kepada pertubuhan mubaligh."],
+[0,"Bagaimanakah dasar pendidikan Rejim Brooke di Sarawak?",["Kerajaan mengawal sepenuhnya semua sekolah","Pendidikan wajib percuma untuk semua","Kerajaan kurang campur tangan; mubaligh dan masyarakat mengusahakan sekolah","Semua sekolah ditutup"],2,"Pentadbiran Brooke kurang campur tangan dalam pendidikan, lalu mubaligh dan masyarakat mengusahakan sekolah."],
+[1,"Apakah cadangan utama Laporan Barnes 1950? (Ordinan Pelajaran 1952 berasaskannya)",["Mengekalkan semua sekolah vernakular","Sekolah kebangsaan dengan bahasa Melayu dan Inggeris sebagai bahasa pengantar","Menghapuskan bahasa Inggeris","Menghantar pelajar ke luar negara"],1,"Laporan Barnes mencadangkan sekolah kebangsaan satu aliran menggantikan sekolah vernakular."],
+[1,"Apakah pendirian utama Laporan Fenn-Wu 1951?",["Menyokong penuh Laporan Barnes","Mengekalkan sekolah vernakular Cina dan Tamil","Menghapuskan sekolah Melayu","Menjadikan Jepun bahasa pengantar"],1,"Laporan Fenn-Wu mengkaji pendidikan Cina dan menyokong pengekalan sekolah vernakular Cina dan Tamil."],
+[1,"Apakah cadangan utama Penyata Razak 1956?",["Sistem pendidikan kebangsaan dengan kurikulum sama dan bahasa Melayu sebagai bahasa pengantar utama","Setiap kaum ada sistem sendiri","Pendidikan hanya swasta","Menghapuskan peperiksaan"],0,"Penyata Razak 1956 mencadangkan sistem pendidikan kebangsaan dengan kurikulum sepunya."],
+[1,"Akta Pelajaran 1961 berasaskan laporan yang mana?",["Laporan Barnes dan Fenn-Wu","Penyata Razak 1956 dan Laporan Rahman Talib 1960","Rancangan Cheeseman sahaja","Laporan Brooke"],1,"Akta Pelajaran 1961 digubal berdasarkan Penyata Razak 1956 dan Laporan Rahman Talib 1960."],
+[2,"Falsafah Pendidikan Kebangsaan menekankan perkembangan potensi individu secara...",["Akademik semata-mata","Menyeluruh dan bersepadu (jasmani, emosi, rohani, intelek)","Sukan sahaja","Teknikal sahaja"],1,"FPK bertujuan melahirkan insan seimbang dari segi jasmani, emosi, rohani dan intelek."],
+[2,"Aminuddin Baki dikenali sebagai tokoh dalam bidang apa?",["Kepimpinan dan pentadbiran pendidikan","Ketenteraan","Perubatan","Sukan"],0,"Aminuddin Baki ialah tokoh pendidikan; Institut Aminuddin Baki dinamakan sempena beliau. (Sahkan dengan nota anda.)"],
+[2,"Tan Sri Dato’ Seri Dr. Abdul Rahman Arshad dikenali sebagai tokoh yang berperanan sebagai...",["Ketua Pengarah Pelajaran dalam pembangunan kurikulum kebangsaan","Jurulatih sukan","Pegawai tentera","Duta asing"],0,"Beliau berperanan sebagai pemimpin pendidikan negara semasa pembaharuan kurikulum. (Sahkan dengan nota anda.)"],
+[2,"Apakah peranan utama pendidikan dalam pembinaan negara bangsa?",["Memisahkan kaum","Memupuk perpaduan dan identiti kebangsaan","Menghapuskan bahasa kebangsaan","Mengurangkan sekolah"],1,"Sistem pendidikan kebangsaan dibina untuk menyatupadukan masyarakat berbilang kaum."]];
+const CH=[["Mario",0xe52521,0xe52521],["Luigi",0x2ea043,0x2ea043],["Peach",0xff8fc7,0xffb3da],["Yoshi",0x7bd62b,0xffffff],["Toad",0x2f6fed,0xffffff],["Bowser",0xff9f1c,0x3a7d1e]];
+const ST=[
+{n:"Dunia Asal Pendidikan",d:"Pendidikan sebelum merdeka: kampung, sekolah Melayu, vernakular dan kolonial.",sky:0x87ceeb,gr:0x5cb85c,R:140,a:.22,f:2,p:0,sp:36,sg:["SEKOLAH MELAYU","SEKOLAH CINA","SEKOLAH TAMIL","SEKOLAH INGGERIS"]},
+{n:"Dunia Perubahan Pendidikan",d:"Laporan dan dasar pendidikan: Barnes, Fenn-Wu, Razak, Rahman Talib dan Akta 1961.",sky:0xffc78a,gr:0x6fbf4a,R:160,a:.25,f:3,p:1,sp:40,sg:["PENYATA RAZAK 1956","LAPORAN BARNES","AKTA PELAJARAN 1961","PERPUSTAKAAN"]},
+{n:"Dunia Pendidikan Masa Hadapan",d:"Pendidikan moden, teknologi digital dan pembinaan negara bangsa.",sky:0x5a4fcf,gr:0x2f8f6f,R:180,a:.28,f:3,p:2,sp:44,sg:["FALSAFAH PENDIDIKAN KEBANGSAAN","MAKMAL KOMPUTER","DIGITAL","NEGARA BANGSA"]}];
+const LAPS=2,N=240,RW=11;
+const G={name:"",ch:0,si:0,score:0,orbs:0,ans:0,right:0,mode:"menu",rid:0,pos:1,t:0};
+const K={};
+/* ---------- audio ---------- */
+let AC,mute=false,eo,eg;
+function ai(){if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();eo=AC.createOscillator();eg=AC.createGain();eo.type="sawtooth";eg.gain.value=0;eo.connect(eg);eg.connect(AC.destination);eo.start();music()}if(AC.state=="suspended")AC.resume()}
+function tn(f,d,ty="square",v=.1,f2){if(!AC||mute||AC.state!=="running")return;const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type=ty;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(t+d)}
+const seq=(a,d=100)=>a.forEach((f,i)=>setTimeout(()=>tn(f,.18),i*d));
+const SFX={orb:()=>seq([660,990],80),ok:()=>seq([523,659,784,1047]),no:()=>tn(200,.4,"sawtooth",.14,90),hit:()=>tn(120,.3,"sawtooth",.25,40),win:()=>seq([523,659,784,1047,784,1047,1319],120),beep:()=>tn(440,.15)};
+function music(){const n=[523,659,784,659,587,740,880,740,523,659,784,1047,988,784,659,587];let k=0;setInterval(()=>{if(!mute&&G.mode!="pause"){tn(n[k%16]/2,.2,"triangle",.05);if(k%2==0)tn(n[k%16],.1,"square",.02)}k++},230)}
+
+window.stopGameAudio=function(){
+  mute=true;
+  if($("bs"))$("bs").textContent="🔇";
+  if(eg)eg.gain.value=0;
+  if(AC&&AC.state==="running"){AC.suspend().catch(()=>{});}
+};
+window.resumeGameAudio=function(){
+  mute=false;
+  if($("bs"))$("bs").textContent="🔊";
+  if(AC&&AC.state==="suspended"){AC.resume().catch(()=>{});}
+};
+window.addEventListener("message",function(e){
+  if(!e||!e.data)return;
+  const a=typeof e.data==="string"?e.data:e.data.action;
+  if(a==="pause"||a==="stopAudio"||a==="mute"||a==="silence"){window.stopGameAudio();}
+  else if(a==="resume"||a==="playAudio"||a==="unmute"){window.resumeGameAudio();}
+});
+document.addEventListener("visibilitychange",function(){
+  if(document.hidden){window.stopGameAudio();}
+});
+
+/* ---------- three ---------- */
+const rn=new THREE.WebGLRenderer({canvas:$("c"),antialias:true});rn.shadowMap.enabled=true;rn.setPixelRatio(Math.min(devicePixelRatio,2));
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(65,1,.5,2500);sc.fog=new THREE.FogExp2(0x87ceeb,.0018);
+sc.add(new THREE.HemisphereLight(0xffffff,0x4a8c3a,.9));
+const sun=new THREE.DirectionalLight(0xfff2cc,.9);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);const sh=sun.shadow.camera;sh.left=sh.bottom=-70;sh.right=sh.top=70;sh.far=400;sc.add(sun,sun.target);
+function rs(){rn.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix()}addEventListener("resize",rs);rs();
+const M=(c,e=0)=>new THREE.MeshLambertMaterial({color:c,emissive:e});
+function mk(g,m,x=0,y=0,z=0){const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.castShadow=true;return o}
+function tex(w,h,fn,rep){const c=document.createElement("canvas");c.width=w;c.height=h;fn(c.getContext("2d"),w,h);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;return t}
+function txt(s){return tex(512,128,(x,w,h)=>{x.fillStyle="#fff";x.fillRect(0,0,w,h);x.strokeStyle="#e63946";x.lineWidth=10;x.strokeRect(5,5,w-10,h-10);x.fillStyle="#1b1464";x.font="bold 40px Trebuchet MS";x.textAlign="center";x.textBaseline="middle";x.fillText(s,w/2,h/2,480)})}
+function kart(ci){const c=CH[ci],g=new THREE.Group();
+g.add(mk(new THREE.BoxGeometry(3,.9,5),M(c[1]),0,.9,0),mk(new THREE.BoxGeometry(2.2,.7,1.8),M(c[2]),0,.8,2.8),mk(new THREE.BoxGeometry(3.4,.3,.8),M(0x222222),0,1.9,-2.5));
+[[-1.7,1.9],[1.7,1.9],[-1.7,-1.9],[1.7,-1.9]].forEach(p=>{const w=mk(new THREE.CylinderGeometry(.85,.85,.8,14),M(0x222222),p[0],.85,p[1]);w.rotation.z=PI/2;g.add(w)});
+g.add(mk(new THREE.CylinderGeometry(.7,.9,1.2,10),M(c[1]),0,1.9,-.2),mk(new THREE.SphereGeometry(.7,12,10),M(0xffd7a8),0,3.0,-.2));
+g.add(mk(new THREE.SphereGeometry(.78,12,8,0,2*PI,0,PI/2),M(c[2]),0,3.2,-.2),mk(new THREE.BoxGeometry(1.2,.12,.8),M(c[2]),0,3.15,.5));
+g.userData.col="#"+new THREE.Color(c[1]).getHexString();return g}
+/* ---------- world ---------- */
+let W,T=[],TG=[],SP=1,ORB=[],OBS=[],P,A=[],BB=[0,0,1,1],PT=[],boxn=0;
+function build(si){
+if(W)sc.remove(W);W=new THREE.Group();sc.add(W);const S=ST[si];sc.background=new THREE.Color(S.sky);sc.fog.color.set(S.sky);
+const pts=[];for(let i=0;i<10;i++){const a=i/10*2*PI,r=S.R*(1+S.a*Math.sin(a*S.f+S.p)+.1*Math.sin(a*3+i));pts.push(new THREE.Vector3(Math.cos(a)*r,0,Math.sin(a)*r))}
+const cv=new THREE.CatmullRomCurve3(pts,true);T=cv.getSpacedPoints(N);T.pop();TG=T.map((p,i)=>{const a=T[(i+1)%N],b=T[(i+N-1)%N],dx=a.x-b.x,dz=a.z-b.z,l=Math.hypot(dx,dz);return{x:dx/l,z:dz/l}});
+let L=0;for(let i=0;i<N;i++)L+=T[i].distanceTo(T[(i+1)%N]);SP=L/N;
+let x0=1e9,x1=-1e9,z0=1e9,z1=-1e9;T.forEach(p=>{x0=Math.min(x0,p.x);x1=Math.max(x1,p.x);z0=Math.min(z0,p.z);z1=Math.max(z1,p.z)});BB=[x0,z0,Math.max(x1-x0,z1-z0)];
+const gr=new THREE.Mesh(new THREE.PlaneGeometry(3000,3000),M(S.gr));gr.rotation.x=-PI/2;gr.position.y=-.1;gr.receiveShadow=true;W.add(gr);
+function rib(a,b,y,t,rep){const p=[],u=[],ix=[];for(let i=0;i<=N;i++){const j=i%N,tg=TG[j],px=T[j].x,pz=T[j].z,nx=tg.z,nz=-tg.x;p.push(px+nx*a,y,pz+nz*a,px+nx*b,y,pz+nz*b);u.push(0,i*SP/rep,1,i*SP/rep);if(i<N){const k=i*2;ix.push(k,k+1,k+2,k+1,k+3,k+2)}}
+const g=new THREE.BufferGeometry();g.setAttribute("position",new THREE.Float32BufferAttribute(p,3));g.setAttribute("uv",new THREE.Float32BufferAttribute(u,2));g.setIndex(ix);g.computeVertexNormals();const m=new THREE.Mesh(g,new THREE.MeshLambertMaterial({map:t,side:THREE.DoubleSide}));m.receiveShadow=true;W.add(m)}
+const rt=tex(128,128,(x,w,h)=>{x.fillStyle="#4a4a58";x.fillRect(0,0,w,h);for(let i=0;i<300;i++){x.fillStyle=R()<.5?"#555566":"#40404c";x.fillRect(R()*w,R()*h,3,3)}x.fillStyle="#fff";x.fillRect(4,0,4,h);x.fillRect(w-8,0,4,h);x.fillRect(62,0,4,64)});
+const bt=tex(16,64,(x,w,h)=>{x.fillStyle="#e63946";x.fillRect(0,0,w,h);x.fillStyle="#fff";x.fillRect(0,0,w,h/2)});
+rib(-RW,RW,.05,rt,20);rib(RW,RW+1.6,.5,bt,6);rib(-RW-1.6,-RW,.5,bt,6);
+// deco
+const sg=[];function near(x,z,d){return T.some(p=>(p.x-x)**2+(p.z-z)**2<d*d)}
+const tree=(x,z)=>{W.add(mk(new THREE.CylinderGeometry(.6,.9,4,6),M(0x7a4a21),x,2,z),mk(new THREE.ConeGeometry(3.5,6,8),M(0x2e9e46),x,6.5,z),mk(new THREE.ConeGeometry(2.6,5,8),M(0x35b653),x,10,z))};
+const palm=(x,z)=>{W.add(mk(new THREE.CylinderGeometry(.5,.8,10,6),M(0x9a6b3a),x,5,z));for(let i=0;i<6;i++){const l=mk(new THREE.BoxGeometry(1.2,.2,6),M(0x2bb04a),x+Math.sin(i)*2.5,10.5,z+Math.cos(i)*2.5);l.rotation.y=i;l.rotation.x=.4;W.add(l)}};
+const house=(x,z,c)=>{W.add(mk(new THREE.BoxGeometry(7,4,6),M(c),x,2,z),mk(new THREE.ConeGeometry(6,3.5,4),M(0x8b2e1d),x,5.7,z).rotateY(PI/4))};
+const bld=(x,z,c,h)=>{W.add(mk(new THREE.BoxGeometry(9,h,9),M(c),x,h/2,z),mk(new THREE.BoxGeometry(9.4,1,9.4),M(0xffffff),x,h+.5,z));for(let k=1;k<h/4;k++)W.add(mk(new THREE.BoxGeometry(9.2,1.3,9.2),M(0x9bd8ff,0x224466),x,k*4,z))};
+const neon=(x,z,c,h)=>{W.add(mk(new THREE.BoxGeometry(7,h,7),M(0x1a1a3a,c),x,h/2,z));const r=mk(new THREE.TorusGeometry(6,.4,8,24),M(c,c),x,h*.7,z);r.rotation.x=PI/2;W.add(r)};
+for(let n=0,t=0;n<110&&t<900;t++){const i=Math.floor(R()*N),s=R()<.5?-1:1,d=RW+9+R()*65,x=T[i].x+TG[i].z*d*s,z=T[i].z-TG[i].x*d*s;if(near(x,z,RW+8))continue;n++;const r=R(),c=[0xf4b400,0xff6b9d,0x4dabf7,0xff7a3d][n%4];
+if(si==0)r<.45?palm(x,z):r<.8?house(x,z,c):tree(x,z);else if(si==1)r<.5?bld(x,z,c,10+R()*14):r<.8?tree(x,z):(W.add(mk(new THREE.BoxGeometry(3,12,3),M(0xdddddd),x,6,z),mk(new THREE.SphereGeometry(2,10,8),M(0xffd23f),x,13,z)));else r<.7?neon(x,z,[0xff2d95,0x00e5ff,0x9cff00][n%3],14+R()*30):r<.85?tree(x,z):neon(x,z,0xffd23f,8)}
+for(let k=0;k<8;k++){const i=Math.floor(k*N/8+12),s=k%2?1:-1,nx=TG[i].z,nz=-TG[i].x,x=T[i].x+nx*(RW+7)*s,z=T[i].z+nz*(RW+7)*s;W.add(mk(new THREE.BoxGeometry(.5,6,.5),M(0x555555),x,3,z));const b=new THREE.Mesh(new THREE.PlaneGeometry(14,3.5),new THREE.MeshBasicMaterial({map:txt(S.sg[k%4]),side:THREE.DoubleSide}));b.position.set(x,7.5,z);b.rotation.y=Math.atan2(-s*nx,-s*nz);W.add(b)}
+for(let i=0;i<18;i++){const a=i/18*2*PI,m=mk(new THREE.ConeGeometry(120+R()*90,180+R()*160,6),M(i%2?0x6b8e5a:0x8a9a8f),Math.cos(a)*(750+R()*100),70,Math.sin(a)*(750+R()*100));W.add(m)}
+for(let i=0;i<16;i++){const c=new THREE.Group();for(let j=0;j<4;j++){const s=new THREE.Mesh(new THREE.SphereGeometry(14+R()*8,8,6),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:.92}));s.position.set(j*16-24,R()*5,R()*8);s.scale.y=.6;c.add(s)}c.position.set((R()-.5)*1100,90+R()*50,(R()-.5)*1100);W.add(c)}
+// gate
+const g=new THREE.Group(),ck=tex(64,64,(x,w,h)=>{for(let i=0;i<8;i++)for(let j=0;j<8;j++){x.fillStyle=(i+j)%2?"#000":"#fff";x.fillRect(i*8,j*8,8,8)}}),bm=new THREE.MeshBasicMaterial({map:ck});ck.repeat.set(8,1);
+g.add(mk(new THREE.BoxGeometry(2,16,2),M(0xe63946),-RW-3,8,0),mk(new THREE.BoxGeometry(2,16,2),M(0xe63946),RW+3,8,0));const bm2=new THREE.Mesh(new THREE.BoxGeometry(2*RW+8,3,2),bm);bm2.position.y=16;g.add(bm2);
+const fl=new THREE.Mesh(new THREE.PlaneGeometry(2*RW,3),new THREE.MeshBasicMaterial({map:ck}));fl.rotation.x=-PI/2;fl.position.y=.12;g.add(fl);
+const gs=new THREE.Mesh(new THREE.PlaneGeometry(16,3),new THREE.MeshBasicMaterial({map:txt("START / FINISH"),side:THREE.DoubleSide}));gs.position.y=19;g.add(gs);
+g.position.set(T[0].x,0,T[0].z);g.rotation.y=Math.atan2(TG[0].x,TG[0].z);W.add(g);
+// questions / orbs / obstacles
+G.qs=Q.filter(q=>q[0]==si).sort(()=>R()-.5);ORB=[];OBS=[];const no=G.qs.length;
+for(let k=0;k<no;k++){const i=Math.floor(N*(k+.7)/(no+.4)),lat=(R()-.5)*12,o=new THREE.Group(),col=new THREE.Color().setHSL(k/no,1,.55);
+o.add(new THREE.Mesh(new THREE.SphereGeometry(1.5,16,12),new THREE.MeshLambertMaterial({color:col,emissive:col,transparent:true,opacity:.85})));const t=new THREE.Mesh(new THREE.TorusGeometry(2.2,.15,6,20),new THREE.MeshBasicMaterial({color:0xffffff}));o.add(t);
+const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:tex(64,64,(x)=>{x.fillStyle="#fff";x.font="bold 56px Arial";x.textAlign="center";x.fillText("?",32,52)})}));sp.scale.set(2.2,2.2,1);o.add(sp);
+const x=T[i].x+TG[i].z*lat,z=T[i].z-TG[i].x*lat;o.position.set(x,3,z);W.add(o);ORB.push({m:o,x,z,got:false,t})}
+for(let k=0;k<16;k++){const i=20+Math.floor(R()*(N-30)),lat=(R()-.5)*16,x=T[i].x+TG[i].z*lat,z=T[i].z-TG[i].x*lat,ty=k%3;let m;
+if(ty==0)m=mk(new THREE.BoxGeometry(2.6,2.6,2.6),M(0xb5772f),0,1.3,0);else if(ty==1)m=mk(new THREE.ConeGeometry(1.2,3,10),M(0xff7a1a),0,1.5,0);else m=mk(new THREE.DodecahedronGeometry(1.8),M(0x888888),0,1.5,0);
+const g2=new THREE.Group();g2.add(m);g2.position.set(x,0,z);W.add(g2);OBS.push({x,z,m:g2})}
+}
+function setup(attract){
+if(P&&P.m)sc.remove(P.m);A.forEach(a=>sc.remove(a.m));const ids=[0,1,2,3,4,5].filter(i=>i!=G.ch).sort(()=>R()-.5).slice(0,3);
+P={m:kart(G.ch),x:T[2].x,z:T[2].z,h:Math.atan2(TG[2].x,TG[2].z),v:0,idx:2,lap:0,prog:2,lives:3,inv:0,wob:0,boost:100,dist:0,spin:0};sc.add(P.m);
+A=ids.map((ci,k)=>{const a={m:kart(ci),ci,prog:.5+k*.8,lat:(k-1)*6,sp:ST[G.si].sp*(.94+k*.03),ph:R()*6};sc.add(a.m);pl(a);return a});
+P.m.position.set(P.x,0,P.z);P.m.rotation.y=P.h}
+function pl(a){const p=a.prog,i=Math.floor(p),f=p-i,i0=((i%N)+N)%N,i1=(i0+1)%N,A0=T[i0],B=T[i1],tx=TG[i0].x*(1-f)+TG[i1].x*f,tz=TG[i0].z*(1-f)+TG[i1].z*f;a.x=A0.x+(B.x-A0.x)*f+tz*a.lat;a.z=A0.z+(B.z-A0.z)*f-tx*a.lat;a.h=Math.atan2(tx,tz);a.m.position.set(a.x,0,a.z);a.m.rotation.y=a.h}
+/* particles */
+for(let i=0;i<40;i++){const m=new THREE.Mesh(new THREE.SphereGeometry(.3,6,5),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true}));m.visible=false;m.l=0;sc.add(m);PT.push(m)}
+function em(x,y,z,c,n=1,sp=3){for(let k=0;k<n;k++){const p=PT.find(q=>q.l<=0);if(!p)return;p.l=.6;p.position.set(x,y,z);p.v=[(R()-.5)*sp,R()*sp,(R()-.5)*sp];p.material.color.set(c);p.visible=true}}
+/* ---------- screens/state ---------- */
+const scr=["menu","chars","how","intro","quiz","clear","end","rank","pause"];
+function show(id){scr.forEach(s=>$(s).classList.toggle("on",s==id))}
+function recs(){try{return JSON.parse(localStorage.getItem("ek")||"[]")}catch(e){return[]}}
+function sv(r){try{localStorage.setItem("ek",JSON.stringify(r))}catch(e){}}
+function sorted(){return recs().sort((a,b)=>b.score-a.score||b.acc-a.acc)}
+function lb(id,n){const r=sorted(),el=$(id);if(!r.length){el.innerHTML="<p>Belum ada rekod. Jadilah yang pertama!</p>";return}
+el.innerHTML="<table><tr><th>#</th><th>Nama</th><th>Markah</th><th>Stage</th></tr>"+r.slice(0,n).map((x,i)=>`<tr class="${x.id==G.rid?"me":""}"><td>${i+1}</td><td>${x.name.replace(/</g,"&lt;")}</td><td>${x.score}</td><td>${x.stage}</td></tr>`).join("")+"</table>";
+const mi=r.findIndex(x=>x.id==G.rid);if(mi>=n)el.innerHTML+=`<p>Kedudukan anda: ${mi+1}/${r.length}</p>`}
+const acc=()=>G.ans?Math.round(G.right/G.ans*100):0;
+function menu(){G.mode="menu";G.si=0;build(0);setup();$("hud").style.display="none";$("tc").classList.remove("on");lb("lb0",5);show("menu")}
+function stageIntro(){build(G.si);setup();G.mode="intro";$("hud").style.display="none";$("it").textContent=`STAGE ${G.si+1}: ${ST[G.si].n}`;$("id").textContent=ST[G.si].d+" Anda ada 3 nyawa. Tamatkan "+LAPS+" pusingan!";show("intro")}
+function save(stage){const r=recs();G.rid=Date.now();r.push({id:G.rid,name:G.name,score:G.score,stage,acc:acc(),ch:CH[G.ch][0]});r.sort((a,b)=>b.score-a.score||b.acc-a.acc);sv(r.slice(0,50))}
+function endRun(win){G.mode="end";const st=win?3:G.si+1;save(st);const r=sorted(),rk=r.findIndex(x=>x.id==G.rid)+1;
+$("et").textContent=win?"🏆 TAHNIAH! PERLUMBAAN SELESAI!":"💥 GAME OVER";
+$("es").innerHTML=(win?"":"Anda gagal meneruskan perlumbaan.<br>")+`👤 ${G.name} (${CH[G.ch][0]})<br>Kedudukan akhir: ${G.pos}/4 &nbsp; Stage berjaya: ${win?3:G.si}/3<br>⭐ Markah: <b>${G.score}</b> &nbsp; 🔮 Bola: ${G.orbs}<br>Soalan: ${G.ans} &nbsp; ✅ ${G.right} &nbsp; ❌ ${G.ans-G.right} &nbsp; Ketepatan: ${acc()}%<br>🏆 Kedudukan leaderboard: ${rk}`;
+lb("lb1",10);show("end");win?SFX.win():SFX.hit()}
+function startRace(){G.mode="count";G.t=3.5;$("hud").style.display="block";$("tc").classList.add("on");show("none")}
+function clearStage(){G.mode="done";SFX.win();em(P.x,4,P.z,0xffd23f,30,10);$("ct").innerHTML=`${ST[G.si].n} tamat!<br>Kedudukan: ${G.pos}/4<br>⭐ Jumlah markah: <b>${G.score}</b>`;$("cn2").textContent=G.si<2?"STAGE SETERUSNYA":"KEPUTUSAN AKHIR";show("clear")}
+function hit(){if(P.inv>0)return;P.lives--;P.v*=.3;P.inv=1.5;P.wob=1;SFX.hit();em(P.x,2,P.z,0xff7a1a,15,8);if(P.lives<=0)endRun(false)}
+function quiz(o){o.got=true;o.m.visible=false;G.orbs++;SFX.orb();em(o.x,3,o.z,0xffd23f,25,10);G.mode="quiz";const q=G.qs.pop(),box=$("qo");
+$("qs").textContent=q[1];$("qe").textContent="";$("qc").style.display="none";box.innerHTML="";
+q[2].forEach((t,i)=>{const b=document.createElement("button");b.className="o";b.textContent="ABCD"[i]+". "+t;b.onclick=()=>{[...box.children].forEach((c,j)=>{c.onclick=null;if(j==q[3])c.classList.add("ok")});G.ans++;if(i==q[3]){G.right++;G.score+=100;SFX.ok()}else{b.classList.add("no");SFX.no()}
+$("qe").innerHTML=(i==q[3]?"✅ Betul! +100 markah. ":"❌ Salah. Jawapan: "+"ABCD"[q[3]]+". ")+q[4];$("qc").style.display="inline-block"};box.appendChild(b)});show("quiz")}
+/* ---------- input ---------- */
+addEventListener("keydown",e=>{K[e.key.toLowerCase()]=1;if(e.key==" ")e.preventDefault()});addEventListener("keyup",e=>K[e.key.toLowerCase()]=0);
+document.querySelectorAll("#tc button").forEach(b=>{const k=b.dataset.k.toLowerCase(),d=e=>{e.preventDefault();K[k]=1},u=()=>K[k]=0;b.onpointerdown=d;b.onpointerup=b.onpointerleave=b.onpointercancel=u});
+let ang=0,drag=0;$("c").onpointerdown=e=>drag=e.clientX;addEventListener("pointermove",e=>{if(drag&&G.mode=="chars"){ang+=(e.clientX-drag)*.01;drag=e.clientX}});addEventListener("pointerup",()=>drag=0);
+$("go").onclick=()=>{const n=$("nm").value.trim();if(!n){$("nm").style.borderColor="red";$("nm").placeholder="Sila masukkan nama!";$("nm").focus();return}G.name=n;ai();SFX.beep();G.mode="chars";G.si=0;build(0);setup();show("chars");pick(G.ch)};
+$("rk").onclick=()=>{ai();lb("lb2",10);show("rank")};$("rb").onclick=()=>G.mode=="end"?show("end"):show("menu");
+$("rd").onclick=()=>{if(confirm("Padam semua rekod leaderboard?")){sv([]);lb("lb2",10);lb("lb0",5)}};
+function pick(i){G.ch=i;sc.remove(P.m);P.m=kart(i);P.m.position.set(P.x,0,P.z);sc.add(P.m);P.spin=1;$("cn").textContent="🏎️ "+CH[i][0];[...$("cl").children].forEach((b,j)=>b.classList.toggle("sel",j==i));SFX.beep()}
+CH.forEach((c,i)=>{const b=document.createElement("button");b.className="b";b.style.background="#"+new THREE.Color(c[1]).getHexString();b.textContent=c[0];b.onclick=()=>pick(i);$("cl").appendChild(b)});
+$("cok").onclick=()=>{G.mode="how";show("how")};
+$("hok").onclick=()=>{Object.assign(G,{score:0,orbs:0,ans:0,right:0,si:0});stageIntro()};
+$("iok").onclick=startRace;
+$("qc").onclick=()=>{show("none");G.mode="race"};
+$("cn2").onclick=()=>{if(G.si<2){G.si++;stageIntro()}else endRun(true)};
+$("e1").onclick=()=>{lb("lb2",10);show("rank")};$("e2").onclick=()=>{Object.assign(G,{score:0,orbs:0,ans:0,right:0,si:0});stageIntro()};$("e3").onclick=menu;
+let pm="race";function pz(){if(G.mode=="race"){pm="race";G.mode="pause";show("pause")}else if(G.mode=="pause"){G.mode=pm;show("none")}}
+$("bp").onclick=pz;$("pr").onclick=pz;addEventListener("keydown",e=>{if(e.key.toLowerCase()=="p")pz()});
+$("bs").onclick=()=>{mute=!mute;$("bs").textContent=mute?"🔇":"🔊";if(mute){if(eg)eg.gain.value=0;if(AC&&AC.state==="running")AC.suspend().catch(()=>{});}else{if(AC&&AC.state==="suspended")AC.resume().catch(()=>{});}};
+/* ---------- loop ---------- */
+let last=0,tm=0,hc=0;const mc=$("mm").getContext("2d");
+function loop(ms){requestAnimationFrame(loop);const dt=Math.min((ms-last)/1000,.05);last=ms;tm+=dt;const md=G.mode;
+ORB.forEach(o=>{o.m.rotation.y+=dt*2;o.m.position.y=3+Math.sin(tm*3+o.x)*.6;o.t.rotation.x+=dt*3;if(!o.got&&md=="race"&&Math.hypot(P.x-o.x,P.z-o.z)<4)quiz(o)});
+if(md=="count"){const n=Math.ceil(G.t);const pn=$("cd").textContent;G.t-=dt;const c=Math.ceil(G.t);$("cd").textContent=c>0?c:G.t>-.7?"GO!":"";if(String(c)!=pn&&c>=0)c>0?SFX.beep():tn(880,.4);if(G.t<=-.7){G.mode="race";$("cd").textContent=""}}
+if(md=="race"||md=="count"||md=="menu"){if(md!="count"){const ph=md=="race";A.forEach(a=>{const d=a.prog-P.prog;let v=a.sp*(ph&&d>20?.9:ph&&d<-20?1.07:1);a.prog+=v*dt/SP;a.lat+=(Math.sin(tm*.6+a.ph)*4-a.lat)*dt;pl(a)})}if(md!="menu")upP(dt,md=="race")}
+if(md=="race"||md=="pause"||md=="quiz"||md=="count"||md=="done"){
+const fx=Math.sin(P.h),fz=Math.cos(P.h),tx=P.x-fx*14,tz=P.z-fz*14,k=1-Math.exp(-6*dt);cam.position.x+=(tx-cam.position.x)*k;cam.position.y+=(7-cam.position.y)*k;cam.position.z+=(tz-cam.position.z)*k;cam.lookAt(P.x+fx*6,2,P.z+fz*6)}
+else if(md=="chars"||md=="how"){const r=11;cam.position.set(P.x+Math.sin(ang+tm*.4)*r,5,P.z+Math.cos(ang+tm*.4)*r);cam.lookAt(P.x,2,P.z);P.m.rotation.y=P.h+(P.spin>0?(1-P.spin)*2*PI:0);P.spin=Math.max(0,P.spin-dt*1.5)}
+else if(md=="menu"||md=="intro"||md=="end"){const a=A[0];cam.position.set(a.x+Math.cos(tm*.5)*16,7,a.z+Math.sin(tm*.5)*16);cam.lookAt(a.x,2,a.z);if(md!="menu"&&md!="intro"&&md!="end"){}}
+PT.forEach(p=>{if(p.l>0){p.l-=dt;p.position.x+=p.v[0]*dt;p.position.y+=p.v[1]*dt;p.position.z+=p.v[2]*dt;p.material.opacity=Math.max(0,p.l/.6);if(p.l<=0)p.visible=false}});
+sun.position.set(P.x+40,80,P.z+30);sun.target.position.set(P.x,0,P.z);
+if(eg)eg.gain.value=mute||md!="race"?0:.015+Math.abs(P.v)*.0004,eo&&(eo.frequency.value=45+Math.abs(P.v)*2.5);
+rn.render(sc,cam);
+if(md=="race"||md=="count"||md=="pause"||md=="quiz"){if((hc+=dt)>.08){hc=0;hud()}}}
+function upP(dt,run){const S=ST[G.si];let mx=46+G.si*2,acc=0,st=0;
+if(run){if(K.w||K.arrowup)acc=1;if(K.s||K.arrowdown)acc=-1;if(K.a||K.arrowleft)st=1;if(K.d||K.arrowright)st=-1}
+const dr=run&&K[" "]&&st&&P.v>20,bo=run&&K[" "]&&P.boost>5&&acc>=0;
+if(bo){mx=70;P.v+=50*dt;P.boost-=35*dt;em(P.x-Math.sin(P.h)*2.5,1.2,P.z-Math.cos(P.h)*2.5,R()<.5?0xff7a1a:0x4dabf7,2,2)}else P.boost=Math.min(100,P.boost+8*dt);
+if(acc>0)P.v+=26*dt;else if(acc<0)P.v-=45*dt;else P.v*=1-.5*dt;if(P.v>mx)P.v+=(mx-P.v)*3*dt;P.v=Math.max(-12,P.v);
+const tr=st*(dr?2.4:1.7)*Math.min(1,Math.abs(P.v)/14)*(P.v<0?-1:1);P.h+=tr*dt;
+P.x+=Math.sin(P.h)*P.v*dt;P.z+=Math.cos(P.h)*P.v*dt;
+let bi=P.idx,bd=1e9;for(let d=-8;d<=8;d++){const j=(P.idx+d+N)%N,dx=P.x-T[j].x,dz=P.z-T[j].z,q=dx*dx+dz*dz;if(q<bd){bd=q;bi=j}}
+if(run){if(P.idx>N*.8&&bi<N*.2)P.lap++;else if(P.idx<N*.2&&bi>N*.8)P.lap--}
+P.idx=bi;P.prog=P.lap*N+bi;const ds=Math.sqrt(bd),lim=RW+1.4;if(ds>lim){const k=(ds-lim)/ds;P.x-=(P.x-T[bi].x)*k;P.z-=(P.z-T[bi].z)*k;P.v*=1-2*dt}
+if(run){OBS.forEach(o=>{if(Math.hypot(P.x-o.x,P.z-o.z)<2.8)hit()});if(G.mode!="race")return;P.inv-=dt;
+G.pos=1+A.filter(a=>a.prog>P.prog).length;if(P.v>8&&Math.random()<.5)em(P.x-Math.sin(P.h)*2.6,.6,P.z-Math.cos(P.h)*2.6,0xdddddd,1,1.5);if(dr)em(P.x-Math.sin(P.h)*2,.3,P.z-Math.cos(P.h)*2,0x4dabf7,2,4);
+if(P.lap>=LAPS)clearStage()}
+P.wob=Math.max(0,P.wob-dt);P.m.position.set(P.x,0,P.z);P.m.rotation.y=P.h+(dr?st*.35:0);P.m.rotation.z=Math.sin(tm*30)*.3*P.wob;P.m.visible=P.inv<=0||Math.floor(tm*12)%2==0}
+function hud(){$("hl").innerHTML=`👤 ${G.name}<br>🏁 ${G.pos}/4 &nbsp; Stage ${G.si+1}/3 &nbsp; Lap ${Math.min(LAPS,Math.max(1,P.lap+1))}/${LAPS}<br>🚀 ${Math.round(Math.abs(P.v)*3)} km/j &nbsp; ⭐ ${G.score} &nbsp; 🔮 ${G.orbs}<br>${"❤️".repeat(Math.max(0,P.lives))}${"🖤".repeat(3-Math.max(0,P.lives))} &nbsp; 🔥 ${Math.round(P.boost)}%`;
+const s=122/BB[2],X=x=>4+(x-BB[0])*s,Y=z=>4+(z-BB[1])*s;mc.clearRect(0,0,130,130);mc.strokeStyle="#bbb";mc.lineWidth=5;mc.beginPath();T.forEach((p,i)=>i?mc.lineTo(X(p.x),Y(p.z)):mc.moveTo(X(p.x),Y(p.z)));mc.closePath();mc.stroke();
+ORB.forEach(o=>{if(!o.got){mc.fillStyle="#ffd23f";mc.beginPath();mc.arc(X(o.x),Y(o.z),3,0,7);mc.fill()}});
+A.forEach(a=>{mc.fillStyle=a.m.userData.col;mc.beginPath();mc.arc(X(a.x),Y(a.z),4,0,7);mc.fill()});mc.fillStyle=P.m.userData.col;mc.strokeStyle="#fff";mc.lineWidth=2;mc.beginPath();mc.arc(X(P.x),Y(P.z),5.5,0,7);mc.fill();mc.stroke()}
+menu();requestAnimationFrame(loop);
+</script></body></html>

@@ -1,0 +1,6 @@
+{
+  "name": "Evolusi Sekolah Kita",
+  "description": "Persekitaran pembelajaran multimedia interaktif mata pelajaran Sejarah Pendidikan Malaysia untuk murid sekolah rendah.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html lang="ms" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Evolusi Sekolah Kita - Sejarah Pendidikan Malaysia</title>
+  <meta name="description" content="Persekitaran pembelajaran multimedia interaktif Sejarah Pendidikan Malaysia untuk murid sekolah rendah (umur 9-12 tahun)." />
+  <meta property="og:title" content="Evolusi Sekolah Kita - Sejarah Pendidikan Malaysia" />
+  <meta property="og:description" content="Terokai sejarah sekolah di Malaysia dari zaman pondok hingga era moden dengan modul interaktif yang ceria dan mesra murid." />
+
+  <!-- Google Fonts: Poppins & Nunito -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Tailwind Configuration for Soft 3D & Pastel Colors -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'Poppins', 'sans-serif'],
+            display: ['Poppins', 'Nunito', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              sky: '#38bdf8',
+              skyDark: '#0284c7',
+              skyDeep: '#0369a1',
+              mint: '#34d399',
+              mintDark: '#059669',
+              yellow: '#fcd34d',
+              yellowDark: '#d97706',
+              coral: '#fb923c',
+              coralDark: '#ea580c',
+              purple: '#c084fc',
+              purpleDark: '#7c3aed',
+              cream: '#fffdfa',
+              cardBg: '#ffffff',
+            }
+          },
+          boxShadow: {
+            '3d-sky': '0 8px 0 0 #0284c7, 0 16px 20px -4px rgba(2, 132, 199, 0.25)',
+            '3d-sky-sm': '0 4px 0 0 #0284c7',
+            '3d-mint': '0 8px 0 0 #059669, 0 16px 20px -4px rgba(5, 150, 105, 0.25)',
+            '3d-yellow': '0 8px 0 0 #d97706, 0 16px 20px -4px rgba(217, 119, 6, 0.25)',
+            '3d-coral': '0 8px 0 0 #ea580c, 0 16px 20px -4px rgba(234, 88, 12, 0.25)',
+            '3d-purple': '0 8px 0 0 #7c3aed, 0 16px 20px -4px rgba(124, 58, 237, 0.25)',
+            '3d-card': '0 8px 0 0 #e2e8f0, 0 15px 25px -5px rgba(100, 116, 139, 0.08)',
+            '3d-card-hover': '0 12px 0 0 #cbd5e1, 0 20px 30px -5px rgba(100, 116, 139, 0.12)',
+            '3d-inner': 'inset 0 3px 6px rgba(0, 0, 0, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Nunito', 'Poppins', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Soft 3D Card Base */
+    .card-soft-3d {
+      border: 3px solid #e2e8f0;
+      border-radius: 1.5rem;
+      background: #ffffff;
+      box-shadow: 0 8px 0 0 #e2e8f0, 0 12px 20px -3px rgba(0, 0, 0, 0.05);
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card-soft-3d:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 0 0 #cbd5e1, 0 18px 24px -3px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    /* Soft 3D Buttons */
+    .btn-3d {
+      position: relative;
+      font-weight: 800;
+      border-radius: 1.25rem;
+      transition: all 0.15s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn-3d:active {
+      transform: translateY(4px);
+    }
+
+    .btn-3d-sky {
+      background: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 6px 0 0 #0284c7, 0 10px 15px -3px rgba(2, 132, 199, 0.3);
+    }
+    .btn-3d-sky:hover {
+      background: #0ea5e9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #0284c7, 0 12px 18px -3px rgba(2, 132, 199, 0.35);
+    }
+    .btn-3d-sky:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #0284c7;
+    }
+
+    .btn-3d-yellow {
+      background: #fcd34d;
+      color: #78350f;
+      box-shadow: 0 6px 0 0 #d97706, 0 10px 15px -3px rgba(217, 119, 6, 0.3);
+    }
+    .btn-3d-yellow:hover {
+      background: #fbbf24;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #d97706, 0 12px 18px -3px rgba(217, 119, 6, 0.35);
+    }
+    .btn-3d-yellow:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #d97706;
+    }
+
+    .btn-3d-mint {
+      background: #34d399;
+      color: #064e3b;
+      box-shadow: 0 6px 0 0 #059669, 0 10px 15px -3px rgba(5, 150, 105, 0.3);
+    }
+    .btn-3d-mint:hover {
+      background: #10b981;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #059669, 0 12px 18px -3px rgba(5, 150, 105, 0.35);
+    }
+    .btn-3d-mint:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #059669;
+    }
+
+    .btn-3d-coral {
+      background: #fb923c;
+      color: #ffffff;
+      box-shadow: 0 6px 0 0 #ea580c, 0 10px 15px -3px rgba(234, 88, 12, 0.3);
+    }
+    .btn-3d-coral:hover {
+      background: #f97316;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #ea580c, 0 12px 18px -3px rgba(234, 88, 12, 0.35);
+    }
+    .btn-3d-coral:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #ea580c;
+    }
+
+    .btn-3d-purple {
+      background: #c084fc;
+      color: #4c1d95;
+      box-shadow: 0 6px 0 0 #7c3aed, 0 10px 15px -3px rgba(124, 58, 237, 0.3);
+    }
+    .btn-3d-purple:hover {
+      background: #a855f7;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #7c3aed, 0 12px 18px -3px rgba(124, 58, 237, 0.35);
+    }
+    .btn-3d-purple:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #7c3aed;
+    }
+
+    .btn-3d-indigo {
+      background: #6366f1;
+      color: #ffffff;
+      box-shadow: 0 6px 0 0 #4338ca, 0 10px 15px -3px rgba(67, 56, 202, 0.3);
+    }
+    .btn-3d-indigo:hover {
+      background: #4f46e5;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #4338ca, 0 12px 18px -3px rgba(67, 56, 202, 0.35);
+    }
+    .btn-3d-indigo:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #4338ca;
+    }
+
+    .btn-3d-white {
+      background: #ffffff;
+      color: #0369a1;
+      border: 2px solid #e0f2fe;
+      box-shadow: 0 6px 0 0 #bae6fd, 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
+    .btn-3d-white:hover {
+      background: #f0f9ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 0 0 #bae6fd;
+    }
+    .btn-3d-white:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 0 #bae6fd;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      background-color: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+    }
+
+    /* Background Image dengan Transparensi 40% pada Setiap Halaman */
+    .page-bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('/assets/aistudio/Nostalgic_LEGO_Schoolyard_Adventure_f29c64dc.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      opacity: 0.40;
+      pointer-events: none;
+      z-index: 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 flex flex-col justify-between relative bg-slate-100">
+
+  <!-- ========================================================== -->
+  <!-- LATAR BELAKANG GAMBAR (40% TRANSPARASI PADA SETIAP HALAMAN)-->
+  <!-- ========================================================== -->
+  <div class="page-bg-overlay" aria-hidden="true"></div>
+
+  <!-- ========================================== -->
+  <!-- STICKY NAVBAR (TETAP DI ATAS DENGAN BUTANG) -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-200 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between min-h-[4.5rem] py-2 gap-2">
+        
+        <!-- Brand Title & Mascot Icon (Tekan untuk kembali ke Muka Depan) -->
+        <button onclick="showPage('muka-depan')" class="flex items-center gap-2.5 group text-left focus:outline-none flex-shrink-0">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-sky-100 border-2 border-sky-300 flex items-center justify-center text-sky-600 shadow-[0_3px_0_0_#7dd3fc] group-hover:scale-105 transition-transform flex-shrink-0">
+            <i class="fa-solid fa-graduation-cap text-xl sm:text-2xl"></i>
+          </div>
+          <div>
+            <div class="text-lg sm:text-xl font-black tracking-tight text-slate-900 flex items-center gap-1 leading-none">
+              <span>Evolusi</span>
+              <span class="text-sky-500">Sekolah</span>
+            </div>
+            <div class="text-[10px] sm:text-xs font-bold text-slate-500 tracking-wide mt-0.5">
+              Sejarah Rendah Malaysia
+            </div>
+          </div>
+        </button>
+
+        <!-- Desktop Navigation (Semua butang selari dalam satu barisan rata & kemas) -->
+        <nav class="hidden lg:flex items-center gap-1 xl:gap-1.5 bg-slate-100/90 p-1 rounded-2xl border-2 border-slate-200 flex-nowrap flex-shrink-0 shadow-inner">
+          <button onclick="showPage('muka-depan')" data-page="muka-depan" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-black bg-sky-500 text-white shadow-xs transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-film text-xs"></i> <span>Muka Depan</span>
+          </button>
+          <button onclick="showPage('pengenalan')" data-page="pengenalan" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-house text-xs text-sky-500"></i> <span>Pengenalan</span>
+          </button>
+          <button onclick="showPage('nota')" data-page="nota" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-book-open text-xs text-amber-500"></i> <span>Nota</span>
+          </button>
+          <button onclick="showPage('edup6013')" data-page="edup6013" title="Penulisan Nota EDUP 6013" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-indigo-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-graduation-cap text-xs text-indigo-500"></i> <span>Nota EDUP 6013</span>
+          </button>
+          <button onclick="showPage('game')" data-page="game" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-gamepad text-xs text-emerald-500"></i> <span>Game</span>
+          </button>
+          <button onclick="showPage('bukudigital')" data-page="bukudigital" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-tablet-screen-button text-xs text-purple-500"></i> <span>Buku Digital</span>
+          </button>
+          <button onclick="showPage('video')" data-page="video" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-circle-play text-xs text-rose-500"></i> <span>Video</span>
+          </button>
+          <button onclick="showPage('quiz')" data-page="quiz" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-amber-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-square-poll-vertical text-xs text-amber-500"></i> <span>Quiz</span>
+          </button>
+          <button onclick="showPage('refleksi')" data-page="refleksi" class="nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap">
+            <i class="fa-solid fa-pen-fancy text-xs text-sky-500"></i> <span>Refleksi</span>
+          </button>
+        </nav>
+
+        <!-- Mobile Hamburger Toggle (Hanya untuk skrin bawah lg) -->
+        <div class="flex items-center gap-2 flex-shrink-0 lg:hidden">
+          <button id="mobile-menu-btn" aria-label="Buka Menu" class="w-11 h-11 rounded-xl bg-slate-100 border-2 border-slate-300 flex items-center justify-center text-slate-700 hover:bg-slate-200 transition-colors">
+            <i id="mobile-menu-icon" class="fa-solid fa-bars text-lg"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Menu (Pilihan Setiap Part) -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t-2 border-slate-200 bg-white px-4 pt-3 pb-6 space-y-2">
+      <button onclick="showPage('muka-depan')" data-page="muka-depan" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-black bg-sky-500 text-white shadow-[0_4px_0_0_#0284c7]">
+        <i class="fa-solid fa-film w-5"></i> Muka Depan (Poster Video)
+      </button>
+      <button onclick="showPage('pengenalan')" data-page="pengenalan" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600">
+        <i class="fa-solid fa-house text-sky-500 w-5"></i> Pengenalan
+      </button>
+      <button onclick="showPage('nota')" data-page="nota" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+        <i class="fa-solid fa-book-open text-amber-500 w-5"></i> Nota
+      </button>
+      <button onclick="showPage('edup6013')" data-page="edup6013" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600">
+        <i class="fa-solid fa-graduation-cap text-indigo-500 w-5"></i> Penulisan Nota EDUP 6013
+      </button>
+      <button onclick="showPage('game')" data-page="game" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-600">
+        <i class="fa-solid fa-gamepad text-emerald-500 w-5"></i> Game
+      </button>
+      <button onclick="showPage('bukudigital')" data-page="bukudigital" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-purple-50 hover:text-purple-600">
+        <i class="fa-solid fa-tablet-screen-button text-purple-500 w-5"></i> Buku Digital
+      </button>
+      <button onclick="showPage('video')" data-page="video" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-rose-50 hover:text-rose-600">
+        <i class="fa-solid fa-circle-play text-rose-500 w-5"></i> Video
+      </button>
+      <button onclick="showPage('quiz')" data-page="quiz" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-amber-50 hover:text-amber-600">
+        <i class="fa-solid fa-square-poll-vertical text-amber-500 w-5"></i> Quiz
+      </button>
+      <button onclick="showPage('refleksi')" data-page="refleksi" class="mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600">
+        <i class="fa-solid fa-pen-fancy text-sky-500 w-5"></i> Refleksi
+      </button>
+    </div>
+  </header>
+
+
+  <!-- ========================================================= -->
+  <!-- KANDUNGAN UTAMA: DIASINGKAN DALAM HALAMAN BERBEZA         -->
+  <!-- ========================================================= -->
+  <main class="flex-grow relative z-10">
+
+    <!-- ======================================================= -->
+    <!-- PART 1: MUKA DEPAN BERSAIZ PENUH (COVER / POSTER VIDEO) -->
+    <!-- ======================================================= -->
+    <div id="part-muka-depan" class="app-page min-h-[calc(100vh-5rem)] flex flex-col justify-center items-center py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-sky-200/40 via-sky-50/30 to-slate-100/40 relative overflow-hidden">
+      <!-- Hiasan Latar Belakang Lembut -->
+      <div class="absolute -top-20 -left-20 w-96 h-96 bg-yellow-200/50 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-emerald-200/50 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="w-full max-w-4xl mx-auto flex flex-col items-center space-y-8 relative z-10">
+        
+        <!-- Video Paparan Muka Depan (Saiz Lebih Padat & Kemas) -->
+        <div class="w-full rounded-3xl overflow-hidden bg-slate-900 border-4 sm:border-8 border-white shadow-[0_16px_0_0_#7dd3fc,0_25px_50px_-12px_rgba(2,132,199,0.35)]">
+          <div class="relative w-full aspect-video">
+            <video 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              webkit-playsinline
+              preload="auto"
+              class="w-full h-full object-cover"
+            >
+              <source src="/assets/aistudio/Create_a_revised_version_of_the_colorful_Malaysian_education_poster_animation._Preserve_the_original_poster_composition__characters__Malaysian_flag__signboards__books__bright_3D_cartoon_style__and_stable_camera_frami_9f9e6301.mp4" type="video/mp4" />
+              Pelayar anda tidak menyokong video ini.
+            </video>
+          </div>
+        </div>
+
+        <!-- Butang Masuk ke Dalam Laman Web -->
+        <div class="pt-2 text-center">
+          <button 
+            type="button"
+            onclick="showPage('pengenalan')" 
+            class="btn-3d btn-3d-yellow px-8 sm:px-14 py-4 sm:py-5 text-xl sm:text-2xl font-black rounded-2xl shadow-[0_8px_0_0_#d97706] inline-flex items-center gap-3 transform hover:scale-105 active:scale-95 transition-all text-amber-950"
+          >
+            <span>Masuk ke Laman Web</span>
+            <i class="fa-solid fa-arrow-right text-xl sm:text-2xl"></i>
+          </button>
+          <div class="text-xs font-bold text-slate-500 mt-3 flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-hand-pointer text-sky-500"></i> Tekan butang di atas untuk memulakan modul pembelajaran
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 2: PENGENALAN (#pengenalan)                       -->
+    <!-- ======================================================= -->
+    <div id="part-pengenalan" class="app-page hidden pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-12">
+      <!-- Hero Banner with Soft 3D Style -->
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-sky-100 via-sky-50 to-white border-4 border-sky-200 shadow-[0_12px_0_0_#bae6fd,0_20px_25px_-5px_rgba(2,132,199,0.15)] p-6 sm:p-10 lg:p-12">
+        <!-- Decorative Background Elements -->
+        <div class="absolute -top-10 -right-10 w-48 h-48 bg-yellow-200/50 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-10 -left-10 w-48 h-48 bg-emerald-200/40 rounded-full blur-2xl pointer-events-none"></div>
+        
+        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Text Column -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full border-2 border-sky-300 shadow-[0_2px_0_0_#7dd3fc] text-sky-700 text-xs sm:text-sm font-extrabold tracking-wide uppercase">
+              <span>🇲🇾</span>
+              <span>Modul Pembelajaran Interaktif Sejarah</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+              Evolusi Sekolah <span class="text-sky-500 underline decoration-yellow-400 decoration-wavy decoration-2">Kita</span>
+            </h1>
+
+            <p class="text-lg sm:text-xl text-slate-600 font-semibold max-w-xl leading-relaxed">
+              Mari teroka sejarah sekolah di Malaysia! Kembara dari zaman pondok, era penjajah, pembentukan dasar kebangsaan, hingga ke sekolah pintar hari ini.
+            </p>
+
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <button onclick="showPage('nota')" class="btn-3d btn-3d-sky px-7 py-3.5 text-base sm:text-lg">
+                <i class="fa-solid fa-book-open"></i> Teroka Nota
+              </button>
+              <button onclick="showPage('game')" class="btn-3d btn-3d-white px-6 py-3.5 text-base sm:text-lg">
+                <i class="fa-solid fa-gamepad text-amber-500"></i> Main Kuiz
+              </button>
+            </div>
+          </div>
+
+          <!-- 3D Feature Showcase Card -->
+          <div class="lg:col-span-5">
+            <div class="relative mx-auto max-w-md">
+              <div class="card-soft-3d p-6 bg-gradient-to-br from-white to-sky-50 border-sky-300 shadow-[0_10px_0_0_#7dd3fc]">
+                <div class="flex items-center justify-between pb-4 border-b-2 border-sky-100">
+                  <div class="flex items-center gap-2">
+                    <div class="w-3.5 h-3.5 rounded-full bg-rose-400"></div>
+                    <div class="w-3.5 h-3.5 rounded-full bg-amber-400"></div>
+                    <div class="w-3.5 h-3.5 rounded-full bg-emerald-400"></div>
+                  </div>
+                  <span class="text-xs font-black uppercase text-sky-600 tracking-wider">Tahap 2 (Tahun 4-6)</span>
+                </div>
+
+                <!-- Illustration & Badges -->
+                <div class="my-6 text-center">
+                  <div class="w-28 h-28 mx-auto rounded-3xl bg-amber-100 border-4 border-amber-300 shadow-[0_6px_0_0_#fcd34d] flex items-center justify-center text-amber-600 mb-4 transform hover:rotate-3 transition-transform">
+                    <i class="fa-solid fa-school text-5xl"></i>
+                  </div>
+                  <h3 class="text-xl font-black text-slate-900">Perjalanan Pendidikan Kita</h3>
+                  <p class="text-xs font-bold text-slate-500 mt-1">Dari Pondok Tradisional ke Era Moden</p>
+                </div>
+
+                <!-- Mini Summary Badges -->
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                  <div class="bg-sky-100/70 border border-sky-200 rounded-xl p-2.5 text-center">
+                    <div class="text-xs font-extrabold text-sky-800">4 Aliran Asal</div>
+                    <div class="text-[11px] text-sky-600 font-bold">Sekolah Vernakular</div>
+                  </div>
+                  <div class="bg-purple-100/70 border border-purple-200 rounded-xl p-2.5 text-center">
+                    <div class="text-xs font-extrabold text-purple-800">2 Tokoh Utama</div>
+                    <div class="text-[11px] text-purple-600 font-bold">Wira Pendidikan</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kotak 3D untuk Objektif Pembelajaran & Kriteria Kejayaan -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Box 1: Objektif Pembelajaran -->
+        <div class="card-soft-3d p-6 bg-gradient-to-r from-sky-50 to-white border-sky-300 shadow-[0_8px_0_0_#7dd3fc]">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-sky-400 text-white flex-shrink-0 flex items-center justify-center text-2xl shadow-[0_4px_0_0_#0284c7]">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <div class="space-y-1.5">
+              <div class="text-xs font-extrabold text-sky-600 uppercase tracking-wider">Langkah Pembelajaran</div>
+              <h2 class="text-xl font-black text-slate-900">Objektif Pembelajaran</h2>
+              <p class="text-sm sm:text-base font-bold text-slate-700 leading-relaxed">
+                Memahami perubahan perkembangan sekolah di Malaysia dari era pramerdeka hingga pembentukan sistem pendidikan kebangsaan.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Box 2: Kriteria Kejayaan -->
+        <div class="card-soft-3d p-6 bg-gradient-to-r from-emerald-50 to-white border-emerald-300 shadow-[0_8px_0_0_#6ee7b7]">
+          <div class="flex items-start gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-400 text-white flex-shrink-0 flex items-center justify-center text-2xl shadow-[0_4px_0_0_#059669]">
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <div class="space-y-1.5">
+              <div class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Sasaran Kejayaan Murid</div>
+              <h2 class="text-xl font-black text-slate-900">Kriteria Kejayaan</h2>
+              <p class="text-sm sm:text-base font-bold text-slate-700 leading-relaxed">
+                Memahami perubahan sekolah dan mengenali 2 tokoh pendidikan terbilang tanah air serta sumbangan besar mereka.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigasi Langkah Seterusnya -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('muka-depan')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Muka Depan
+        </button>
+        <button onclick="showPage('nota')" class="btn-3d btn-3d-yellow px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Buka Nota Sejarah</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 3: NOTA (#nota)                                   -->
+    <!-- ======================================================= -->
+    <div id="part-nota" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+      
+      <!-- Section Title Header -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 bg-amber-100 border-2 border-amber-300 px-4 py-1.5 rounded-full text-amber-800 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#fcd34d]">
+          <i class="fa-solid fa-book-bookmark"></i> Nota Lengkap Sejarah
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          Terokai Perkembangan Sekolah
+        </h2>
+        <p class="text-base sm:text-lg text-slate-600 font-semibold">
+          Pelajari 2 bahagian penting dalam sejarah sistem pendidikan negara kita secara bersistem dan interaktif.
+        </p>
+      </div>
+
+      <!-- ====================================== -->
+      <!-- BAHAGIAN A: SEKOLAH DAHULU             -->
+      <!-- ====================================== -->
+      <div class="space-y-8">
+        <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-3">
+          <div class="w-10 h-10 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center text-lg shadow-[0_3px_0_0_#0284c7]">
+            A
+          </div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900">Bahagian A: Sekolah Dahulu (Aliran Vernakular)</h3>
+            <p class="text-sm font-bold text-slate-500">Sistem persekolahan sebelum merdeka yang terpisah mengikut kaum dan bahasa pengantar</p>
+          </div>
+        </div>
+
+        <!-- Video Animasi GIF: Zaman Dahulu Sistem Sekolah Berbeza Di Malaysia (Saiz Lebih Padat & Kemas) -->
+        <div class="card-soft-3d p-3 sm:p-5 bg-white border-sky-300 shadow-[0_12px_0_0_#7dd3fc,0_20px_35px_-10px_rgba(2,132,199,0.25)]">
+          <div class="relative w-full max-w-4xl mx-auto aspect-video rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-inner">
+            <video 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              webkit-playsinline
+              preload="auto"
+              class="w-full h-full object-cover"
+            >
+              <source src="/assets/aistudio/download_7fb3e4f5.mp4" type="video/mp4" />
+              Pelayar anda tidak menyokong video ini.
+            </video>
+          </div>
+
+          <!-- Kad Rumusan 4 Aliran Sekolah (Berasaskan Video Animasi) -->
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="bg-sky-50 p-3.5 rounded-2xl border-2 border-sky-200">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="w-6 h-6 rounded-lg bg-sky-500 text-white flex items-center justify-center text-xs font-black">
+                  <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <div class="text-sm font-black text-sky-900">Sekolah Inggeris</div>
+              </div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Lokasi:</strong> Bandar</div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Fokus:</strong> Latih kerani & pentadbir</div>
+            </div>
+
+            <div class="bg-amber-50 p-3.5 rounded-2xl border-2 border-amber-200">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs font-black">
+                  <i class="fa-solid fa-mosque"></i>
+                </div>
+                <div class="text-sm font-black text-amber-900">Sekolah Melayu</div>
+              </div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Lokasi:</strong> Luar bandar</div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Fokus:</strong> Asas membaca & bertani</div>
+            </div>
+
+            <div class="bg-rose-50 p-3.5 rounded-2xl border-2 border-rose-200">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="w-6 h-6 rounded-lg bg-rose-500 text-white flex items-center justify-center text-xs font-black">
+                  <i class="fa-solid fa-scroll"></i>
+                </div>
+                <div class="text-sm font-black text-rose-900">Sekolah Cina</div>
+              </div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Lokasi:</strong> Kawasan lombong</div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Fokus:</strong> Guna buku & guru dari China</div>
+            </div>
+
+            <div class="bg-purple-50 p-3.5 rounded-2xl border-2 border-purple-200">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="w-6 h-6 rounded-lg bg-purple-500 text-white flex items-center justify-center text-xs font-black">
+                  <i class="fa-solid fa-tree"></i>
+                </div>
+                <div class="text-sm font-black text-purple-900">Sekolah Tamil</div>
+              </div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Lokasi:</strong> Ladang getah</div>
+              <div class="text-xs text-slate-600 font-bold"><strong>Fokus:</strong> Guna buku & guru dari India</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nota Ringkas: Sekolah di Sabah dan Sarawak -->
+        <div class="card-soft-3d p-6 bg-gradient-to-r from-emerald-50 via-teal-50 to-white border-emerald-300 shadow-[0_8px_0_0_#6ee7b7]">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex-shrink-0 flex items-center justify-center text-xl shadow-[0_3px_0_0_#059669]">
+                <i class="fa-solid fa-map-location-dot"></i>
+              </div>
+              <div>
+                <span class="text-xs font-extrabold text-emerald-700 uppercase tracking-wider">Sorotan Geografi</span>
+                <h4 class="text-xl font-black text-slate-900">Pendidikan di Sabah dan Sarawak</h4>
+                <p class="text-sm text-slate-700 font-semibold mt-1 leading-relaxed max-w-4xl">
+                  Di Sarawak (era Rajah Brooke) dan Sabah (era SBBU), pendidikan diterajui oleh <strong>sekolah mubaligh Kristian</strong> (seperti Sekolah St. Thomas, Kuching 1848), <strong>sekolah vernakular bumiputera</strong> (Iban, Kadazan-Dusun dan Melayu) serta <strong>sekolah Cina</strong>. Kebanyakan sekolah bertumpu di kawasan bandar dan pesisir pantai sebelum penyeragaman sistem pendidikan kebangsaan.
+                </p>
+              </div>
+            </div>
+            <div class="flex-shrink-0 self-end sm:self-center">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-emerald-300 text-xs font-extrabold text-emerald-800 shadow-sm">
+                <i class="fa-solid fa-circle-check text-emerald-500"></i> Fakta Penting
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- BAHAGIAN B: JOM KENALI TOKOH PENDIDIKAN DI MALAYSIA       -->
+      <!-- ======================================================== -->
+      <div class="space-y-8">
+        <div class="flex items-center gap-3 border-b-2 border-slate-200 pb-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500 text-white font-black flex items-center justify-center text-lg shadow-[0_3px_0_0_#7c3aed]">
+            B
+          </div>
+          <div>
+            <h3 class="text-2xl font-black text-slate-900">Bahagian B: Jom Kenali Tokoh Pendidikan Di Malaysia</h3>
+            <p class="text-sm font-bold text-slate-500">Tekan butang pada setiap gambar tokoh di bawah untuk melihat maklumat sumbangan mereka</p>
+          </div>
+        </div>
+
+        <!-- 2 Kad Gambar Tokoh dengan Butang Pada Gambar (Gambar Berubah Bila Ditekan) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          
+          <!-- Tokoh 1: Aminuddin Baki -->
+          <div class="card-soft-3d p-4 sm:p-5 bg-white border-sky-300 shadow-[0_12px_0_0_#7dd3fc]">
+            <div class="relative rounded-2xl overflow-hidden border-4 border-slate-200 shadow-md bg-amber-50 aspect-[3/4] select-none">
+              
+              <!-- Gambar Penuh Tokoh 1 (Mengandungi Info di Bahagian Bawah) -->
+              <img 
+                src="/assets/aistudio/Gemini_Generated_Image_br43onbr43onbr43_63cf5efa.jpg" 
+                alt="Aminuddin Baki - Arkitek Pendidikan Negara" 
+                class="w-full h-full object-cover"
+              />
+
+              <!-- Lencana Label Tokoh di Atas Kiri Gambar -->
+              <div class="absolute top-3 left-3 bg-sky-500/95 backdrop-blur-sm text-white text-xs font-black px-3 py-1 rounded-full shadow-[0_2px_0_0_#0284c7] z-10 flex items-center gap-1.5">
+                <i class="fa-solid fa-user-graduate"></i>
+                <span>Tokoh 1: Aminuddin Baki</span>
+              </div>
+
+              <!-- BUTANG DI ATAS GAMBAR APABILA INFO SUDAH DIBUKA (UNTUK TUTUP SEMULA & UBAH GAMBAR KEMBALI) -->
+              <button 
+                type="button"
+                id="btn-close-aminuddin"
+                onclick="toggleTokohImage('aminuddin')"
+                class="hidden absolute top-3 right-3 z-30 btn-3d btn-3d-coral px-3 py-1.5 text-xs font-black shadow-lg"
+                title="Tutup info dan ubah gambar kembali"
+              >
+                <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Tutup Info
+              </button>
+
+              <!-- HAMPARAN PENUTUP INFO PADA GAMBAR DENGAN BUTANG (SECARA LALAI KELIHATAN, TIADA INFO JIKA TIDAK DITEKAN) -->
+              <div 
+                id="overlay-aminuddin" 
+                class="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-amber-100 via-amber-100/95 to-amber-50/90 backdrop-blur-sm border-t-4 border-amber-400 p-4 flex flex-col items-center justify-center text-center z-20 transition-all duration-300"
+              >
+                <div class="space-y-3">
+                  <div class="w-12 h-12 rounded-2xl bg-amber-300 border-2 border-amber-500 text-amber-950 flex items-center justify-center text-xl mx-auto shadow-[0_4px_0_0_#b45309] animate-bounce">
+                    <i class="fa-solid fa-lock"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-black text-amber-950 uppercase tracking-wider">Maklumat Pada Gambar Terkunci</div>
+                    <p class="text-[11px] font-bold text-amber-800 mt-0.5">Tekan butang di bawah untuk mengubah gambar dan melihat info</p>
+                  </div>
+                  
+                  <!-- BUTANG TEPAT PADA GAMBAR -->
+                  <button 
+                    type="button"
+                    onclick="toggleTokohImage('aminuddin')"
+                    class="btn-3d btn-3d-yellow px-6 py-3 text-sm font-black shadow-[0_6px_0_0_#d97706] text-amber-950 hover:scale-105 active:scale-95 transition-transform"
+                  >
+                    <i class="fa-solid fa-hand-pointer mr-1.5 animate-pulse"></i>
+                    <span>Tekan Untuk Buka Info</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hiasan Status Apabila Gambar Berubah Menunjukkan Info -->
+              <div 
+                id="revealed-banner-aminuddin" 
+                class="hidden absolute inset-x-0 bottom-0 bg-slate-900/85 backdrop-blur-sm text-white px-3 py-2 text-center text-xs font-bold border-t border-white/20 z-10"
+              >
+                <span class="text-yellow-300 font-black">✨ Gambar Berubah!</span> Maklumat pada skrol telah didedahkan
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tokoh 2: Tan Sri Dr. Abdul Rahman Arshad -->
+          <div class="card-soft-3d p-4 sm:p-5 bg-white border-amber-300 shadow-[0_12px_0_0_#fcd34d]">
+            <div class="relative rounded-2xl overflow-hidden border-4 border-slate-200 shadow-md bg-amber-50 aspect-[3/4] select-none">
+              
+              <!-- Gambar Penuh Tokoh 2 (Mengandungi Info di Bahagian Bawah) -->
+              <img 
+                src="/assets/aistudio/Gemini_Generated_Image_br43onbr43onbr43__1__f7829452.jpg" 
+                alt="Tan Sri Dr. Abdul Rahman Arshad - Wira Pendidikan Menyeluruh" 
+                class="w-full h-full object-cover"
+              />
+
+              <!-- Lencana Label Tokoh di Atas Kiri Gambar -->
+              <div class="absolute top-3 left-3 bg-amber-500/95 backdrop-blur-sm text-white text-xs font-black px-3 py-1 rounded-full shadow-[0_2px_0_0_#d97706] z-10 flex items-center gap-1.5">
+                <i class="fa-solid fa-user-tie"></i>
+                <span>Tokoh 2: Tan Sri Dr. Abdul Rahman Arshad</span>
+              </div>
+
+              <!-- BUTANG DI ATAS GAMBAR APABILA INFO SUDAH DIBUKA (UNTUK TUTUP SEMULA & UBAH GAMBAR KEMBALI) -->
+              <button 
+                type="button"
+                id="btn-close-arshad"
+                onclick="toggleTokohImage('arshad')"
+                class="hidden absolute top-3 right-3 z-30 btn-3d btn-3d-coral px-3 py-1.5 text-xs font-black shadow-lg"
+                title="Tutup info dan ubah gambar kembali"
+              >
+                <i class="fa-solid fa-arrow-rotate-left mr-1"></i> Tutup Info
+              </button>
+
+              <!-- HAMPARAN PENUTUP INFO PADA GAMBAR DENGAN BUTANG (SECARA LALAI KELIHATAN, TIADA INFO JIKA TIDAK DITEKAN) -->
+              <div 
+                id="overlay-arshad" 
+                class="absolute inset-x-0 bottom-0 h-[48%] bg-gradient-to-t from-amber-100 via-amber-100/95 to-amber-50/90 backdrop-blur-sm border-t-4 border-amber-400 p-4 flex flex-col items-center justify-center text-center z-20 transition-all duration-300"
+              >
+                <div class="space-y-3">
+                  <div class="w-12 h-12 rounded-2xl bg-amber-300 border-2 border-amber-500 text-amber-950 flex items-center justify-center text-xl mx-auto shadow-[0_4px_0_0_#b45309] animate-bounce">
+                    <i class="fa-solid fa-lock"></i>
+                  </div>
+                  <div>
+                    <div class="text-xs font-black text-amber-950 uppercase tracking-wider">Maklumat Pada Gambar Terkunci</div>
+                    <p class="text-[11px] font-bold text-amber-800 mt-0.5">Tekan butang di bawah untuk mengubah gambar dan melihat info</p>
+                  </div>
+                  
+                  <!-- BUTANG TEPAT PADA GAMBAR -->
+                  <button 
+                    type="button"
+                    onclick="toggleTokohImage('arshad')"
+                    class="btn-3d btn-3d-yellow px-6 py-3 text-sm font-black shadow-[0_6px_0_0_#d97706] text-amber-950 hover:scale-105 active:scale-95 transition-transform"
+                  >
+                    <i class="fa-solid fa-hand-pointer mr-1.5 animate-pulse"></i>
+                    <span>Tekan Untuk Buka Info</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hiasan Status Apabila Gambar Berubah Menunjukkan Info -->
+              <div 
+                id="revealed-banner-arshad" 
+                class="hidden absolute inset-x-0 bottom-0 bg-slate-900/85 backdrop-blur-sm text-white px-3 py-2 text-center text-xs font-bold border-t border-white/20 z-10"
+              >
+                <span class="text-yellow-300 font-black">✨ Gambar Berubah!</span> Maklumat pada poster telah didedahkan
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-8 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('pengenalan')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Pengenalan
+        </button>
+        <button onclick="showPage('edup6013')" class="btn-3d btn-3d-indigo px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Penulisan Nota EDUP 6013</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART: PENULISAN NOTA EDUP 6013 (#edup6013)             -->
+    <!-- ======================================================= -->
+    <div id="part-edup6013" class="app-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8">
+      
+      <!-- Header Dokumen EDUP 6013 -->
+      <div class="card-soft-3d p-6 sm:p-8 bg-gradient-to-r from-indigo-900 via-slate-900 to-indigo-950 text-white border-indigo-400 shadow-[0_10px_0_0_#4338ca] rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/30 border border-indigo-400/40 text-indigo-200 text-xs font-black uppercase tracking-wider">
+            <i class="fa-solid fa-graduation-cap"></i> EDUP 6013
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            Penulisan Nota EDUP 6013
+          </h1>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+          <a 
+            href="https://anyflip.com/ytwls/zpud/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn-3d btn-3d-yellow px-5 py-3 text-xs sm:text-sm font-black text-amber-950 flex items-center gap-2"
+            title="Buka Flipbook Nota EDUP 6013 di platform AnyFlip"
+          >
+            <i class="fa-solid fa-book-open text-base"></i>
+            <span>Buka di AnyFlip</span>
+          </a>
+          <a 
+            href="/assets/aistudio/Nota_Pembelajaran_Evolusi_Pendidikan_Malaysia__2_345_compressed_4cdb9d9a.pdf" 
+            target="_blank" 
+            download="Nota_Pembelajaran_Evolusi_Pendidikan_Malaysia_EDUP6013_compressed.pdf"
+            class="btn-3d btn-3d-white px-4 py-3 text-xs sm:text-sm font-black text-slate-800 border-2 border-slate-200 flex items-center gap-2"
+            title="Muat turun salinan dokumen PDF compressed"
+          >
+            <i class="fa-solid fa-file-pdf text-rose-600 text-base"></i>
+            <span>Muat Turun PDF</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pilihan Mod Paparan Nota EDUP 6013 (AnyFlip vs 8 Halaman Asal vs Fail PDF) -->
+      <div class="flex items-center justify-between gap-3 flex-wrap bg-white p-2 sm:p-2.5 rounded-2xl border-2 border-indigo-200 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-black text-slate-700 hidden sm:inline-flex items-center gap-1 pl-2">
+            <i class="fa-solid fa-sliders text-indigo-600"></i> Mod Paparan:
+          </span>
+          <div class="inline-flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1">
+            <button id="edup-btn-flip" onclick="switchEdupViewMode('flip')" class="px-3.5 py-1.5 rounded-lg text-xs font-black bg-indigo-600 text-white shadow-xs transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-book-open"></i> <span>Flipbook 3D (AnyFlip)</span>
+            </button>
+            <button id="edup-btn-pages" onclick="switchEdupViewMode('pages')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-layer-group"></i> <span>8 Halaman Dokumen Asal</span>
+            </button>
+            <button id="edup-btn-pdf" onclick="switchEdupViewMode('pdf')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1.5">
+              <i class="fa-solid fa-file-pdf"></i> <span>Pembaca PDF</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="toggleEdupAnyflipFullscreen()" class="btn-3d btn-3d-white px-3 py-1.5 text-xs font-bold text-indigo-700 border border-indigo-200" title="Skrin Penuh">
+            <i class="fa-solid fa-expand"></i> <span class="hidden md:inline">Skrin Penuh</span>
+          </button>
+          <a href="https://anyflip.com/ytwls/zpud/" target="_blank" rel="noopener noreferrer" class="btn-3d btn-3d-white px-3 py-1.5 text-xs font-bold text-slate-700 border border-slate-200" title="Buka di tab baharu AnyFlip">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> <span class="hidden md:inline">Buka AnyFlip</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 1. Paparan Interaktif Flipbook 3D AnyFlip (Aktif Secara Lalai) -->
+      <div id="edup-anyflip-container" class="card-soft-3d p-3 sm:p-5 bg-slate-900 border-indigo-400 shadow-[0_12px_0_0_#4338ca] relative space-y-3">
+        <div class="flex items-center justify-between px-3 py-2 bg-slate-800/90 rounded-xl text-slate-300 text-xs font-bold border border-slate-700">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-white font-extrabold">AnyFlip 3D Flipbook Reader: Nota Pembelajaran EDUP 6013</span>
+            <span class="hidden sm:inline text-slate-400">• Helaian boleh diselak 3D, dizum & dibaca interaktif</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleEdupAnyflipFullscreen()" class="hover:text-white transition-colors flex items-center gap-1.5 text-xs bg-indigo-600 hover:bg-indigo-500 text-white font-black px-3 py-1.5 rounded-lg shadow-sm">
+              <i class="fa-solid fa-expand"></i>
+              <span>Skrin Penuh</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AnyFlip Responsive Iframe Reader Frame -->
+        <div class="relative w-full h-[580px] sm:h-[680px] md:h-[760px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800">
+          <iframe 
+            id="edup-anyflip-frame"
+            src="https://online.anyflip.com/ytwls/zpud/index.html" 
+            seamless="seamless" 
+            scrolling="no" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allowfullscreen="true"
+            class="w-full h-full border-0"
+            title="Penulisan Nota EDUP 6013 - Flipbook Interaktif AnyFlip"
+          ></iframe>
+        </div>
+
+        <div class="px-3.5 py-2.5 bg-slate-800/70 rounded-xl text-center text-xs text-slate-300 font-semibold flex items-center justify-center gap-2 flex-wrap">
+          <span>💡 <strong>Petua Membaca:</strong> Klik bucu helaian untuk membalikkan muka surat secara 3D, atau klik <strong class="text-indigo-300">Skrin Penuh</strong> untuk membaca dengan selesa.</span>
+        </div>
+      </div>
+
+      <!-- 2. Paparan Fail PDF Terbenam (Compressed) -->
+      <div id="edup-pdf-container" class="hidden card-soft-3d p-4 bg-slate-900 border-indigo-400 shadow-[0_12px_0_0_#4338ca] space-y-3">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-300 px-2">
+          <span><i class="fa-solid fa-file-pdf text-rose-500 mr-1.5"></i> Pembaca PDF Terbenam: Nota_Pembelajaran_Evolusi_Pendidikan_Malaysia_compressed.pdf</span>
+          <a href="/assets/aistudio/Nota_Pembelajaran_Evolusi_Pendidikan_Malaysia__2_345_compressed_4cdb9d9a.pdf" target="_blank" class="text-indigo-400 hover:text-indigo-300">
+            <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> Buka Asal
+          </a>
+        </div>
+        <div class="w-full h-[640px] sm:h-[760px] rounded-xl overflow-hidden border border-slate-700 bg-slate-950">
+          <iframe 
+            src="/assets/aistudio/Nota_Pembelajaran_Evolusi_Pendidikan_Malaysia__2_345_compressed_4cdb9d9a.pdf#toolbar=1" 
+            class="w-full h-full border-0"
+            title="Fail PDF Nota Pembelajaran EDUP 6013 Compressed"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- 3. Bar Lompat Halaman Pantas (Hanya Muncul Semasa Mod 8 Halaman Asal) -->
+      <div id="edup-jump-bar" class="hidden sticky top-24 z-30 bg-white/95 backdrop-blur-md p-3 rounded-2xl border-2 border-indigo-200 shadow-md flex items-center justify-between gap-2 overflow-x-auto">
+        <span class="text-xs font-black text-slate-700 whitespace-nowrap hidden sm:inline-flex items-center gap-1.5 pl-2">
+          <i class="fa-solid fa-file-lines text-indigo-600"></i> Lompat Muka Surat:
+        </span>
+        <div class="flex items-center gap-1.5 flex-nowrap">
+          <a href="#edup-p1" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 1</a>
+          <a href="#edup-p2" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 2</a>
+          <a href="#edup-p3" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 3</a>
+          <a href="#edup-p4" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 4</a>
+          <a href="#edup-p5" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 5</a>
+          <a href="#edup-p6" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 6</a>
+          <a href="#edup-p7" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 7</a>
+          <a href="#edup-p8" class="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-100 text-slate-700 hover:text-indigo-800 text-xs font-black transition-colors">Hal 8 (Rujukan)</a>
+        </div>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="px-3 py-1.5 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 text-xs font-black whitespace-nowrap transition-colors" title="Ke Atas">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
+      </div>
+
+      <!-- 4. Paparan 8 Muka Surat Sebijik Mengikut Dokumen Asal -->
+      <div id="edup-pages-container" class="hidden space-y-10">
+
+        <!-- Muka Surat 1 -->
+        <div id="edup-p1" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 1 — 1.0 Pengenalan & Rajah 1: Kerangka Penulisan</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 1 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-1.png" 
+              alt="Nota EDUP 6013 - Halaman 1" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 2 -->
+        <div id="edup-p2" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 2 — 2.0 Matlamat Pendidikan & 3.0 Semenanjung Malaysia</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 2 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-2.png" 
+              alt="Nota EDUP 6013 - Halaman 2" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 3 -->
+        <div id="edup-p3" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 3 — Implikasi Vernakular & 4.0 Pendidikan Sabah dan Sarawak</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 3 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-3.png" 
+              alt="Nota EDUP 6013 - Halaman 3" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 4 -->
+        <div id="edup-p4" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 4 — 5.0 Laporan dan Ordinan Pelajaran (Rajah 4: Garis Masa)</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 4 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-4.png" 
+              alt="Nota EDUP 6013 - Halaman 4" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 5 -->
+        <div id="edup-p5" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 5 — 6.0 Tokoh Pendidikan: 6.1 Aminuddin Baki</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 5 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-5.png" 
+              alt="Nota EDUP 6013 - Halaman 5" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 6 -->
+        <div id="edup-p6" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 6 — 6.2 Tan Sri Dr. Abdul Rahman Arshad & 7.0 Implikasi Sumbangan</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 6 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-6.png" 
+              alt="Nota EDUP 6013 - Halaman 6" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 7 -->
+        <div id="edup-p7" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 7 — 8.0 Kesimpulan & Pemerkasaan Teknologi Digital</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 7 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-7.png" 
+              alt="Nota EDUP 6013 - Halaman 7" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+        <!-- Muka Surat 8 -->
+        <div id="edup-p8" class="space-y-2 pt-2 scroll-mt-36">
+          <div class="flex items-center justify-between text-xs font-extrabold text-slate-500 px-2">
+            <span><i class="fa-solid fa-file mr-1 text-indigo-500"></i> Muka Surat 8 — Senarai Rujukan Akademik</span>
+            <span class="bg-indigo-100 text-indigo-800 px-2.5 py-0.5 rounded-full font-black">Halaman 8 / 8</span>
+          </div>
+          <div class="card-soft-3d p-2 sm:p-4 bg-white border-slate-200 shadow-[0_12px_0_0_#94a3b8] rounded-2xl overflow-hidden">
+            <img 
+              src="/assets/aistudio/edup_exact_page-8.png" 
+              alt="Nota EDUP 6013 - Halaman 8" 
+              class="w-full h-auto rounded-xl shadow-xs border border-slate-100 block"
+            />
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-8 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('nota')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Nota
+        </button>
+        <button onclick="showPage('game')" class="btn-3d btn-3d-mint px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Main Game Kuiz</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 4: GAME (#game)                                   -->
+    <!-- ======================================================= -->
+    <!-- ======================================================= -->
+    <!-- PART 4: GAME (#game) - PUSAT PERMAINAN & KUIZ 3D       -->
+    <!-- ======================================================= -->
+    <div id="part-game" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      
+      <!-- Tajuk Utama & Selector Game -->
+      <div class="text-center space-y-4">
+        <div class="inline-flex items-center gap-2 bg-emerald-100 border-2 border-emerald-300 px-4 py-1.5 rounded-full text-emerald-800 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#6ee7b7]">
+          <i class="fa-solid fa-gamepad"></i> Zon Permainan & Kuiz Interaktif 3D
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          Pusat Permainan Sejarah Pendidikan
+        </h2>
+        <p class="text-base sm:text-lg text-slate-700 font-bold max-w-2xl mx-auto">
+          Pilih permainan kegemaran anda di bawah! Berlumba kart 3D sambil menjawab kuiz atau terokai maze EDU-MAN memburu ilmu.
+        </p>
+
+        <!-- TAB SELECTOR GAME 1 & GAME 2 -->
+        <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <button 
+            id="btn-tab-game1" 
+            onclick="switchGame('game1')" 
+            class="btn-3d btn-3d-mint px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md">
+            <i class="fa-solid fa-flag-checkered text-amber-300"></i>
+            <span>Game 1: EduKart 3D (Lumba Kereta)</span>
+          </button>
+          <button 
+            id="btn-tab-game2" 
+            onclick="switchGame('game2')" 
+            class="btn-3d btn-3d-white px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md">
+            <i class="fa-solid fa-ghost text-purple-600"></i>
+            <span>Game 2: EDU-MAN (Maze of Knowledge)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- GAME 1: EDUKART 3D CONTAINER               -->
+      <!-- ========================================== -->
+      <div id="container-game1" class="space-y-6">
+        <!-- Kotak 3D bersaiz besar (Container Utama Game 1) -->
+        <div class="card-soft-3d p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-emerald-100/70 via-emerald-50 to-white border-emerald-300 shadow-[0_12px_0_0_#6ee7b7]">
+          
+          <!-- Header Info Game 1 -->
+          <div class="max-w-4xl mx-auto text-center space-y-3 mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-md">
+              <i class="fa-solid fa-flag-checkered"></i> Permainan 1: Lumba Kereta & Kuiz
+            </div>
+            
+            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+              EduKart 3D: Cabaran Sejarah Pendidikan
+            </h3>
+            
+            <p class="text-sm sm:text-base text-emerald-950 font-bold max-w-2xl mx-auto">
+              Pandu kereta kart 3D, kutip bola kuasa <span class="text-purple-600 font-black">🔮</span> untuk menjawab kuiz sejarah pendidikan, elak halangan berbahaya dan kumpulkan markah tertinggi di papan pendahulu!
+            </p>
+
+            <!-- Badges Ciri-ciri -->
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border border-emerald-200 text-slate-800 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-layer-group text-emerald-500"></i> 3 Peringkat Litar
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border border-purple-200 text-slate-800 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-circle-question text-purple-500"></i> 12 Soalan Kuiz Sejarah
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border border-amber-200 text-slate-800 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-500"></i> Rekod Skor & Ranking
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-white border border-sky-200 text-slate-800 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-gamepad text-sky-500"></i> Papan Kekunci & Skrin Sentuh
+              </span>
+            </div>
+          </div>
+
+          <!-- Toolbar Game 1 -->
+          <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 mb-3 px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="text-xs sm:text-sm font-black text-emerald-900">EduKart 3D Siap Sedia Untuk Berlumba</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="game-mute-btn" onclick="toggleEduKartMute()" class="btn-3d btn-3d-white px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5" title="Mute/Nyahmute Audio">
+                <i class="fa-solid fa-volume-high" id="game-mute-icon"></i>
+                <span id="game-mute-text">Bunyi Aktif</span>
+              </button>
+              <button onclick="toggleGameFullscreen()" class="btn-3d btn-3d-mint px-4 py-2 text-xs font-black inline-flex items-center gap-1.5" title="Skrin Penuh">
+                <i class="fa-solid fa-expand" id="game-fs-icon"></i>
+                <span id="game-fs-text">Skrin Penuh</span>
+              </button>
+              <button onclick="reloadEduKartGame()" class="btn-3d btn-3d-white px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5" title="Muat Semula Game">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Mula Semula</span>
+              </button>
+              <a href="/assets/aistudio/EduKart_3D__Cabaran_Sejarah_Pendidikan_Malaysia_d2218c55.html" target="_blank" rel="noopener noreferrer" class="btn-3d btn-3d-sky px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5" title="Buka di tab baharu">
+                <i class="fa-solid fa-up-right-from-square"></i>
+                <span class="hidden sm:inline">Tab Baharu</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3D Game Frame Container Game 1 -->
+          <div id="game-frame-wrapper" class="max-w-5xl mx-auto relative rounded-3xl border-4 border-emerald-400 bg-slate-900 shadow-[0_14px_0_0_#6ee7b7] overflow-hidden">
+            <div class="w-full h-[540px] sm:h-[640px] lg:h-[720px] relative">
+              <iframe 
+                id="edukart-game-iframe"
+                src="/assets/aistudio/EduKart_3D__Cabaran_Sejarah_Pendidikan_Malaysia_d2218c55.html" 
+                title="EduKart 3D: Cabaran Sejarah Pendidikan Malaysia"
+                class="w-full h-full border-0 absolute inset-0"
+                allow="fullscreen; autoplay; audio"
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Panduan Kawalan Game 1 -->
+          <div class="max-w-5xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Kawalan -->
+            <div class="bg-white/95 rounded-2xl p-5 border-2 border-emerald-200 shadow-sm space-y-3">
+              <h4 class="text-sm font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-keyboard text-emerald-600"></i> Kawalan EduKart 3D (Papan Kekunci / Telefon)
+              </h4>
+              <div class="grid grid-cols-2 gap-2 text-xs font-bold text-slate-700">
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">W / ↑</span>
+                  <span>Memecut Maju</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">S / ↓</span>
+                  <span>Brek / Mengundur</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 font-black">A D / ← →</span>
+                  <span>Belok Kiri / Kanan</span>
+                </div>
+                <div class="p-2 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-2">
+                  <span class="px-2 py-0.5 rounded-lg bg-amber-100 text-amber-800 font-black">Spacebar</span>
+                  <span>Drift & Turbo 🔥</span>
+                </div>
+              </div>
+              <p class="text-[11px] text-slate-500 font-semibold">
+                <i class="fa-solid fa-mobile-screen mr-1 text-sky-500"></i> Butang kawalan sentuh maya dipaparkan secara automatik di skrin peranti pintar.
+              </p>
+            </div>
+
+            <!-- Petua Kuiz -->
+            <div class="bg-white/95 rounded-2xl p-5 border-2 border-purple-200 shadow-sm space-y-3">
+              <h4 class="text-sm font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-lightbulb text-purple-600"></i> Cara Menang & Skor Tertinggi
+              </h4>
+              <ul class="text-xs font-bold text-slate-700 space-y-2 list-disc list-inside">
+                <li>Kutip bola ungu <span class="text-purple-600 font-black">🔮</span> di litar untuk membuka soalan kuiz sejarah.</li>
+                <li>Setiap jawapan betul memberi <span class="text-emerald-600 font-black">+100 mata</span> bonus!</li>
+                <li>Elakkan halangan tepi litar bagi melindungi 3 nyawa (<span class="text-rose-500">❤️</span>).</li>
+                <li>Selesaikan 2 pusingan dengan pantas untuk buka litar baharu dan catat nama di leaderboard.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ========================================== -->
+      <!-- GAME 2: EDU-MAN MAZE OF KNOWLEDGE CONTAINER -->
+      <!-- ========================================== -->
+      <div id="container-game2" class="hidden space-y-6">
+        <!-- Kotak 3D bersaiz besar (Container Utama Game 2) -->
+        <div class="card-soft-3d p-5 sm:p-8 lg:p-10 bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 border-purple-400 shadow-[0_12px_0_0_#9333ea] text-white">
+          
+          <!-- Header Info Game 2 -->
+          <div class="max-w-4xl mx-auto text-center space-y-3 mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-black text-xs uppercase tracking-wider shadow-md">
+              <i class="fa-solid fa-ghost"></i> Permainan 2: Misi Memburu Ilmu, Mengelak Musuh
+            </div>
+            
+            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-yellow-300 tracking-tight" style="text-shadow: 0 0 12px rgba(255,212,0,0.4);">
+              EDU-MAN: Maze of Knowledge
+            </h3>
+            
+            <p class="text-sm sm:text-base text-purple-200 font-bold max-w-2xl mx-auto">
+              Kawal wira EDU-MAN dalam laluan maze 3D bercahaya neon, kutip titik ilmu emas (+10), elakkan hantu musuh, dan buka bola misteri (?) untuk menjawab soalan sejarah pendidikan pelbagai format!
+            </p>
+
+            <!-- Badges Ciri-ciri -->
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-1">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-900/60 border border-purple-400/50 text-purple-200 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-compass text-cyan-400"></i> 4 Tahap Maze Cabaran
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-900/60 border border-purple-400/50 text-purple-200 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-shield-halved text-yellow-400"></i> Kuasa Immunity 8 Saat (Makan Hantu!)
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-900/60 border border-purple-400/50 text-purple-200 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-shapes text-emerald-400"></i> 5 Format Soalan Interaktif
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-purple-900/60 border border-purple-400/50 text-purple-200 font-bold text-xs shadow-sm">
+                <i class="fa-solid fa-trophy text-amber-400"></i> Leaderboard Top 10
+              </span>
+            </div>
+          </div>
+
+          <!-- Toolbar Game 2 -->
+          <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 mb-3 px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-cyan-400 animate-pulse"></span>
+              <span class="text-xs sm:text-sm font-black text-cyan-200">EDU-MAN 3D Engine Siap Sedia</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="eduman-mute-btn" onclick="toggleEduManMute()" class="btn-3d btn-3d-white px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5" title="Mute/Nyahmute Audio">
+                <i class="fa-solid fa-volume-high text-cyan-500" id="eduman-mute-icon"></i>
+                <span id="eduman-mute-text" class="text-slate-800">Bunyi Aktif</span>
+              </button>
+              <button onclick="toggleEduManFullscreen()" class="btn-3d btn-3d-purple px-4 py-2 text-xs font-black inline-flex items-center gap-1.5" title="Skrin Penuh">
+                <i class="fa-solid fa-expand" id="eduman-fs-icon"></i>
+                <span id="eduman-fs-text">Skrin Penuh</span>
+              </button>
+              <button onclick="reloadEduManGame()" class="btn-3d btn-3d-white px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5 text-slate-800" title="Muat Semula Game">
+                <i class="fa-solid fa-rotate-right"></i>
+                <span>Mula Semula</span>
+              </button>
+              <a href="/assets/aistudio/EDU-MAN__Maze_of_Knowledge_7dfbbf19.html" target="_blank" rel="noopener noreferrer" class="btn-3d btn-3d-sky px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5" title="Buka di tab baharu">
+                <i class="fa-solid fa-up-right-from-square"></i>
+                <span class="hidden sm:inline">Tab Baharu</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- 3D Game Frame Container Game 2 -->
+          <div id="eduman-frame-wrapper" class="max-w-5xl mx-auto relative rounded-3xl border-4 border-purple-500 bg-[#05010f] shadow-[0_14px_0_0_#7e22ce] overflow-hidden">
+            <div class="w-full h-[540px] sm:h-[640px] lg:h-[720px] relative">
+              <iframe 
+                id="eduman-game-iframe"
+                src="/assets/aistudio/EDU-MAN__Maze_of_Knowledge_7dfbbf19.html" 
+                title="EDU-MAN: Maze of Knowledge"
+                class="w-full h-full border-0 absolute inset-0"
+                allow="fullscreen; autoplay; audio"
+                loading="lazy">
+              </iframe>
+            </div>
+          </div>
+
+          <!-- Panduan Kawalan Game 2 -->
+          <div class="max-w-5xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Kawalan -->
+            <div class="bg-slate-900/90 rounded-2xl p-5 border-2 border-purple-500/50 shadow-sm space-y-3">
+              <h4 class="text-sm font-black text-cyan-300 flex items-center gap-2">
+                <i class="fa-solid fa-gamepad text-cyan-400"></i> Kawalan Permainan EDU-MAN
+              </h4>
+              <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+                <div class="p-2 rounded-xl bg-purple-950/60 border border-purple-400/40 flex items-center gap-2 text-purple-200">
+                  <span class="px-2 py-0.5 rounded-lg bg-cyan-400 text-slate-950 font-black">W / ↑</span>
+                  <span>Gerak Atas</span>
+                </div>
+                <div class="p-2 rounded-xl bg-purple-950/60 border border-purple-400/40 flex items-center gap-2 text-purple-200">
+                  <span class="px-2 py-0.5 rounded-lg bg-cyan-400 text-slate-950 font-black">S / ↓</span>
+                  <span>Gerak Bawah</span>
+                </div>
+                <div class="p-2 rounded-xl bg-purple-950/60 border border-purple-400/40 flex items-center gap-2 text-purple-200">
+                  <span class="px-2 py-0.5 rounded-lg bg-cyan-400 text-slate-950 font-black">A / ←</span>
+                  <span>Gerak Kiri</span>
+                </div>
+                <div class="p-2 rounded-xl bg-purple-950/60 border border-purple-400/40 flex items-center gap-2 text-purple-200">
+                  <span class="px-2 py-0.5 rounded-lg bg-cyan-400 text-slate-950 font-black">D / →</span>
+                  <span>Gerak Kanan</span>
+                </div>
+              </div>
+              <p class="text-[11px] text-purple-300 font-semibold">
+                <i class="fa-solid fa-mobile-screen mr-1 text-cyan-400"></i> Di telefon bimbit, gunakan pad sentuh maya (D-Pad di bucu kanan bawah) atau leret jari pada skrin untuk bergerak.
+              </p>
+            </div>
+
+            <!-- Petua Kuiz -->
+            <div class="bg-slate-900/90 rounded-2xl p-5 border-2 border-cyan-500/50 shadow-sm space-y-3">
+              <h4 class="text-sm font-black text-yellow-300 flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-yellow-400"></i> Panduan & Kuasa IMMUNITY
+              </h4>
+              <ul class="text-xs font-bold text-slate-200 space-y-2 list-disc list-inside">
+                <li>Kutip semua titik kuning (+10) untuk membersihkan maze dan membuka level baharu.</li>
+                <li>Sentuh bola emas (?) untuk membuka soalan kuiz (pilihan, seret ke kotak, atau susun garis masa).</li>
+                <li>Jawapan betul memberi <span class="text-emerald-400 font-black">+100 markah</span> dan kuasa <span class="text-cyan-300 font-black">IMMUNITY 8 saat</span>!</li>
+                <li>Semasa immunity aktif, hantu bertukar biru dan melarikan diri — anda boleh menangkap hantu!</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('edup6013')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Penulisan Nota EDUP 6013
+        </button>
+        <button onclick="showPage('bukudigital')" class="btn-3d btn-3d-purple px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Buka Buku Digital</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 5: BUKU DIGITAL (#bukudigital)                    -->
+    <!-- ======================================================= -->
+    <!-- ======================================================= -->
+    <!-- PART 5: BUKU DIGITAL (#bukudigital - AnyFlip Flipbook)    -->
+    <!-- ======================================================= -->
+    <div id="part-bukudigital" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      
+      <!-- Header & Intro Banner -->
+      <div class="card-soft-3d p-6 sm:p-8 bg-gradient-to-br from-purple-100/90 via-purple-50 to-white border-purple-300 shadow-[0_12px_0_0_#d8b4fe] space-y-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 bg-purple-100 border-2 border-purple-300 px-3.5 py-1 rounded-full text-purple-800 text-xs font-black uppercase tracking-wider">
+              <i class="fa-solid fa-book-open-reader"></i> Buku Digital Interaktif AnyFlip
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+              Pengembaraan Masa: Sekolah Kita, Kebanggaan Kita!
+            </h2>
+            <p class="text-sm sm:text-base text-slate-600 font-semibold max-w-3xl">
+              Hayati kisah pengembaraan Harith dan Nuha meneroka sejarah evolusi pendidikan sekolah rendah di Malaysia melalui buku digital AnyFlip di bawah. Selak halaman dengan efek 3D, zum helaian, atau besarkan paparan ke skrin penuh!
+            </p>
+          </div>
+
+          <!-- Quick Action Controls -->
+          <div class="flex flex-wrap items-center gap-2.5 flex-shrink-0">
+            <button onclick="toggleAnyflipFullscreen()" class="btn-3d btn-3d-purple px-4 py-2.5 text-xs sm:text-sm font-black inline-flex items-center gap-2" title="Besarkan ke Mod Skrin Penuh">
+              <i class="fa-solid fa-expand"></i>
+              <span>Skrin Penuh</span>
+            </button>
+            <button onclick="reloadAnyflipBook()" class="btn-3d btn-3d-white px-3.5 py-2.5 text-xs sm:text-sm font-black inline-flex items-center gap-1.5 text-slate-700 border-2 border-slate-200" title="Muat Semula Buku AnyFlip">
+              <i class="fa-solid fa-rotate-right"></i>
+              <span>Muat Semula</span>
+            </button>
+            <a 
+              href="https://anyflip.com/ytwls/nwvs/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-3d btn-3d-white px-4 py-2.5 text-xs sm:text-sm font-black inline-flex items-center gap-2 text-purple-800 border-2 border-purple-200"
+              title="Buka terus di platform rasmi AnyFlip"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square text-purple-600"></i>
+              <span>Buka di AnyFlip</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Ringkasan Pengembaraan Cerita -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 text-left">
+          <div class="bg-white/95 p-3.5 rounded-2xl border-2 border-purple-100 shadow-sm flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs flex-shrink-0">1</div>
+            <div>
+              <div class="text-xs font-black text-slate-900">Kompas Masa Ajaib</div>
+              <div class="text-[11px] font-bold text-slate-500">Menyusuri zaman sekolah vernakular</div>
+            </div>
+          </div>
+          <div class="bg-white/95 p-3.5 rounded-2xl border-2 border-purple-100 shadow-sm flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs flex-shrink-0">2</div>
+            <div>
+              <div class="text-xs font-black text-slate-900">Impian Penyatuan</div>
+              <div class="text-[11px] font-bold text-slate-500">Rancangan sekolah seragam kebangsaan</div>
+            </div>
+          </div>
+          <div class="bg-white/95 p-3.5 rounded-2xl border-2 border-purple-100 shadow-sm flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs flex-shrink-0">3</div>
+            <div>
+              <div class="text-xs font-black text-slate-900">Wira Pendidikan</div>
+              <div class="text-[11px] font-bold text-slate-500">Aminuddin Baki & Dr. Abdul Rahman Arshad</div>
+            </div>
+          </div>
+          <div class="bg-white/95 p-3.5 rounded-2xl border-2 border-purple-100 shadow-sm flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs flex-shrink-0">4</div>
+            <div>
+              <div class="text-xs font-black text-slate-900">Harmoni & Bangga</div>
+              <div class="text-[11px] font-bold text-slate-500">Semua murid belajar bersama dengan ceria</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Interactive AnyFlip 3D Flipbook Frame -->
+      <div id="anyflip-book-wrapper" class="card-soft-3d p-3 sm:p-5 bg-slate-900 border-purple-400 shadow-[0_12px_0_0_#a855f7] relative">
+        <div class="flex items-center justify-between px-3 py-2 bg-slate-800/90 rounded-xl mb-3 text-slate-300 text-xs font-bold border border-slate-700">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-white font-extrabold">AnyFlip 3D Digital Flipbook Aktif</span>
+            <span class="hidden sm:inline text-slate-400">• Boleh diselak, dizum, dan dimainkan audio</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="toggleAnyflipFullscreen()" class="hover:text-white transition-colors flex items-center gap-1.5 text-xs bg-purple-600 hover:bg-purple-500 text-white font-black px-3 py-1.5 rounded-lg shadow-sm">
+              <i class="fa-solid fa-expand"></i>
+              <span>Skrin Penuh</span>
+            </button>
+            <a href="https://anyflip.com/ytwls/nwvs/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1 text-xs bg-slate-700 hover:bg-slate-600 px-2.5 py-1.5 rounded-lg text-slate-200">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              <span class="hidden sm:inline">Buka AnyFlip</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- AnyFlip Responsive Iframe Reader -->
+        <div class="relative w-full h-[580px] sm:h-[680px] md:h-[760px] rounded-xl overflow-hidden bg-slate-950 border border-slate-800">
+          <iframe 
+            id="anyflip-book-frame"
+            src="https://online.anyflip.com/ytwls/nwvs/index.html" 
+            seamless="seamless" 
+            scrolling="no" 
+            frameborder="0" 
+            allowtransparency="true" 
+            allowfullscreen="true"
+            class="w-full h-full border-0"
+            title="Buku Cerita Digital: Pengembaraan Masa Sekolah Kita, Kebanggaan Kita! (AnyFlip)"
+          ></iframe>
+        </div>
+
+        <!-- Reader Tips Bar -->
+        <div class="mt-3 px-3.5 py-2.5 bg-slate-800/70 rounded-xl text-center text-xs text-slate-300 font-semibold flex items-center justify-center gap-2 flex-wrap">
+          <span>💡 <strong>Petua Membaca:</strong> Klik bucu halaman untuk membalikkan muka surat.</span>
+          <span class="hidden md:inline text-slate-500">•</span>
+          <span>Gunakan kawalan bar di bawah buku untuk zum atau lompat ke halaman tertentu.</span>
+        </div>
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('game')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Game
+        </button>
+        <button onclick="showPage('video')" class="btn-3d btn-3d-coral px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Tonton Video</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 6: VIDEO (#video)                                 -->
+    <!-- ======================================================= -->
+    <div id="part-video" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-10">
+      
+      <!-- Section Title -->
+      <div class="text-center max-w-3xl mx-auto space-y-3">
+        <div class="inline-flex items-center gap-2 bg-rose-100 border-2 border-rose-300 px-4 py-1.5 rounded-full text-rose-800 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#fca5a5]">
+          <i class="fa-solid fa-play"></i> Galeri Multimedia
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+          Tonton & Fahami
+        </h2>
+        <p class="text-base sm:text-lg text-slate-600 font-semibold">
+          Saksikan dokumentari dan visual sejarah bagaimana sekolah di Malaysia berkembang dari masa ke masa.
+        </p>
+      </div>
+
+      <!-- 2 Video Interaktif YouTube dalam Grid 3D -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        
+        <!-- Video 1 -->
+        <div class="card-soft-3d p-4 sm:p-6 bg-white border-rose-200 shadow-[0_12px_0_0_#fca5a5]">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="inline-flex items-center gap-1.5 text-xs font-black text-rose-600 bg-rose-50 px-3 py-1.5 rounded-xl border border-rose-200">
+              <i class="fa-solid fa-play"></i> Video 1
+            </span>
+            <span class="text-xs font-bold text-slate-500">Sejarah & Perkembangan Sekolah</span>
+          </div>
+
+          <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-inner">
+            <iframe 
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/RZ2jRzKgnHM?rel=0" 
+              title="Video Pembelajaran 1: Sejarah Pendidikan Malaysia"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="mt-4 pt-3 border-t-2 border-slate-100 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-600 flex items-center justify-center text-sm flex-shrink-0">
+              <i class="fa-solid fa-tv"></i>
+            </div>
+            <p class="text-xs font-bold text-slate-700">Tonton video ini untuk mendalami asal-usul dan sistem persekolahan negara kita.</p>
+          </div>
+        </div>
+
+        <!-- Video 2 -->
+        <div class="card-soft-3d p-4 sm:p-6 bg-white border-sky-200 shadow-[0_12px_0_0_#7dd3fc]">
+          <div class="flex items-center justify-between gap-2 mb-3">
+            <span class="inline-flex items-center gap-1.5 text-xs font-black text-sky-600 bg-sky-50 px-3 py-1.5 rounded-xl border border-sky-200">
+              <i class="fa-solid fa-play"></i> Video 2
+            </span>
+            <span class="text-xs font-bold text-slate-500">Evolusi & Tokoh Pendidikan</span>
+          </div>
+
+          <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-slate-900 border-2 border-slate-200 shadow-inner">
+            <iframe 
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/dYX97TEwiiA?rel=0" 
+              title="Video Pembelajaran 2: Perkembangan Sekolah & Tokoh"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="mt-4 pt-3 border-t-2 border-slate-100 flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-600 flex items-center justify-center text-sm flex-shrink-0">
+              <i class="fa-solid fa-film"></i>
+            </div>
+            <p class="text-xs font-bold text-slate-700">Fahami sumbangan dan perubahan struktur pendidikan kebangsaan melalui video ini.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Info Tambahan di Bawah Video -->
+      <div class="card-soft-3d p-5 bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200 shadow-[0_6px_0_0_#fcd34d] max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-400 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div>
+            <div class="text-xs font-black text-amber-900 uppercase">Tip Murid Cemerlang:</div>
+            <div class="text-xs sm:text-sm font-bold text-slate-800">Catatkan isi penting semasa menonton untuk memudahkan anda mengisi ruangan refleksi!</div>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-xs font-black text-amber-800 bg-white px-3 py-1.5 rounded-xl border border-amber-300 shadow-xs flex-shrink-0">
+          <i class="fa-solid fa-circle-check text-amber-500"></i> 2 Video Pilihan
+        </span>
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('bukudigital')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Buku Digital
+        </button>
+        <button onclick="showPage('quiz')" class="btn-3d btn-3d-yellow px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Jawab Quiz</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 7: QUIZ GOOGLE FORM (#quiz)                       -->
+    <!-- ======================================================= -->
+    <div id="part-quiz" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto space-y-10">
+      
+      <!-- Section Title -->
+      <div class="text-center space-y-3">
+        <div class="inline-flex items-center gap-2 bg-amber-100 border-2 border-amber-300 px-4 py-1.5 rounded-full text-amber-800 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#fcd34d]">
+          <i class="fa-solid fa-square-poll-vertical"></i> Ujian & Penilaian Kendiri
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          Sudut Quiz Sejarah Pendidikan Malaysia
+        </h2>
+        <p class="text-base sm:text-lg text-slate-700 font-bold max-w-2xl mx-auto">
+          Uji kefahaman anda mengenai evolusi sistem persekolahan dan tokoh-tokoh penting pendidikan negara melalui borang kuiz rasmi di bawah.
+        </p>
+      </div>
+
+      <!-- Kotak Utama 3D untuk Google Form -->
+      <div class="card-soft-3d p-4 sm:p-8 bg-white border-amber-300 shadow-[0_12px_0_0_#fcd34d] rounded-3xl space-y-6">
+        
+        <!-- Toolbar Atas Google Form -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b-2 border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div>
+              <div class="text-sm font-black text-slate-900">Borang Quiz Interaktif Google Form</div>
+              <div class="text-xs font-bold text-slate-500">Sedia dijawab secara langsung di bawah</div>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-2.5">
+            <button onclick="reloadQuizForm()" class="btn-3d btn-3d-white px-3.5 py-2 text-xs font-bold inline-flex items-center gap-1.5 text-slate-800" title="Muat Semula Borang">
+              <i class="fa-solid fa-rotate-right"></i>
+              <span>Muat Semula</span>
+            </button>
+            <a 
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfvOIMKlQ0FBInHjmkm2Ewn6dQmy_05Z2S2wkoryclvtVy87w/viewform?usp=header" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="btn-3d btn-3d-yellow px-4 py-2 text-xs sm:text-sm font-black inline-flex items-center gap-2"
+              title="Buka Google Form di Tab Baharu">
+              <i class="fa-solid fa-up-right-from-square"></i>
+              <span>Buka di Tab Baharu</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Iframe Embed Google Form -->
+        <div class="relative w-full rounded-2xl overflow-hidden border-2 border-slate-200 bg-slate-50 shadow-inner">
+          <iframe 
+            id="google-quiz-iframe"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfvOIMKlQ0FBInHjmkm2Ewn6dQmy_05Z2S2wkoryclvtVy87w/viewform?embedded=true" 
+            class="w-full min-h-[750px] sm:min-h-[880px] border-0 block"
+            frameborder="0" 
+            marginheight="0" 
+            marginwidth="0"
+            title="Quiz Google Form Sejarah Pendidikan Malaysia"
+            loading="lazy">
+            Memuatkan Borang Quiz Google... Sila tunggu sebentar.
+          </iframe>
+        </div>
+
+        <!-- Panduan & Tip Murid Menjawab Kuiz -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+          <div class="p-4 rounded-2xl bg-amber-50/80 border-2 border-amber-200 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-amber-400 text-amber-950 font-black flex items-center justify-center text-xs flex-shrink-0">1</div>
+            <div>
+              <div class="text-xs font-black text-amber-950">Isi Maklumat Diri</div>
+              <div class="text-[11px] font-bold text-slate-600">Pastikan nama dan kelas anda ditaip dengan betul sebelum mula.</div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-sky-50/80 border-2 border-sky-200 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-sky-400 text-white font-black flex items-center justify-center text-xs flex-shrink-0">2</div>
+            <div>
+              <div class="text-xs font-black text-sky-950">Baca Teliti & Fikir</div>
+              <div class="text-[11px] font-bold text-slate-600">Gunakan pengetahuan dari nota dan buku digital yang dipelajari.</div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-emerald-50/80 border-2 border-emerald-200 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center text-xs flex-shrink-0">3</div>
+            <div>
+              <div class="text-xs font-black text-emerald-950">Tekan Hantar / Submit</div>
+              <div class="text-[11px] font-bold text-slate-600">Pastikan klik "Submit" di hujung borang untuk merekod skor anda.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigasi Langkah Antara Bahagian -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('video')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Video
+        </button>
+        <button onclick="showPage('refleksi')" class="btn-3d btn-3d-sky px-8 py-3.5 text-base font-black">
+          <span>Langkah Seterusnya: Sudut Refleksi</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- ======================================================= -->
+    <!-- PART 8: REFLEKSI (#refleksi)                           -->
+    <!-- ======================================================= -->
+    <div id="part-refleksi" class="app-page hidden py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-10">
+      
+      <!-- Section Title -->
+      <div class="text-center space-y-3">
+        <div class="inline-flex items-center gap-2 bg-sky-100 border-2 border-sky-300 px-4 py-1.5 rounded-full text-sky-800 text-xs font-black uppercase tracking-wider shadow-[0_2px_0_0_#7dd3fc]">
+          <i class="fa-solid fa-comment-dots"></i> Suara Murid & Hubungi Guru
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight">
+          Sudut Refleksi & Pendapat Murid
+        </h2>
+        <p class="text-base sm:text-lg text-slate-700 font-bold max-w-2xl mx-auto">
+          Tempat khas untuk murid-murid memberikan pendapat tentang laman web ini, serta ruang untuk menghubungi guru pembina modul sekiranya memerlukan bimbingan.
+        </p>
+      </div>
+
+      <!-- KAD PROFIL GURU: USTAZ MUHAMMAD ANIQ AQASHA BIN HAMIDON -->
+      <div class="card-soft-3d p-6 sm:p-8 lg:p-10 bg-gradient-to-br from-emerald-100/80 via-white to-sky-50 border-emerald-300 shadow-[0_12px_0_0_#6ee7b7] rounded-3xl">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          <!-- Foto Guru -->
+          <div class="md:col-span-5 flex flex-col items-center text-center">
+            <div class="relative group">
+              <!-- Soft 3D Glow Frame -->
+              <div class="w-48 h-56 sm:w-56 sm:h-64 rounded-3xl overflow-hidden border-4 border-emerald-400 bg-white shadow-[0_10px_0_0_#34d399] p-1.5 transition-transform duration-300 group-hover:scale-105">
+                <img 
+                  src="/assets/aistudio/ustaz_aniq_profile.jpg" 
+                  alt="Ustaz Muhammad Aniq Aqasha Bin Hamidon" 
+                  class="w-full h-full object-cover rounded-2xl"
+                  loading="lazy"
+                />
+              </div>
+              <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-emerald-600 text-white text-xs font-black px-3.5 py-1 rounded-full shadow-md border-2 border-white flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+                <span>Guru Pembina Modul</span>
+              </div>
+            </div>
+            <div class="mt-5 text-center">
+              <span class="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-lg border border-emerald-200">
+                Pendidik Sejarah EDUP 6013
+              </span>
+            </div>
+          </div>
+
+          <!-- Info & Hubungi Guru -->
+          <div class="md:col-span-7 space-y-4">
+            <div>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-sky-100 text-sky-800 font-bold text-xs mb-2">
+                <i class="fa-solid fa-chalkboard-user"></i> Profil Guru Pembimbing
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-black text-slate-900 leading-snug tracking-tight">
+                USTAZ MUHAMMAD ANIQ AQASHA BIN HAMIDON
+              </h3>
+              <p class="text-sm font-bold text-emerald-800">
+                Penyelaras & Pengarang Modul Evolusi Pendidikan Malaysia
+              </p>
+            </div>
+
+            <!-- Pesanan Guru -->
+            <div class="p-4 rounded-2xl bg-white/90 border-2 border-emerald-200 text-xs sm:text-sm text-slate-700 font-semibold leading-relaxed shadow-sm">
+              <i class="fa-solid fa-quote-left text-emerald-400 text-base mr-1"></i>
+              Assalamualaikum dan salam sejahtera kepada semua murid yang dikasihi! Ruang ini disediakan khusus untuk anda menyatakan pendapat jujur tentang laman web ini. Ustaz sentiasa bersedia mendengar maklum balas dan membantu anda dalam pembelajaran. Sila hubungi ustaz secara terus melalui maklumat di bawah.
+            </div>
+
+            <!-- Kotak Saluran Hubungi Saya -->
+            <div class="space-y-3 pt-2">
+              <div class="text-xs font-black uppercase text-slate-500 tracking-wider flex items-center gap-1.5">
+                <i class="fa-solid fa-address-book text-sky-500"></i> Saluran Hubungan Guru:
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <!-- Telefon & WhatsApp -->
+                <div class="p-3.5 rounded-2xl bg-white border-2 border-emerald-200 shadow-sm flex flex-col justify-between space-y-2">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-sm shadow-sm">
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                      <div class="text-[10px] font-extrabold uppercase text-slate-400">Nombor Telefon / WhatsApp</div>
+                      <div class="text-sm font-black text-slate-900">016-2646861</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-1.5 pt-1">
+                    <a href="tel:0162646861" class="btn-3d btn-3d-white py-1.5 px-3 text-xs font-black flex-1 text-center">
+                      <i class="fa-solid fa-phone mr-1 text-emerald-600"></i> Dail
+                    </a>
+                    <a href="https://wa.me/60162646861?text=Assalamualaikum%20Ustaz%20Aniq,%20saya%20ingin%20memberi%20maklum%20balas%20mengenai%20website%20Sejarah%20Pendidikan%20Malaysia" target="_blank" rel="noopener noreferrer" class="btn-3d btn-3d-mint py-1.5 px-3 text-xs font-black flex-1 text-center">
+                      <i class="fa-brands fa-whatsapp mr-1"></i> WhatsApp
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Emel Rasmi -->
+                <div class="p-3.5 rounded-2xl bg-white border-2 border-sky-200 shadow-sm flex flex-col justify-between space-y-2">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-sky-500 text-white flex items-center justify-center text-sm shadow-sm">
+                      <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="overflow-hidden">
+                      <div class="text-[10px] font-extrabold uppercase text-slate-400">Emel Rasmi MOE</div>
+                      <div class="text-xs font-black text-slate-900 truncate" title="g-ipgp253008514@moe.dl.edu.my">
+                        g-ipgp253008514@moe.dl.edu.my
+                      </div>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <a href="mailto:g-ipgp253008514@moe.dl.edu.my?subject=Maklum%20Balas%20Website%20Sejarah%20Pendidikan%20Malaysia" class="btn-3d btn-3d-sky py-1.5 px-3 text-xs font-black w-full block text-center">
+                      <i class="fa-solid fa-paper-plane mr-1"></i> Hantar Emel
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BORANG PENDAPAT MURID TENTANG WEBSITE (KAD 3D) -->
+      <div class="card-soft-3d p-6 sm:p-10 bg-white border-sky-200 shadow-[0_12px_0_0_#7dd3fc]">
+        
+        <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-slate-100">
+          <div class="w-12 h-12 rounded-2xl bg-sky-500 text-white flex items-center justify-center text-xl shadow-sm">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900">Beri Pendapat Anda Tentang Website Ini</h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">
+              Apakah bahagian paling anda sukai? Kongsikan komen dan idea anda untuk Ustaz Aniq!
+            </p>
+          </div>
+        </div>
+
+        <form id="reflection-form" class="space-y-6">
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Input Nama -->
+            <div class="space-y-2">
+              <label for="student-name" class="block text-sm font-black text-slate-900">
+                <i class="fa-solid fa-user text-sky-500 mr-1.5"></i> Nama Anda:
+              </label>
+              <input 
+                type="text" 
+                id="student-name" 
+                name="student-name"
+                required
+                placeholder="Contoh: Muhammad Adam / Nur Dania" 
+                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-800 placeholder-slate-400 shadow-sm transition-all"
+              />
+            </div>
+
+            <!-- Input Kelas / Sekolah -->
+            <div class="space-y-2">
+              <label for="student-class" class="block text-sm font-black text-slate-900">
+                <i class="fa-solid fa-school text-sky-500 mr-1.5"></i> Kelas / Sekolah:
+              </label>
+              <input 
+                type="text" 
+                id="student-class" 
+                name="student-class"
+                placeholder="Contoh: Tahun 5 Bestari / SK Seri Indah" 
+                class="w-full px-4 py-3 rounded-2xl border-2 border-slate-200 focus:border-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-800 placeholder-slate-400 shadow-sm transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Pilihan Penilaian / Bintang -->
+          <div class="space-y-2">
+            <label class="block text-sm font-black text-slate-900">
+              <i class="fa-solid fa-star text-amber-500 mr-1.5"></i> Penilaian Anda Terhadap Website:
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <label class="flex items-center gap-2 p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition-all">
+                <input type="radio" name="student-rating" value="⭐⭐⭐⭐⭐ Hebat & Menyeronokkan!" checked class="accent-amber-500" />
+                <span class="text-xs font-black text-slate-800">⭐⭐⭐⭐⭐ Hebat!</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition-all">
+                <input type="radio" name="student-rating" value="⭐⭐⭐⭐ Sangat Baik & Ceria" class="accent-amber-500" />
+                <span class="text-xs font-black text-slate-800">⭐⭐⭐⭐ Sangat Baik</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition-all">
+                <input type="radio" name="student-rating" value="⭐⭐⭐ Menarik & Mudah Belajar" class="accent-amber-500" />
+                <span class="text-xs font-black text-slate-800">⭐⭐⭐ Menarik</span>
+              </label>
+              <label class="flex items-center gap-2 p-3 rounded-2xl border-2 border-slate-200 bg-slate-50 cursor-pointer hover:border-amber-400 hover:bg-amber-50 transition-all">
+                <input type="radio" name="student-rating" value="⭐⭐ Boleh Ditambah Baik" class="accent-amber-500" />
+                <span class="text-xs font-black text-slate-800">⭐⭐ Tambah Baik</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Textarea Pendapat tentang website -->
+          <div class="space-y-2">
+            <label for="reflection-text" class="block text-sm font-black text-slate-900">
+              <i class="fa-solid fa-pen-nib text-sky-500 mr-1.5"></i> Pendapat & Refleksi Anda Tentang Website Ini:
+            </label>
+            <textarea 
+              id="reflection-text" 
+              name="reflection-text"
+              rows="4" 
+              required
+              placeholder="Tuliskan pendapat anda tentang website ini, bahagian mana yang paling anda gemari (game kart, nota tokoh, buku cerita atau video) dan sebarang cadangan anda..." 
+              class="w-full px-4 py-3.5 rounded-2xl border-2 border-slate-200 focus:border-sky-400 focus:outline-none focus:ring-4 focus:ring-sky-100 font-bold text-slate-800 placeholder-slate-400 shadow-sm transition-all resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Butang Submit 3D: Hantar Pendapat -->
+          <div class="pt-2 text-center sm:text-left">
+            <button type="submit" class="btn-3d btn-3d-sky px-8 py-4 text-base font-black w-full sm:w-auto">
+              <i class="fa-solid fa-paper-plane mr-2"></i> Hantar Pendapat Saya
+            </button>
+          </div>
+
+        </form>
+
+        <!-- Notification Toast on Submit -->
+        <div id="reflection-toast" class="hidden mt-6 p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-800 font-bold flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg flex-shrink-0 shadow-sm">
+            <i class="fa-solid fa-check"></i>
+          </div>
+          <div>
+            <div class="font-black text-emerald-900" id="toast-title">Terima Kasih!</div>
+            <div class="text-xs text-emerald-700" id="toast-desc">Pendapat anda telah berjaya disimpan dan dihantar kepada Ustaz Aniq.</div>
+          </div>
+        </div>
+
+        <!-- Recent Reflections Feed -->
+        <div class="mt-10 pt-8 border-t-2 border-slate-100 space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="text-xs font-black uppercase text-slate-400 tracking-wider">
+              <i class="fa-solid fa-comments text-sky-500 mr-1"></i> Pendapat & Ulasan Murid Terkini:
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2.5 py-0.5 rounded-full border border-emerald-200">
+              Kemas Kini Langsung
+            </span>
+          </div>
+          <div id="reflections-list" class="space-y-3">
+            <div class="p-4 rounded-2xl bg-slate-50 border-2 border-slate-200">
+              <div class="flex items-center justify-between mb-1.5">
+                <span class="font-black text-slate-900 text-sm flex items-center gap-2">
+                  <span>Aisyah Zahra (Tahun 5 Bestari)</span>
+                  <span class="text-amber-500 text-xs">⭐⭐⭐⭐⭐</span>
+                </span>
+                <span class="text-[11px] font-bold text-slate-400">Baru sahaja</span>
+              </div>
+              <p class="text-xs font-bold text-slate-600 leading-relaxed">
+                "Website ini sangat cantik dan seronok! Saya suka game EduKart 3D dan buku cerita digital. Senang nak faham tentang tokoh pendidikan negara."
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Navigasi Langkah Akhir -->
+      <div class="pt-6 border-t-2 border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <button onclick="showPage('quiz')" class="btn-3d btn-3d-white px-6 py-3 text-sm">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Quiz
+        </button>
+        <button onclick="showPage('muka-depan')" class="btn-3d btn-3d-yellow px-8 py-3.5 text-base font-black">
+          <i class="fa-solid fa-trophy mr-1.5"></i>
+          <span>Tahniah! Kembali ke Muka Depan</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+
+
+
+  <!-- ======================================================= -->
+  <!-- FOOTER & RUJUKAN AKADEMIK                               -->
+  <!-- ======================================================= -->
+  <footer class="bg-slate-900/95 backdrop-blur-md text-slate-300 py-12 border-t-4 border-sky-400 mt-16 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+        <!-- Logo & Description -->
+        <div class="md:col-span-6 space-y-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-500 text-white flex items-center justify-center text-xl font-black">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="text-2xl font-black text-white">Evolusi Sekolah Kita</span>
+          </div>
+          <p class="text-sm text-slate-400 font-semibold max-w-md leading-relaxed">
+            Modul pembelajaran digital berasaskan Kurikulum Standard Sekolah Rendah (KSSR) Sejarah Kementerian Pendidikan Malaysia.
+          </p>
+        </div>
+
+        <!-- Academic References (UKM, UPSI, IAB, UM) -->
+        <div class="md:col-span-6 space-y-3">
+          <div class="text-xs font-black uppercase tracking-wider text-slate-400">Pautan Rujukan Akademik:</div>
+          <div class="flex flex-wrap gap-2.5">
+            <a href="https://www.ukm.my" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold border border-slate-700 transition-colors">
+              <i class="fa-solid fa-building-columns mr-1 text-sky-400"></i> UKM
+            </a>
+            <a href="https://www.upsi.edu.my" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold border border-slate-700 transition-colors">
+              <i class="fa-solid fa-school mr-1 text-amber-400"></i> UPSI
+            </a>
+            <a href="https://iab.moe.edu.my" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold border border-slate-700 transition-colors">
+              <i class="fa-solid fa-award mr-1 text-emerald-400"></i> IAB (Institut Aminuddin Baki)
+            </a>
+            <a href="https://www.um.edu.my" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-extrabold border border-slate-700 transition-colors">
+              <i class="fa-solid fa-landmark mr-1 text-purple-400"></i> UM
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright & Back to Top -->
+      <div class="pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-500">
+        <div>
+          © 2026 Sejarah Pendidikan Malaysia. Modul Multimedia Sekolah Rendah.
+        </div>
+        <div class="flex items-center gap-4">
+          <button onclick="showPage('muka-depan')" class="hover:text-sky-400 transition-colors inline-flex items-center gap-1.5">
+            <i class="fa-solid fa-house"></i>
+            <span>Muka Depan</span>
+          </button>
+          <span>•</span>
+          <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hover:text-sky-400 transition-colors inline-flex items-center gap-1.5">
+            <span>Ke Atas</span>
+            <i class="fa-solid fa-arrow-up"></i>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ======================================================= -->
+  <!-- JAVASCRIPT: LOGIK PERTUKARAN HALAMAN & INTERAKSI        -->
+  <!-- ======================================================= -->
+  <script>
+    // ----------------------------------------------------
+    // 1. Logik Asingkan Setiap Bahagian ke Halaman Berbeza
+    // ----------------------------------------------------
+    const pageIds = ['muka-depan', 'pengenalan', 'nota', 'edup6013', 'game', 'bukudigital', 'video', 'quiz', 'refleksi'];
+
+    function showPage(targetPageId) {
+      if (!pageIds.includes(targetPageId)) return;
+
+      // 1. Sembunyikan semua halaman, paparkan hanya halaman yang ditekan
+      pageIds.forEach(id => {
+        const el = document.getElementById(`part-${id}`);
+        if (el) {
+          if (id === targetPageId) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      });
+
+      // 2. Kemas kini gaya butang aktif di Desktop Navbar (Semua butang sama tinggi h-9 dan selari di garisan bawah)
+      document.querySelectorAll('.nav-page-btn').forEach(btn => {
+        const page = btn.getAttribute('data-page');
+        if (page === targetPageId) {
+          btn.className = 'nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-black bg-sky-500 text-white shadow-xs transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap';
+        } else {
+          btn.className = 'nav-page-btn h-9 px-2.5 xl:px-3 rounded-xl text-xs xl:text-sm font-extrabold text-slate-700 hover:text-sky-600 hover:bg-white transition-all flex items-center gap-1.5 whitespace-nowrap flex-nowrap';
+        }
+      });
+
+      // 3. Kemas kini gaya butang aktif di Mobile Drawer
+      document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+        const page = btn.getAttribute('data-page');
+        if (page === targetPageId) {
+          btn.className = 'mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-black bg-sky-500 text-white shadow-[0_4px_0_0_#0284c7]';
+        } else {
+          btn.className = 'mobile-nav-btn w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl font-bold text-slate-700 hover:bg-sky-50 hover:text-sky-600';
+        }
+      });
+
+      // 4. Tutup menu mobile jika terbuka
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+      if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+        mobileMenu.classList.add('hidden');
+        if (mobileMenuIcon) {
+          mobileMenuIcon.classList.remove('fa-xmark');
+          mobileMenuIcon.classList.add('fa-bars');
+        }
+      }
+
+      // 5. Kawalan Bunyi Automatik: Matikan kedua-dua game bila pengguna keluar dari Game!
+      if (targetPageId !== 'game') {
+        silenceEduKart();
+        silenceEduMan();
+      } else {
+        if (activeGameId === 'game1') {
+          restoreEduKart();
+          silenceEduMan();
+        } else {
+          restoreEduMan();
+          silenceEduKart();
+        }
+      }
+
+      // 6. Tatal ke bahagian atas skrin dengan lancar
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 7. Jika buka halaman game, fokuskan tetingkap iframe aktif supaya papan kekunci aktif serta-merta
+      if (targetPageId === 'game') {
+        setTimeout(() => {
+          const iframeId = activeGameId === 'game1' ? 'edukart-game-iframe' : 'eduman-game-iframe';
+          const iframe = document.getElementById(iframeId);
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.focus();
+          }
+        }, 300);
+      }
+    }
+
+    // ----------------------------------------------------
+    // 2. Mobile Menu Toggle
+    // ----------------------------------------------------
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+
+    if (mobileMenuBtn && mobileMenu && mobileMenuIcon) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenuIcon.classList.remove('fa-bars');
+          mobileMenuIcon.classList.add('fa-xmark');
+        } else {
+          mobileMenu.classList.add('hidden');
+          mobileMenuIcon.classList.remove('fa-xmark');
+          mobileMenuIcon.classList.add('fa-bars');
+        }
+      });
+    }
+
+    // ----------------------------------------------------
+    // 3. Interactive AnyFlip Digital Flipbook Controls
+    // ----------------------------------------------------
+    window.toggleAnyflipFullscreen = function() {
+      const wrapper = document.getElementById('anyflip-book-wrapper');
+      const iframe = document.getElementById('anyflip-book-frame');
+      const targetElem = wrapper || iframe;
+
+      if (!targetElem) return;
+
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (targetElem.requestFullscreen) {
+          targetElem.requestFullscreen().catch(() => {
+            // Fallback CSS fullscreen jika API disekat persekitaran iFrame
+            targetElem.classList.toggle('fixed');
+            targetElem.classList.toggle('inset-2');
+            targetElem.classList.toggle('z-50');
+          });
+        } else if (targetElem.webkitRequestFullscreen) {
+          targetElem.webkitRequestFullscreen();
+        } else {
+          targetElem.classList.toggle('fixed');
+          targetElem.classList.toggle('inset-2');
+          targetElem.classList.toggle('z-50');
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    };
+
+    window.reloadAnyflipBook = function() {
+      const iframe = document.getElementById('anyflip-book-frame');
+      if (iframe) {
+        const currentSrc = iframe.src;
+        iframe.src = '';
+        setTimeout(() => {
+          iframe.src = currentSrc || 'https://online.anyflip.com/ytwls/nwvs/index.html';
+        }, 120);
+      }
+    };
+
+    window.openBookModal = function(pageNum = 1) {
+      // Alihkan paparan terus ke seksyen Buku Digital AnyFlip
+      showPage('bukudigital');
+      setTimeout(() => {
+        const wrapper = document.getElementById('anyflip-book-wrapper');
+        if (wrapper) {
+          wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    };
+
+    // Kawalan Penulisan Nota EDUP 6013 (AnyFlip 3D vs Dokumen 8 Halaman vs PDF)
+    window.switchEdupViewMode = function(mode) {
+      const flipContainer = document.getElementById('edup-anyflip-container');
+      const pagesContainer = document.getElementById('edup-pages-container');
+      const pdfContainer = document.getElementById('edup-pdf-container');
+      const jumpBar = document.getElementById('edup-jump-bar');
+
+      const btnFlip = document.getElementById('edup-btn-flip');
+      const btnPages = document.getElementById('edup-btn-pages');
+      const btnPdf = document.getElementById('edup-btn-pdf');
+
+      if (flipContainer) flipContainer.classList.add('hidden');
+      if (pagesContainer) pagesContainer.classList.add('hidden');
+      if (pdfContainer) pdfContainer.classList.add('hidden');
+      if (jumpBar) jumpBar.classList.add('hidden');
+
+      if (btnFlip) btnFlip.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1.5';
+      if (btnPages) btnPages.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1.5';
+      if (btnPdf) btnPdf.className = 'px-3.5 py-1.5 rounded-lg text-xs font-bold text-slate-700 hover:text-slate-900 transition-all flex items-center gap-1.5';
+
+      if (mode === 'flip') {
+        if (flipContainer) flipContainer.classList.remove('hidden');
+        if (btnFlip) btnFlip.className = 'px-3.5 py-1.5 rounded-lg text-xs font-black bg-indigo-600 text-white shadow-xs transition-all flex items-center gap-1.5';
+      } else if (mode === 'pdf') {
+        if (pdfContainer) pdfContainer.classList.remove('hidden');
+        if (btnPdf) btnPdf.className = 'px-3.5 py-1.5 rounded-lg text-xs font-black bg-indigo-600 text-white shadow-xs transition-all flex items-center gap-1.5';
+      } else {
+        if (pagesContainer) pagesContainer.classList.remove('hidden');
+        if (jumpBar) jumpBar.classList.remove('hidden');
+        if (btnPages) btnPages.className = 'px-3.5 py-1.5 rounded-lg text-xs font-black bg-indigo-600 text-white shadow-xs transition-all flex items-center gap-1.5';
+      }
+    };
+
+    window.toggleEdupAnyflipFullscreen = function() {
+      const wrapper = document.getElementById('edup-anyflip-container');
+      const iframe = document.getElementById('edup-anyflip-frame');
+      const targetElem = wrapper || iframe;
+
+      if (!targetElem) return;
+
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (targetElem.requestFullscreen) {
+          targetElem.requestFullscreen().catch(() => {
+            targetElem.classList.toggle('fixed');
+            targetElem.classList.toggle('inset-2');
+            targetElem.classList.toggle('z-50');
+          });
+        } else if (targetElem.webkitRequestFullscreen) {
+          targetElem.webkitRequestFullscreen();
+        } else {
+          targetElem.classList.toggle('fixed');
+          targetElem.classList.toggle('inset-2');
+          targetElem.classList.toggle('z-50');
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    };
+
+    // ----------------------------------------------------
+    // 4. Game Switcher & Helper Controls (Game 1 & Game 2)
+    // ----------------------------------------------------
+    let activeGameId = 'game1';
+    let edukartMuted = false;
+    let edumanMuted = false;
+
+    function switchGame(gameId) {
+      if (activeGameId === gameId) return;
+      activeGameId = gameId;
+
+      const btn1 = document.getElementById('btn-tab-game1');
+      const btn2 = document.getElementById('btn-tab-game2');
+      const cont1 = document.getElementById('container-game1');
+      const cont2 = document.getElementById('container-game2');
+
+      if (gameId === 'game1') {
+        if (cont1) cont1.classList.remove('hidden');
+        if (cont2) cont2.classList.add('hidden');
+
+        if (btn1) {
+          btn1.className = 'btn-3d btn-3d-mint px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md';
+        }
+        if (btn2) {
+          btn2.className = 'btn-3d btn-3d-white px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md';
+        }
+
+        // Matikan audio Game 2, pulihkan audio Game 1
+        silenceEduMan();
+        restoreEduKart();
+
+        setTimeout(() => {
+          const iframe = document.getElementById('edukart-game-iframe');
+          if (iframe && iframe.contentWindow) iframe.contentWindow.focus();
+        }, 150);
+      } else {
+        if (cont1) cont1.classList.add('hidden');
+        if (cont2) cont2.classList.remove('hidden');
+
+        if (btn1) {
+          btn1.className = 'btn-3d btn-3d-white px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md';
+        }
+        if (btn2) {
+          btn2.className = 'btn-3d btn-3d-purple px-5 sm:px-7 py-3 text-sm sm:text-base font-black flex items-center gap-2.5 transition-all shadow-md';
+        }
+
+        // Matikan audio Game 1, pulihkan audio Game 2
+        silenceEduKart();
+        restoreEduMan();
+
+        setTimeout(() => {
+          const iframe = document.getElementById('eduman-game-iframe');
+          if (iframe && iframe.contentWindow) iframe.contentWindow.focus();
+        }, 150);
+      }
+    }
+
+    // --- EduKart 3D Controls ---
+    function silenceEduKart() {
+      const iframe = document.getElementById('edukart-game-iframe');
+      if (!iframe) return;
+      try {
+        iframe.contentWindow?.postMessage({ action: 'stopAudio' }, '*');
+        iframe.contentWindow?.postMessage('pause', '*');
+        if (iframe.contentWindow) {
+          if (typeof iframe.contentWindow.stopGameAudio === 'function') {
+            iframe.contentWindow.stopGameAudio();
+          }
+          if (iframe.contentWindow.AC && iframe.contentWindow.AC.state === 'running') {
+            iframe.contentWindow.AC.suspend().catch(()=>{});
+          }
+          if ('mute' in iframe.contentWindow) {
+            iframe.contentWindow.mute = true;
+          }
+          if (iframe.contentWindow.eg) {
+            iframe.contentWindow.eg.gain.value = 0;
+          }
+        }
+      } catch (err) {
+        console.warn('Audio silence error:', err);
+      }
+    }
+
+    function restoreEduKart() {
+      if (edukartMuted) return; // kekal bisu jika pengguna sendiri menekan Mute
+      const iframe = document.getElementById('edukart-game-iframe');
+      if (!iframe) return;
+      try {
+        iframe.contentWindow?.postMessage({ action: 'resume' }, '*');
+        if (iframe.contentWindow) {
+          if (typeof iframe.contentWindow.resumeGameAudio === 'function') {
+            iframe.contentWindow.resumeGameAudio();
+          }
+          if (iframe.contentWindow.AC && iframe.contentWindow.AC.state === 'suspended') {
+            iframe.contentWindow.AC.resume().catch(()=>{});
+          }
+          if ('mute' in iframe.contentWindow) {
+            iframe.contentWindow.mute = false;
+          }
+        }
+      } catch (err) {
+        console.warn('Audio resume error:', err);
+      }
+    }
+
+    function toggleEduKartMute() {
+      edukartMuted = !edukartMuted;
+      const muteIcon = document.getElementById('game-mute-icon');
+      const muteText = document.getElementById('game-mute-text');
+
+      if (edukartMuted) {
+        silenceEduKart();
+        if (muteIcon) muteIcon.className = 'fa-solid fa-volume-xmark text-rose-500';
+        if (muteText) muteText.textContent = 'Bisu (Muted)';
+      } else {
+        restoreEduKart();
+        if (muteIcon) muteIcon.className = 'fa-solid fa-volume-high text-emerald-600';
+        if (muteText) muteText.textContent = 'Bunyi Aktif';
+      }
+    }
+
+    function reloadEduKartGame() {
+      const iframe = document.getElementById('edukart-game-iframe');
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
+    }
+
+    function toggleGameFullscreen() {
+      const frameWrapper = document.getElementById('game-frame-wrapper');
+      const fsIcon = document.getElementById('game-fs-icon');
+      const fsText = document.getElementById('game-fs-text');
+
+      if (!document.fullscreenElement) {
+        if (frameWrapper && frameWrapper.requestFullscreen) {
+          frameWrapper.requestFullscreen().then(() => {
+            if (fsIcon) fsIcon.className = 'fa-solid fa-compress';
+            if (fsText) fsText.textContent = 'Keluar Skrin Penuh';
+          }).catch(err => {
+            console.error('Ralat mod skrin penuh EduKart:', err);
+          });
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().then(() => {
+            if (fsIcon) fsIcon.className = 'fa-solid fa-expand';
+            if (fsText) fsText.textContent = 'Skrin Penuh';
+          });
+        }
+      }
+    }
+
+    // --- EDU-MAN Controls ---
+    function silenceEduMan() {
+      const iframe = document.getElementById('eduman-game-iframe');
+      if (!iframe) return;
+      try {
+        iframe.contentWindow?.postMessage({ action: 'stopAudio' }, '*');
+        iframe.contentWindow?.postMessage('pause', '*');
+        if (iframe.contentWindow) {
+          if (typeof iframe.contentWindow.stopGameAudio === 'function') {
+            iframe.contentWindow.stopGameAudio();
+          }
+          if (iframe.contentWindow.AC && iframe.contentWindow.AC.state === 'running') {
+            iframe.contentWindow.AC.suspend().catch(()=>{});
+          }
+          if ('mute' in iframe.contentWindow) {
+            iframe.contentWindow.mute = true;
+          }
+        }
+      } catch (err) {
+        console.warn('EduMan silence error:', err);
+      }
+    }
+
+    function restoreEduMan() {
+      if (edumanMuted) return; // kekal bisu jika pengguna sendiri menekan Mute
+      const iframe = document.getElementById('eduman-game-iframe');
+      if (!iframe) return;
+      try {
+        iframe.contentWindow?.postMessage({ action: 'resume' }, '*');
+        if (iframe.contentWindow) {
+          if (typeof iframe.contentWindow.resumeGameAudio === 'function') {
+            iframe.contentWindow.resumeGameAudio();
+          }
+          if (iframe.contentWindow.AC && iframe.contentWindow.AC.state === 'suspended') {
+            iframe.contentWindow.AC.resume().catch(()=>{});
+          }
+          if ('mute' in iframe.contentWindow) {
+            iframe.contentWindow.mute = false;
+          }
+        }
+      } catch (err) {
+        console.warn('EduMan resume error:', err);
+      }
+    }
+
+    function toggleEduManMute() {
+      edumanMuted = !edumanMuted;
+      const muteIcon = document.getElementById('eduman-mute-icon');
+      const muteText = document.getElementById('eduman-mute-text');
+
+      if (edumanMuted) {
+        silenceEduMan();
+        if (muteIcon) muteIcon.className = 'fa-solid fa-volume-xmark text-rose-500';
+        if (muteText) muteText.textContent = 'Bisu (Muted)';
+      } else {
+        restoreEduMan();
+        if (muteIcon) muteIcon.className = 'fa-solid fa-volume-high text-cyan-400';
+        if (muteText) muteText.textContent = 'Bunyi Aktif';
+      }
+    }
+
+    function reloadEduManGame() {
+      const iframe = document.getElementById('eduman-game-iframe');
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
+    }
+
+    function toggleEduManFullscreen() {
+      const frameWrapper = document.getElementById('eduman-frame-wrapper');
+      const fsIcon = document.getElementById('eduman-fs-icon');
+      const fsText = document.getElementById('eduman-fs-text');
+
+      if (!document.fullscreenElement) {
+        if (frameWrapper && frameWrapper.requestFullscreen) {
+          frameWrapper.requestFullscreen().then(() => {
+            if (fsIcon) fsIcon.className = 'fa-solid fa-compress';
+            if (fsText) fsText.textContent = 'Keluar Skrin Penuh';
+          }).catch(err => {
+            console.error('Ralat mod skrin penuh EduMan:', err);
+          });
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().then(() => {
+            if (fsIcon) fsIcon.className = 'fa-solid fa-expand';
+            if (fsText) fsText.textContent = 'Skrin Penuh';
+          });
+        }
+      }
+    }
+
+    // Fullscreen change listener untuk kedua-dua game
+    document.addEventListener('fullscreenchange', () => {
+      const edukartFsIcon = document.getElementById('game-fs-icon');
+      const edukartFsText = document.getElementById('game-fs-text');
+      const edumanFsIcon = document.getElementById('eduman-fs-icon');
+      const edumanFsText = document.getElementById('eduman-fs-text');
+
+      if (!document.fullscreenElement) {
+        if (edukartFsIcon) edukartFsIcon.className = 'fa-solid fa-expand';
+        if (edukartFsText) edukartFsText.textContent = 'Skrin Penuh';
+        if (edumanFsIcon) edumanFsIcon.className = 'fa-solid fa-expand';
+        if (edumanFsText) edumanFsText.textContent = 'Skrin Penuh';
+      } else {
+        if (document.fullscreenElement.id === 'game-frame-wrapper') {
+          if (edukartFsIcon) edukartFsIcon.className = 'fa-solid fa-compress';
+          if (edukartFsText) edukartFsText.textContent = 'Keluar Skrin Penuh';
+        } else if (document.fullscreenElement.id === 'eduman-frame-wrapper') {
+          if (edumanFsIcon) edumanFsIcon.className = 'fa-solid fa-compress';
+          if (edumanFsText) edumanFsText.textContent = 'Keluar Skrin Penuh';
+        }
+      }
+    });
+
+    // --- Google Form Quiz Helper ---
+    function reloadQuizForm() {
+      const iframe = document.getElementById('google-quiz-iframe');
+      if (iframe) {
+        iframe.src = iframe.src;
+      }
+    }
+
+    // ----------------------------------------------------
+    // 5. Reflection & Student Opinion Form Submission
+    // ----------------------------------------------------
+    const reflectionForm = document.getElementById('reflection-form');
+    const studentNameInput = document.getElementById('student-name');
+    const studentClassInput = document.getElementById('student-class');
+    const reflectionTextInput = document.getElementById('reflection-text');
+    const reflectionToast = document.getElementById('reflection-toast');
+    const toastTitle = document.getElementById('toast-title');
+    const toastDesc = document.getElementById('toast-desc');
+    const reflectionsList = document.getElementById('reflections-list');
+
+    if (reflectionForm) {
+      reflectionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = studentNameInput ? studentNameInput.value.trim() : '';
+        const studentClass = studentClassInput ? studentClassInput.value.trim() : '';
+        const text = reflectionTextInput ? reflectionTextInput.value.trim() : '';
+        const selectedRating = document.querySelector('input[name="student-rating"]:checked')?.value || '⭐⭐⭐⭐⭐ Hebat!';
+
+        if (!name || !text) return;
+
+        if (toastTitle) toastTitle.textContent = `Terima Kasih, ${name}!`;
+        if (toastDesc) toastDesc.textContent = `Pendapat anda tentang laman web ini telah berjaya dihantar kepada Ustaz Muhammad Aniq Aqasha.`;
+        if (reflectionToast) reflectionToast.classList.remove('hidden');
+
+        const newCard = document.createElement('div');
+        newCard.className = 'p-4 rounded-2xl bg-sky-50 border-2 border-sky-200 transform transition-all duration-300 shadow-sm';
+        const classLabel = studentClass ? ` (${studentClass})` : '';
+        newCard.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-1 mb-1.5">
+            <span class="font-black text-slate-900 text-sm flex items-center gap-2">
+              <i class="fa-solid fa-circle-user text-sky-500"></i>
+              <span>${name}${classLabel}</span>
+              <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md border border-amber-300 font-bold">${selectedRating}</span>
+            </span>
+            <span class="text-[11px] font-bold text-sky-700 bg-white px-2 py-0.5 rounded-md border border-sky-200">Baru Sahaja</span>
+          </div>
+          <p class="text-xs font-bold text-slate-700 leading-relaxed pl-6">
+            "${text}"
+          </p>
+        `;
+        if (reflectionsList) reflectionsList.prepend(newCard);
+
+        if (studentNameInput) studentNameInput.value = '';
+        if (studentClassInput) studentClassInput.value = '';
+        if (reflectionTextInput) reflectionTextInput.value = '';
+
+        setTimeout(() => {
+          if (reflectionToast) reflectionToast.classList.add('hidden');
+        }, 5000);
+      });
+    }
+
+    // ----------------------------------------------------
+    // 6. Logik Butang Pada Gambar Tokoh (Ubah Gambar & Buka/Tutup Info)
+    // ----------------------------------------------------
+    function toggleTokohImage(tokohId) {
+      const overlay = document.getElementById(`overlay-${tokohId}`);
+      const closeBtn = document.getElementById(`btn-close-${tokohId}`);
+      const banner = document.getElementById(`revealed-banner-${tokohId}`);
+
+      if (!overlay) return;
+
+      const isHidden = overlay.classList.contains('hidden');
+      if (isHidden) {
+        // Sembunyikan semula info (Ubah gambar kembali ke keadaan terkunci)
+        overlay.classList.remove('hidden');
+        if (closeBtn) closeBtn.classList.add('hidden');
+        if (banner) banner.classList.add('hidden');
+      } else {
+        // Dedahkan info (Ubah gambar mendedahkan isi penting pada skrol/poster)
+        overlay.classList.add('hidden');
+        if (closeBtn) closeBtn.classList.remove('hidden');
+        if (banner) banner.classList.remove('hidden');
+      }
+    }
+
+    // Paparkan Muka Depan secara lalai semasa laman dimuatkan
+    showPage('muka-depan');
+  </script>
+</body>
+</html>

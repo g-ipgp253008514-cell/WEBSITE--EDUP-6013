@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ms"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EDU-MAN: Maze of Knowledge</title>
+<style>
+:root{--bg:#05010f;--fg:#f4f0ff;--n1:#27e8ff;--n2:#c13bff;--y:#ffd400;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:"Trebuchet MS",system-ui,sans-serif;overflow:hidden}
+#game{position:fixed;left:0;right:0;top:0;bottom:0;touch-action:none}
+#hud{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;min-height:44px;display:none;flex-wrap:wrap;align-items:center;gap:4px 14px;padding:4px 10px;background:rgba(10,4,30,.92);border-bottom:2px solid var(--n2);font-size:13px;z-index:5;box-sizing:border-box}
+#hud b{color:var(--y)}#hud button{margin-left:auto;background:none;border:1px solid var(--n1);color:var(--fg);border-radius:6px}
+.scr{position:fixed;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;background:rgba(5,1,15,.9);z-index:10;overflow:auto;padding:16px;text-align:center;box-sizing:border-box}
+.scr.on{display:flex}
+#menu{background:radial-gradient(circle at 50% 30%,#2a0a55,#05010f 70%)}
+.box{max-width:600px;width:100%;margin:auto}
+h1{margin:4px;font-size:clamp(30px,8vw,56px);color:var(--y);text-shadow:0 0 12px var(--y),0 0 28px var(--n2);letter-spacing:2px}
+h1 small{display:block;font-size:.45em;color:var(--n1);text-shadow:0 0 10px var(--n1)}
+h2{color:var(--n1);text-shadow:0 0 10px var(--n1);margin:6px}
+.sub{color:#cdb8ff;margin:4px}
+.b{background:linear-gradient(180deg,#7a2cff,#4a12b8);color:#fff;border:2px solid var(--n1);border-radius:12px;padding:11px 20px;margin:5px;font:bold 15px inherit;cursor:pointer;box-shadow:0 0 14px #7a2cff}
+.b:hover{filter:brightness(1.25)}.b:disabled{opacity:.5}
+input{padding:10px;border-radius:10px;border:2px solid var(--n2);background:#12062b;color:#fff;font-size:16px;text-align:center;width:min(300px,80%)}
+#chars{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:10px}
+.ch{background:#12062b;color:#fff;border:2px solid #444;border-radius:10px;padding:6px 8px;cursor:pointer;font-size:12px}
+.ch i{display:block;width:30px;height:30px;border-radius:50%;margin:0 auto 3px}
+.ch.sel{border-color:var(--y);box-shadow:0 0 12px var(--y)}
+.strip{position:relative;width:min(560px,92vw);height:56px;margin:10px auto;border-top:3px solid var(--n2);border-bottom:3px solid var(--n1);background:radial-gradient(circle,var(--y) 3px,transparent 4px) 0 50%/24px 24px repeat-x;overflow:hidden;box-shadow:0 0 14px var(--n2)}
+.strip>i{position:absolute;top:10px;left:-40px;width:34px;height:34px;animation:run 6s linear infinite backwards}
+@property --m{syntax:'<angle>';inherits:false;initial-value:6deg}
+.pm{--m:6deg;border-radius:50%;background:conic-gradient(#fd0 0 calc(90deg - var(--m)),transparent calc(90deg - var(--m)) calc(90deg + var(--m)),#fd0 calc(90deg + var(--m)));animation:run 6s linear infinite,chomp .3s ease-in-out infinite alternate!important}
+.gh{border-radius:17px 17px 4px 4px;background:radial-gradient(circle at 32% 40%,#fff 18%,transparent 20%),radial-gradient(circle at 68% 40%,#fff 18%,transparent 20%),var(--c)}
+@keyframes run{from{left:-40px}to{left:100%}}@keyframes chomp{to{--m:42deg}}
+.panel{background:#10062a;border:2px solid var(--n2);border-radius:14px;padding:14px;margin:8px auto;text-align:left;box-shadow:0 0 18px var(--n2)}
+.panel li{margin:5px 0}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{border-bottom:1px solid #3b2a6b;padding:4px}th{color:var(--n1)}
+.qo{display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border-radius:10px;border:2px solid var(--n1);background:#1a0c40;color:#fff;font-size:15px;cursor:pointer}
+.qo:hover:not(:disabled){background:#33188a}.qo.ok{background:#0b7a35;border-color:#5f5}.qo.no{background:#8a1630;border-color:#f55}
+.fb{font-size:26px;font-weight:bold;animation:pp .5s}.fb.ok{color:#5f5}.fb.no{color:#f55}
+@keyframes pp{0%{transform:scale(.2)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+.pop{position:absolute;color:var(--y);font-weight:bold;text-shadow:0 0 6px #000;pointer-events:none;animation:up .8s forwards}
+@keyframes up{to{transform:translateY(-40px);opacity:0}}
+#pad{display:none;position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));grid-template-columns:repeat(3,54px);grid-template-rows:repeat(3,54px);gap:4px;z-index:6;opacity:.75}
+#pad button{border-radius:50%;border:2px solid var(--n1);background:rgba(40,10,90,.8);color:#fff;font-size:20px;touch-action:none}
+@media(pointer:coarse){#pad.on{display:grid}}
+.pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0;min-height:44px}
+.chip{display:inline-block;padding:9px 12px;border-radius:10px;background:#3a1a9a;border:2px solid var(--y);cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;font-size:14px}
+.chip.sel{background:#7a2cff;box-shadow:0 0 12px var(--y)}.chip.ok{background:#0b7a35}.chip.no{background:#8a1630}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.bn{display:inline-block;min-width:90px;min-height:34px;border:2px dashed var(--n1);border-radius:10px;padding:6px;background:#0c0420;vertical-align:middle;text-align:center}
+.bn.ok{border-color:#5f5;color:#5f5}.bn.no{border-color:#f55;color:#f55}.bins .bn{display:block}
+.bc{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:38px;margin-top:6px}
+.bn.seq{display:flex;flex-wrap:wrap;gap:6px;counter-reset:n;min-height:56px;width:100%;box-sizing:border-box}.seq .chip::before{counter-increment:n;content:counter(n) ". ";color:var(--y)}
+.sq{font-size:17px;line-height:2.4}
+.err{color:#ff6b6b;min-height:18px}
+</style></head><body>
+<div id="game"></div>
+<div id="hud"><span>👤 <b id="hn"></b></span><span>LEVEL <b id="hl"></b></span><span>SKOR <b id="hs"></b></span><span>POINT <b id="hd"></b></span><span>BAKI <b id="hb"></b></span><span id="hv"></span><span id="hi"></span><span>⏱ <b id="ht"></b></span><button id="mu">🔊</button></div>
+<div id="pad"><span></span><button data-d="0,-1">▲</button><span></span><button data-d="-1,0">◀</button><span></span><button data-d="1,0">▶</button><span></span><button data-d="0,1">▼</button><span></span></div>
+
+<div id="menu" class="scr on"><div class="box">
+<h1>EDU-MAN<small>MAZE OF KNOWLEDGE</small></h1><p class="sub">Misi Memburu Ilmu, Mengelak Musuh!</p>
+<div class="strip"><i class="pm"></i><i class="gh" style="--c:#f33;animation-delay:.8s"></i><i class="gh" style="--c:#ff7ad9;animation-delay:1.3s"></i><i class="gh" style="--c:#2bd4ff;animation-delay:1.8s"></i><i class="gh" style="--c:#f90;animation-delay:2.3s"></i></div>
+<input id="nm" maxlength="16" placeholder="Masukkan nama pelajar" autocomplete="off">
+<div class="err" id="er"></div>
+<p class="sub">Pilih karakter:</p><div id="chars"></div>
+<div><button class="b" id="go">MULA PERMAINAN</button><button class="b" id="lb">LEADERBOARD</button><button class="b" id="hw">CARA BERMAIN</button></div>
+</div></div>
+
+<div id="how" class="scr"><div class="box"><h2>CARA BERMAIN</h2><div class="panel"><ol>
+<li>Bergerak dalam maze untuk mengutip point kuning (+10).</li><li>Cari bola pendidikan emas (?) untuk membuka soalan kuiz.</li><li>Jawab dengan betul: +100 markah dan kuasa IMMUNITY 8 saat.</li><li>Elakkan hantu yang berkeliaran. Ada 3 nyawa sahaja!</li><li>Semasa immunity, hantu melarikan diri dan tidak boleh menangkap anda.</li><li>Kutip semua point untuk membuka level seterusnya (4 level).</li></ol>
+<b>Kawalan:</b> W/A/S/D atau anak panah. Telefon: butang arah atau leret skrin. M: bisu.</div><button class="b" data-back>KEMBALI</button></div></div>
+
+<div id="board" class="scr"><div class="box"><h2>🏆 LEADERBOARD TOP 10</h2><div class="panel" id="bt"></div><button class="b" data-back>KEMBALI</button></div></div>
+
+<div id="intro" class="scr"><div class="box"><h2 id="il"></h2><div class="panel"><p id="id"></p><p>📚 Topik: <b id="it"></b></p></div><button class="b" id="st">MULAKAN</button></div></div>
+
+<div id="lvc" class="scr"><div class="box"><h1 style="font-size:38px">LEVEL COMPLETED!</h1><div class="panel" id="lvs"></div><button class="b" id="nx">LEVEL SETERUSNYA</button></div></div>
+
+<div id="quiz" class="scr"><div class="box panel" style="margin:auto"><div style="color:var(--y)">📖 SOALAN ILMU · <span id="qn"></span></div><h3 id="qq"></h3><div id="qo"></div><button class="b" id="qs" style="display:none">SEMAK JAWAPAN</button><div id="qf" style="display:none"><div class="fb" id="qb"></div><p id="qe"></p><button class="b" id="qc">TERUSKAN</button></div></div></div>
+
+<div id="res" class="scr"><div class="box"><h1 id="rt" style="font-size:34px"></h1><div class="panel" id="rs"></div><div class="panel" id="rb"></div>
+<button class="b" id="again">MAIN SEMULA</button><button class="b" id="rlb">LEADERBOARD</button><button class="b" id="home">MENU UTAMA</button></div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=id=>document.getElementById(id),D=[[1,0],[-1,0],[0,1],[0,-1]];
+const CH=[{n:'Klasik',c:0xffd400,h:'#ffd400'},{n:'Biru',c:0x2f8bff,h:'#2f8bff'},{n:'Merah',c:0xff3b3b,h:'#ff3b3b'},{n:'Hijau',c:0x34e36b,h:'#34e36b'},{n:'Ungu',c:0xb455ff,h:'#b455ff'}];
+const LV=[
+{n:'THE BEGINNER MAZE',W:9,H:7,seed:11,ex:40,gs:2.4,d:'Maze mudah dengan laluan luas. Musuh bergerak perlahan dan belum mengejar anda.',t:'Pendidikan sebelum merdeka, sekolah vernakular, Sabah & Sarawak'},
+{n:'THE CHALLENGE MAZE',W:11,H:8,seed:23,ex:22,gs:3.1,d:'Maze lebih besar, banyak simpang dan jalan buntu. Musuh mula mengesan dan mengejar anda.',t:'Cheeseman, Barnes, Fenn-Wu dan Ordinan Pelajaran 1952'},
+{n:'THE DANGER MAZE',W:13,H:9,seed:37,ex:10,gs:3.7,d:'Laluan sempit dan musuh agresif yang cuba mengepung anda. Gunakan immunity dengan bijak!',t:'Woodhead, Razak, Rahman Talib dan Akta Pelajaran 1961'},
+{n:'THE ULTIMATE MAZE',W:15,H:10,seed:53,ex:4,gs:4.2,d:'Maze paling besar dengan banyak jalan buntu. Musuh paling pantas dan bijak!',t:'Aminuddin Baki, Abdul Rahman Arshad, FPK dan pembinaan negara bangsa'}];
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(x=>x[1]);
+// Jenis soalan: mc=pilihan A-D, tf=benar/salah, drop=seret ke kotak, bin=seret ke kategori, order=susun urutan. Sumber: Nota Pembelajaran.
+const QS=[[
+{t:'mc',q:'Sebelum merdeka, siapakah yang mentadbir Tanah Melayu, Sabah dan Sarawak secara berasingan?',o:['British','Jepun','Siam','Belanda'],e:'British mentadbir Tanah Melayu, Sabah dan Sarawak secara berasingan, jadi sistem persekolahan pun terpisah. British mengamalkan dasar pecah dan perintah.'},
+{t:'bin',q:'Seret setiap sekolah ke kotak tempat ia banyak ditemui!',bins:['Bandar','Luar bandar','Bandar dan lombong','Ladang getah'],it:[['Sekolah Inggeris',0],['Sekolah Melayu',1],['Sekolah Cina',2],['Sekolah Tamil',3]],e:'Sekolah Inggeris di bandar, Sekolah Melayu di luar bandar, Sekolah Cina di bandar dan lombong, Sekolah Tamil di ladang getah.'},
+{t:'bin',q:'Seret setiap perkara ke kotak Sabah atau Sarawak!',bins:['Sabah','Sarawak'],it:[['Syarikat Berpiagam Borneo Utara',0],['Rejim Brooke',1],['Kadazandusun, Bajau dan Murut',0],['Dayak, Iban dan Bidayuh',1]],e:'Sabah ditadbir SBUB (1881–1946); Sarawak oleh Rejim Brooke (1841–1946). Kadazandusun, Bajau dan Murut di Sabah; Dayak, Iban dan Bidayuh di Sarawak.'},
+{t:'drop',q:'Sekolah Inggeris dibuka di bandar untuk melahirkan ___ pentadbiran.',o:['kakitangan','petani','nelayan','pelombong'],e:'Sekolah Inggeris dibuka di bandar untuk melahirkan kakitangan pentadbiran. Sekolah Melayu di luar bandar hanya menyediakan pendidikan asas.'}],
+[
+{t:'order',q:'Susun laporan dan ordinan ini mengikut tahun, daripada yang paling awal!',it:['Rancangan Cheeseman (1946)','Laporan Barnes (1951)','Ordinan Pelajaran (1952)','Laporan Woodhead (1955)'],e:'Cheeseman 1946 mencadangkan pembinaan semula sekolah selepas perang dan bahasa ibunda di sekolah rendah. Kemudian Barnes 1951, Ordinan Pelajaran 1952 dan Woodhead 1955.'},
+{t:'mc',q:'Laporan Barnes (1951) mencadangkan…',o:['Sekolah Kebangsaan tunggal berbahasa Melayu dan Inggeris','Semua sekolah menggunakan bahasa Tamil','Sekolah Cina ditambah di setiap bandar','Semua sekolah ditutup selepas perang'],e:'Barnes mencadangkan Sekolah Kebangsaan tunggal (Melayu dan Inggeris) dan memansuhkan sekolah Cina dan Tamil secara beransur-ansur. Cadangan ini dibantah.'},
+{t:'tf',q:'Laporan Fenn-Wu (1951) mahu semua sekolah Cina dihapuskan.',a:false,e:'Salah! Fenn-Wu menyokong sekolah Cina dikekalkan sebagai warisan budaya, tetapi menerima Bahasa Melayu dan Inggeris sebagai subjek wajib.'},
+{t:'drop',q:'Ordinan Pelajaran (1952) tidak dikuatkuasakan sepenuhnya kerana masalah ___, darurat dan tentangan masyarakat.',o:['kewangan','cuaca','banjir','makanan'],e:'Ordinan 1952 melaksanakan cadangan Barnes tetapi tidak dikuatkuasakan sepenuhnya akibat masalah kewangan, keadaan darurat dan tentangan masyarakat.'}],
+[
+{t:'mc',q:'Laporan Woodhead (1955) menilai dasar pendidikan di…',o:['Sabah dan Sarawak','Singapura','Pulau Pinang sahaja','Johor sahaja'],e:'Woodhead menilai dasar pendidikan Sabah dan Sarawak serta mencadangkan pendidikan Inggeris sebagai asas sistem seragam di Borneo.'},
+{t:'bin',q:'Seret setiap cadangan ke kotak laporan yang betul!',bins:['Laporan Barnes 1951','Penyata Razak 1956 dan Laporan Rahman Talib 1960'],it:[['Sekolah Kebangsaan tunggal',0],['Hapuskan sekolah Cina dan Tamil beransur-ansur',0],['Bahasa Melayu bahasa pengantar utama',1],['Sukatan pelajaran sepunya',1]],e:'Barnes mahu Sekolah Kebangsaan tunggal. Penyata Razak dan Laporan Rahman Talib menetapkan Bahasa Melayu sebagai bahasa pengantar utama, sukatan pelajaran sepunya dan peperiksaan seragam.'},
+{t:'drop',q:'Cadangan Penyata Razak dan Laporan Rahman Talib dimaktubkan dalam Akta ___ 1961.',o:['Pelajaran','Bahasa','Tanah','Sekolah'],e:'Cadangan itu dimaktubkan dalam Akta Pelajaran 1961 sebagai asas Dasar Pendidikan Kebangsaan.'},
+{t:'tf',q:'Penyata Razak (1956) menetapkan Bahasa Cina sebagai bahasa pengantar utama.',a:false,e:'Salah! Penyata Razak menetapkan Bahasa Melayu sebagai bahasa pengantar utama, bersama sukatan pelajaran sepunya dan peperiksaan seragam.'}],
+[
+{t:'mc',q:'Siapakah yang dikenali sebagai Arkitek Pendidikan Negara?',o:['Aminuddin Baki','Cheeseman','Woodhead','Barnes'],e:'Aminuddin Baki (1926–1965) dikenali sebagai Arkitek Pendidikan Negara dan dikaitkan dengan perjuangan GPMS sebelum merdeka.'},
+{t:'bin',q:'Seret setiap sumbangan kepada tokoh yang betul!',bins:['Aminuddin Baki','Tan Sri Dr. Abdul Rahman Arshad'],it:[['Aneka jurusan dan kursus kemahiran',0],['Institut Aminuddin Baki',0],['Menerajui KBSR dan KBSM',1],['Sekolah dan makmal ke luar bandar',1]],e:'Aminuddin Baki: sistem aneka jurusan dan Institut Aminuddin Baki. Abdul Rahman Arshad (Ketua Pengarah Pendidikan): KBSR, KBSM dan kemudahan sekolah ke luar bandar serta Sabah dan Sarawak.'},
+{t:'drop',q:'JERI bermaksud Jasmani, Emosi, Rohani dan ___.',o:['Intelek','Ilmu','Insan','Imaginasi'],e:'KBSR dan KBSM menekankan pendidikan menyeluruh dari segi jasmani, emosi, rohani dan intelek (JERI).'},
+{t:'order',q:'Susun perjalanan pendidikan ke arah negara bangsa!',it:['Pendidikan Kolonial','Laporan dan Ordinan Pelajaran','Sistem Kebangsaan','Negara Bangsa'],e:'Pendidikan berkembang daripada sistem kolonial yang terpisah, melalui laporan dan ordinan, kepada sistem kebangsaan yang memupuk perpaduan, jati diri dan negara bangsa.'}]];
+// ===== Audio =====
+let AC,muted=false,dc=0;
+function tn(f,d,ty,v,f2,dl){if(muted||!AC||AC.state!=='running')return;const t=AC.currentTime+(dl||0),o=AC.createOscillator(),g=AC.createGain();o.type=ty||'square';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v||.05,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}
+const arp=(a,ty)=>a.forEach((f,i)=>tn(f,.16,ty,.08,0,i*.08));
+const SFX={dot:()=>tn(dc++%2?740:880,.06,'square',.035),orb:()=>arp([523,659,784,1047],'triangle'),ok:()=>arp([523,659,784,1047,1319],'square'),no:()=>{tn(220,.3,'sawtooth',.08,110);tn(165,.4,'sawtooth',.08,80,.25)},near:()=>tn(90,.12,'square',.06),die:()=>tn(700,1,'sawtooth',.1,50),imm:()=>tn(300,.7,'sine',.12,1400),win:()=>arp([523,659,784,1047,784,1047,1319],'triangle')};
+const NOTES=[262,330,392,330,294,349,440,349,262,330,392,523,494,392,330,294];let ni=0;
+setInterval(()=>{if(!muted&&st=='play'){tn(NOTES[ni%16],.17,'square',.018);if(ni%4==0)tn(NOTES[ni%16]/2,.3,'triangle',.04);ni++}},190);
+
+window.stopGameAudio=function(){
+  muted=true;
+  if($('mu'))$('mu').textContent='🔇';
+  if(AC&&AC.state==='running'){AC.suspend().catch(()=>{});}
+};
+window.resumeGameAudio=function(){
+  muted=false;
+  if($('mu'))$('mu').textContent='🔊';
+  if(AC&&AC.state==='suspended'){AC.resume().catch(()=>{});}
+};
+window.addEventListener('message',function(e){
+  if(!e||!e.data)return;
+  const a=typeof e.data==='string'?e.data:e.data.action;
+  if(a==='pause'||a==='stopAudio'||a==='mute'||a==='silence'){window.stopGameAudio();}
+  else if(a==='resume'||a==='playAudio'||a==='unmute'){window.resumeGameAudio();}
+});
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){window.stopGameAudio();}
+});
+
+
+// ===== Three.js =====
+const G=$('game'),rd=new THREE.WebGLRenderer({antialias:true});rd.shadowMap.enabled=true;G.appendChild(rd.domElement);
+const sc=new THREE.Scene();sc.background=new THREE.Color(0x05010f);sc.fog=new THREE.Fog(0x05010f,50,120);
+const cam=new THREE.PerspectiveCamera(45,1,.1,300);
+sc.add(new THREE.AmbientLight(0x6655aa,.9));
+const dl=new THREE.DirectionalLight(0xffffff,.8);dl.position.set(-8,24,10);dl.castShadow=true;dl.shadow.mapSize.set(1024,1024);Object.assign(dl.shadow.camera,{left:-22,right:22,top:22,bottom:-22,far:60});sc.add(dl);
+const pl=new THREE.PointLight(0xffdd55,1.2,9);sc.add(pl);
+const world=new THREE.Group();sc.add(world);
+const GB=new THREE.BoxGeometry(1,1,1),GD=new THREE.SphereGeometry(.17,14,10),GP=new THREE.SphereGeometry(.07,6,4);
+const MD=new THREE.MeshStandardMaterial({color:0xffe14a,emissive:0xffc800,emissiveIntensity:.9});
+const PT=[];for(let i=0;i<60;i++){const m=new THREE.Mesh(GP,new THREE.MeshBasicMaterial());m.visible=false;sc.add(m);PT.push({m,v:new THREE.Vector3(),l:0})}
+function burst(x,y,z,c,n){let k=0;for(const p of PT)if(p.l<=0&&k<n){k++;p.l=.6;p.m.visible=true;p.m.material.color.setHex(c);p.m.position.set(x,y,z);p.v.set((Math.random()-.5)*4,Math.random()*3+1,(Math.random()-.5)*4)}}
+function pop(txt,v,col){const p=v.clone().project(cam),e=document.createElement('div');e.className='pop';e.textContent=txt;e.style.color=col||'';e.style.left=((p.x+1)/2*G.clientWidth)+'px';e.style.top=((1-p.y)/2*G.clientHeight)+'px';G.appendChild(e);setTimeout(()=>e.remove(),800)}
+const qtex=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');x.font='bold 54px sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillStyle='#fff';x.strokeStyle='#a60';x.lineWidth=4;x.strokeText('?',32,36);x.fillText('?',32,36);return new THREE.CanvasTexture(c)})();
+function floorTex(){const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');x.fillStyle='#0a0524';x.fillRect(0,0,64,64);x.strokeStyle='rgba(70,110,255,.55)';x.lineWidth=3;x.strokeRect(1,1,62,62);x.fillStyle='rgba(193,59,255,.25)';x.fillRect(30,30,4,4);const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;return t}
+
+// ===== State =====
+let st='menu',S={},g,w,h,lvl=0,dots,orbs,pac,ghosts,imm=0,grace=0,deadT=0,qi=0,T=0,dp,ppt=[-1,-1],pt=[1,1],pdir=[1,0],selCh=0,nearT=0,curQ,lastPos=null;
+const X=i=>i-(w-1)/2,Z=j=>j-(h-1)/2;
+function rnd(s){return()=>(s=s*16807%2147483647)/2147483647}
+function genMaze(W,H,seed,ex){const r=rnd(seed),w=2*W+1,h=2*H+1,g=[];for(let y=0;y<h;y++)g.push(Array(w).fill(1));
+ const s=[[0,0]];g[1][1]=0;
+ while(s.length){const[cx,cy]=s[s.length-1],n=[];
+  for(const[dx,dy]of D){const nx=cx+dx,ny=cy+dy;if(nx>=0&&ny>=0&&nx<W&&ny<H&&g[2*ny+1][2*nx+1])n.push([dx,dy])}
+  if(!n.length){s.pop();continue}
+  const[dx,dy]=n[Math.floor(r()*n.length)];g[2*cy+1+dy][2*cx+1+dx]=0;g[2*cy+1+2*dy][2*cx+1+2*dx]=0;s.push([cx+dx,cy+dy])}
+ let k=ex,t=0;
+ while(k>0&&t++<9000){const x=1+Math.floor(r()*(w-2)),y=1+Math.floor(r()*(h-2));
+  if(g[y][x]&&((x%2==0&&y%2==1&&!g[y][x-1]&&!g[y][x+1])||(x%2==1&&y%2==0&&!g[y-1][x]&&!g[y+1][x]))){g[y][x]=0;k--}}
+ return g}
+function bfs(ti,tj){const f=new Int16Array(w*h).fill(-1),q=[ti+tj*w];f[q[0]]=0;
+ for(let a=0;a<q.length;a++){const c=q[a],x=c%w,y=(c/w)|0;for(const[dx,dy]of D){const nx=x+dx,ny=y+dy;if(!g[ny][nx]&&f[ny*w+nx]<0){f[ny*w+nx]=f[c]+1;q.push(ny*w+nx)}}}return f}
+
+function mkPac(ci){const c=CH[ci].c,m=new THREE.MeshStandardMaterial({color:c,roughness:.3,emissive:c,emissiveIntensity:.25,side:THREE.DoubleSide});
+ const gr=new THREE.Group(),f=new THREE.Group(),hg=new THREE.SphereGeometry(.42,20,12,0,Math.PI*2,0,Math.PI/2);
+ const top=new THREE.Mesh(hg,m),bot=new THREE.Mesh(hg,m);bot.rotation.x=Math.PI;f.add(top,bot);
+ const bk=new THREE.MeshBasicMaterial({color:0x111111});
+ for(const s of[-1,1]){const e=new THREE.Mesh(new THREE.SphereGeometry(.06,8,6),bk);e.position.set(.12,.3,.24*s);f.add(e)}
+ const am=new THREE.MeshStandardMaterial({color:ci==4?0xffd400:0xffffff,emissive:ci==4?0x886600:0x333333});
+ if(ci==1){const a=new THREE.Mesh(new THREE.CylinderGeometry(.02,.02,.35),am);a.position.y=.55;const b=new THREE.Mesh(new THREE.SphereGeometry(.07,8,6),am);b.position.y=.74;f.add(a,b)}
+ if(ci==2)for(const s of[-1,1]){const hn=new THREE.Mesh(new THREE.ConeGeometry(.08,.3,8),am);hn.position.set(0,.5,.22*s);hn.rotation.x=.4*s;f.add(hn)}
+ if(ci==3){const a=new THREE.Mesh(new THREE.CylinderGeometry(.2,.22,.25,12),am),b=new THREE.Mesh(new THREE.CylinderGeometry(.34,.34,.04,16),am);a.position.y=.55;b.position.y=.42;f.add(a,b)}
+ if(ci==4){const a=new THREE.Mesh(new THREE.ConeGeometry(.28,.3,5),am);a.position.y=.55;f.add(a)}
+ const aura=new THREE.Mesh(new THREE.SphereGeometry(.78,24,16),new THREE.MeshBasicMaterial({color:0x66ffff,transparent:true,opacity:.3,blending:THREE.AdditiveBlending,depthWrite:false}));aura.visible=false;
+ gr.add(f,aura);gr.traverse(o=>o.castShadow=true);return{mesh:gr,f,top,bot,m,aura,c}}
+const GC=[0xff2b2b,0xff7ad9,0x2bd4ff,0xff9a1f];
+function mkGhost(c){const m=new THREE.MeshStandardMaterial({color:c,emissive:c,emissiveIntensity:.35,roughness:.4}),gr=new THREE.Group(),f=new THREE.Group();
+ const b=new THREE.Mesh(new THREE.CylinderGeometry(.38,.4,.4,16),m);b.position.y=.2;const t=new THREE.Mesh(new THREE.SphereGeometry(.38,16,10,0,Math.PI*2,0,Math.PI/2),m);t.position.y=.4;f.add(b,t);
+ for(let k=0;k<6;k++){const s=new THREE.Mesh(new THREE.SphereGeometry(.12,8,6),m);s.position.set(Math.cos(k)*.28,.02,Math.sin(k)*.28);f.add(s)}
+ const wm=new THREE.MeshBasicMaterial({color:0xffffff}),pm=new THREE.MeshBasicMaterial({color:0x112});
+ for(const s of[-1,1]){const e=new THREE.Mesh(new THREE.SphereGeometry(.1,8,6),wm);e.position.set(.27,.5,.14*s);const p=new THREE.Mesh(new THREE.SphereGeometry(.05,6,4),pm);p.position.set(.35,.5,.14*s);f.add(e,p)}
+ gr.add(f);gr.traverse(o=>o.castShadow=true);return{mesh:gr,f,m}}
+
+function loadLevel(n){const L=LV[n];lvl=n;g=genMaze(L.W,L.H,L.seed,L.ex);h=g.length;w=g[0].length;
+ while(world.children.length){const c=world.children.pop();if(c.isInstancedMesh&&c.dispose)c.dispose()}
+ let nw=0;for(let j=0;j<h;j++)for(let i=0;i<w;i++)if(g[j][i])nw++;
+ const wm=new THREE.InstancedMesh(GB,new THREE.MeshStandardMaterial({color:0xffffff,roughness:.35,metalness:.3,emissive:0x0a0a30}),nw),cm=new THREE.InstancedMesh(GB,new THREE.MeshBasicMaterial({color:0xffffff}),nw),M=new THREE.Matrix4(),cc=new THREE.Color();let k=0;
+ for(let j=0;j<h;j++)for(let i=0;i<w;i++)if(g[j][i]){const a=(i*7+j*3)%2;
+  M.compose(new THREE.Vector3(X(i),.6,Z(j)),new THREE.Quaternion(),new THREE.Vector3(1,1.2,1));wm.setMatrixAt(k,M);wm.setColorAt(k,cc.set(a?0x1c2fff:0x6a1fd0));
+  M.compose(new THREE.Vector3(X(i),1.22,Z(j)),new THREE.Quaternion(),new THREE.Vector3(.92,.06,.92));cm.setMatrixAt(k,M);cm.setColorAt(k,cc.set(a?0x27e8ff:0xff4dff));k++}
+ wm.castShadow=wm.receiveShadow=true;world.add(wm,cm);
+ const ft=floorTex();ft.repeat.set(w,h);const fl=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshStandardMaterial({map:ft,emissive:0x2a2a66,emissiveMap:ft,roughness:.8}));fl.rotation.x=-Math.PI/2;fl.receiveShadow=true;world.add(fl);
+ const fs=bfs(1,1);dots=new Map();orbs=[];
+ const cells=[];for(let j=1;j<h;j+=2)for(let i=1;i<w;i+=2)cells.push([i,j]);const r=rnd(L.seed+5);cells.sort(()=>r()-.5);
+ const mind=Math.max(...fs)*.3;
+ for(const c of cells){if(orbs.length>=4)break;if(fs[c[1]*w+c[0]]>=mind&&orbs.every(o=>Math.abs(o.i-c[0])+Math.abs(o.j-c[1])>=6))orbs.push({i:c[0],j:c[1]})}
+ for(const c of cells){if(orbs.length>=4)break;if(!orbs.some(o=>o.i==c[0]&&o.j==c[1])&&c[0]+c[1]>2)orbs.push({i:c[0],j:c[1]})}
+ for(const o of orbs){const gr=new THREE.Group(),s=new THREE.Mesh(new THREE.SphereGeometry(.3,16,12),new THREE.MeshStandardMaterial({color:0xffcc00,emissive:0xff9900,emissiveIntensity:1,transparent:true,opacity:.85})),
+  rg=new THREE.Mesh(new THREE.TorusGeometry(.42,.04,6,20),new THREE.MeshBasicMaterial({color:0xfff2a0})),sp=new THREE.Sprite(new THREE.SpriteMaterial({map:qtex,depthTest:false}));sp.scale.set(.6,.6,1);
+  gr.add(s,rg,sp);gr.position.set(X(o.i),.6,Z(o.j));o.m=gr;o.rg=rg;o.s=s;world.add(gr)}
+ for(let j=1;j<h-1;j++)for(let i=1;i<w-1;i++)if(!g[j][i]&&!(i==1&&j==1)&&!orbs.some(o=>o.i==i&&o.j==j)){const m=new THREE.Mesh(GD,MD);m.position.set(X(i),.5,Z(j));world.add(m);dots.set(j*w+i,m)}
+ S.total=dots.size;S.left=dots.size;S.ldots=0;qi=0;
+ const pk=mkPac(S.ch);pac={i:1,j:1,x:1,y:1,mv:0,p:0,dir:[0,0],want:[0,0],...pk};world.add(pac.mesh);
+ const hm=[[w-2,h-2],[w-2,1],[1,h-2],[(w>>1)|1,(h>>1)|1]];ghosts=hm.map((p,k)=>{const o=mkGhost(GC[k]);return{...o,c:GC[k],k,i:p[0],j:p[1],x:p[0],y:p[1],mv:0,p:0,dir:null,home:p,delay:k*.9+.5,}});
+ ghosts.forEach(o=>world.add(o.mesh));imm=0;grace=1.5;ppt=[-1,-1];fit()}
+function fit(){const W=G.clientWidth,H=G.clientHeight;if(!W||!h)return;rd.setSize(W,H);cam.aspect=W/H;const t=Math.tan(cam.fov*Math.PI/360),d=Math.max((h*1.12+3)/(2*t),(w*1.05+1)/(2*t*cam.aspect));cam.position.set(0,d*.9,d*.5);cam.lookAt(0,0,0);cam.updateProjectionMatrix()}
+function layout(){G.style.top=($('hud').style.display=='flex'?$('hud').getBoundingClientRect().bottom:0)+'px';fit()}
+addEventListener('resize',layout);
+
+// ===== Movement =====
+function step(e,dt,sp,ch){let d=sp*dt;while(d>1e-6){if(!e.mv){const r=ch(e);if(!r)break;e.dir=r;e.mv=1;e.p=0}
+ const s=Math.min(d,1-e.p);e.p+=s;d-=s;if(e.p>=.99999){e.i+=e.dir[0];e.j+=e.dir[1];e.mv=0;e.p=0}}
+ e.x=e.i+(e.mv?e.dir[0]*e.p:0);e.y=e.j+(e.mv?e.dir[1]*e.p:0)}
+function flip(e){if(e.mv&&e.dir){e.i+=e.dir[0];e.j+=e.dir[1];e.dir=[-e.dir[0],-e.dir[1]];e.p=1-e.p}}
+const open=(i,j,d)=>!g[j+d[1]][i+d[0]];
+function pChoose(e){const q=e.want;if((q[0]||q[1])&&open(e.i,e.j,q))return q;if((e.dir[0]||e.dir[1])&&open(e.i,e.j,e.dir))return e.dir;return null}
+function tgt(e){const ah=n=>{let a=pt[0],b=pt[1];for(let s=0;s<n;s++){const x=a+pdir[0],y=b+pdir[1];if(g[y][x])break;a=x;b=y}return[a,b]},dd=dp[e.j*w+e.i];
+ if(e.k==1)return ah(lvl==3?6:4);
+ if(e.k==2){const a=ah(2),r=ghosts[0],x=2*a[0]-r.i,y=2*a[1]-r.j;return x>0&&y>0&&x<w&&y<h&&!g[y][x]?[x,y]:a}
+ if(e.k==3&&lvl==2&&dd<7)return[1,h-2];return pt}
+function gChoose(e){let o=D.filter(d=>open(e.i,e.j,d));if(o.length>1&&e.dir)o=o.filter(d=>d[0]!=-e.dir[0]||d[1]!=-e.dir[1]);
+ const best=(f,mx)=>{let b=[],bv=mx?-1e9:1e9;for(const d of o){const v=f[(e.j+d[1])*w+e.i+d[0]];if(v==bv)b.push(d);else if(mx?v>bv:v<bv){bv=v;b=[d]}}return b[0|Math.random()*b.length]},R=()=>o[0|Math.random()*o.length];
+ if(imm>0)return best(dp,1);const dd=dp[e.j*w+e.i];
+ if(lvl==0)return R();if(lvl==1)return dd<=8&&Math.random()>.15?best(dp):R();
+ if(lvl==2&&Math.random()<.1)return R();return best(bfs(...tgt(e)))}
+
+// ===== Game flow =====
+function startImm(){imm=8;ghosts.forEach(flip);SFX.imm()}
+function respawn(){pac.i=1;pac.j=1;pac.x=1;pac.y=1;pac.mv=0;pac.p=0;pac.dir=[0,0];pac.want=[0,0];pac.mesh.scale.setScalar(1);ghosts.forEach(o=>{o.i=o.home[0];o.j=o.home[1];o.mv=0;o.p=0;o.dir=null;o.delay=o.k*.8+1.2});imm=0;grace=2.5;ppt=[-1,-1]}
+function setWant(d){if(st!='play')return;pac.want=d;if(pac.mv&&d[0]==-pac.dir[0]&&d[1]==-pac.dir[1])flip(pac)}
+function hit(){S.lives--;st='dead';deadT=1.5;SFX.die();burst(X(pac.x),.5,Z(pac.y),CH[S.ch].c,25)}
+function update(dt){S.time+=dt;if(imm>0){imm-=dt;if(imm<=0)imm=0}if(grace>0)grace-=dt;
+ step(pac,dt,imm>0?5.2:4.8,pChoose);if(pac.dir[0]||pac.dir[1])pdir=pac.dir;
+ pt=[Math.round(pac.x),Math.round(pac.y)];if(pt[0]!=ppt[0]||pt[1]!=ppt[1]){ppt=pt;dp=bfs(pt[0],pt[1])}
+ const k=pt[1]*w+pt[0];
+ if(Math.hypot(pac.x-pt[0],pac.y-pt[1])<.45&&dots.has(k)){const m=dots.get(k);world.remove(m);dots.delete(k);S.score+=10;S.dots++;S.ldots++;S.left--;SFX.dot();burst(m.position.x,.4,m.position.z,0xffe14a,4);pop('+10',m.position)}
+ for(const o of orbs)if(!o.got&&Math.hypot(pac.x-o.i,pac.y-o.j)<.5){o.got=true;world.remove(o.m);SFX.orb();burst(X(o.i),.6,Z(o.j),0xffcc00,20);openQuiz();return}
+ let md=99;
+ for(const o of ghosts){if(o.delay>0){o.delay-=dt;o.x=o.i;o.y=o.j;continue}step(o,dt,LV[lvl].gs*(imm>0?.62:1),gChoose);
+  const d=Math.hypot(o.x-pac.x,o.y-pac.y);md=Math.min(md,d);
+  if(d<.6){if(imm>0){o.i=o.home[0];o.j=o.home[1];o.mv=0;o.p=0;o.dir=null;o.delay=2;burst(X(o.x),.5,Z(o.y),0xffffff,12)}else if(grace<=0){hit();return}}}
+ nearT-=dt;if(md<4&&imm<=0&&nearT<=0){SFX.near();nearT=.5}
+ if(S.left<=0){st='lvc';SFX.win();hudHide();$('lvs').innerHTML=`Level ${lvl+1} selesai!<br>Skor: <b>${S.score}</b> · Point: <b>${S.ldots}/${S.total}</b><br>Nyawa: ${'❤'.repeat(S.lives)}`;$('nx').textContent=lvl==3?'LIHAT KEPUTUSAN':'LEVEL SETERUSNYA';show('lvc')}}
+let sel=null,qdone=false;
+function drag(c,onDrop){c.onpointerdown=e=>{if(qdone)return;e.preventDefault();const sx=e.clientX,sy=e.clientY;let gh=null;
+ const mv=v=>{if(!gh&&Math.hypot(v.clientX-sx,v.clientY-sy)>8){gh=c.cloneNode(true);gh.style.cssText='position:fixed;pointer-events:none;z-index:99;opacity:.9';document.body.appendChild(gh);c.style.opacity=.3}if(gh){gh.style.left=v.clientX-40+'px';gh.style.top=v.clientY-18+'px'}},
+ up=v=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);c.style.opacity='';
+  if(gh){gh.remove();const el=document.elementFromPoint(v.clientX,v.clientY),b=el&&el.closest('.bn');if(b)onDrop(c,b)}else onDrop(c,null)};
+ addEventListener('pointermove',mv);addEventListener('pointerup',up)}}
+function openQuiz(){st='quiz';const q=curQ=QS[lvl][qi++],c=$('qo');c.innerHTML='';qdone=false;sel=null;$('qs').style.display='none';$('qf').style.display='none';
+ $('qn').textContent=`Level ${lvl+1} · Soalan ${qi}/4 · `+{mc:'Pilih jawapan',tf:'Benar atau Salah',drop:'Seret ke dalam kotak',bin:'Seret ke kotak yang betul',order:'Susun mengikut urutan'}[q.t];
+ $('qq').textContent=q.t=='drop'?'Seret perkataan yang betul ke dalam kotak:':q.q;
+ const E=(tg,cl,tx)=>{const e=document.createElement(tg);e.className=cl||'';if(tx!=null)e.textContent=tx;return e},lock=()=>{qdone=true;$('qs').style.display='none'};
+ const tap=(ch,home)=>{if(ch.parentNode!=home&&q.t!='drop'){home.appendChild(ch);chk();return}document.querySelectorAll('.chip.sel').forEach(x=>x.classList.remove('sel'));if(sel==ch)sel=null;else{ch.classList.add('sel');sel=ch}};
+ let chk=()=>{};
+ if(q.t=='mc')shuf(q.o.map((t,i)=>[t,i])).forEach(([t,i],n)=>{const b=E('button','qo','ABCD'[n]+'. '+t);b.dataset.o=i;b.onclick=()=>{[...c.children].forEach(x=>{x.disabled=true;if(x.dataset.o==0)x.classList.add('ok')});if(i)b.classList.add('no');fin(!i,q.o[0])};c.appendChild(b)});
+ else if(q.t=='tf')[['BENAR',true],['SALAH',false]].forEach(([t,v])=>{const b=E('button','qo',t);b.onclick=()=>{[...c.children].forEach(x=>{x.disabled=true;if(x.textContent==(q.a?'BENAR':'SALAH'))x.classList.add('ok')});if(v!=q.a)b.classList.add('no');fin(v==q.a,q.a?'BENAR':'SALAH')};c.appendChild(b)});
+ else if(q.t=='drop'){const[a,z]=q.q.split('___'),p=E('p','sq'),slot=E('span','bn','?'),pool=E('div','pool');p.append(a,slot,z);c.append(p,pool);
+  const put=ch=>{if(qdone)return;lock();slot.textContent=ch.textContent;const ok=ch.dataset.i==0;slot.classList.add(ok?'ok':'no');fin(ok,q.o[0])};
+  slot.onclick=()=>sel&&put(sel);
+  shuf(q.o.map((t,i)=>[t,i])).forEach(([t,i])=>{const k=E('span','chip',t);k.dataset.i=i;pool.appendChild(k);drag(k,(ch,b)=>b?put(ch):tap(ch,pool))})}
+ else{const pool=E('div','pool'),zone=E('div',q.t=='bin'?'bins':'');c.append(pool,zone);let items,bins=[];
+  const place=(ch,b)=>{if(qdone)return;(b.querySelector('.bc')||b).appendChild(ch);ch.classList.remove('sel');sel=null;chk()};
+  if(q.t=='bin'){q.bins.forEach((t,i)=>{const b=E('div','bn'),k=E('div','bc');b.dataset.b=i;b.append(E('b','',t),k);b.onclick=()=>sel&&place(sel,b);zone.appendChild(b)});items=q.it.map((x,i)=>[x[0],x[1]])}
+  else{const z=E('div','bn seq');z.onclick=()=>sel&&place(sel,z);zone.appendChild(z);items=q.it.map((x,i)=>[x,i])}
+  chk=()=>{$('qs').style.display=pool.children.length||qdone?'none':'inline-block'};
+  shuf(items).forEach(([t,v])=>{const k=E('span','chip',t);k.dataset.v=v;pool.appendChild(k);drag(k,(ch,b)=>b?place(ch,b):tap(ch,pool))});
+  $('qs').onclick=()=>{lock();const ch=[...c.querySelectorAll('.chip')];let all;
+   if(q.t=='bin'){all=true;ch.forEach(k=>{const ok=k.closest('.bn').dataset.b==k.dataset.v;k.classList.add(ok?'ok':'no');if(!ok)all=false});fin(all,q.it.map(x=>x[0]+' → '+q.bins[x[1]]).join('; '))}
+   else{all=true;[...c.querySelector('.seq').children].forEach((k,i)=>{const ok=k.dataset.v==i;k.classList.add(ok?'ok':'no');if(!ok)all=false});fin(all,q.it.join(' → '))}}}
+ show('quiz')}
+function fin(ok,ans){qdone=true;S.ans++;if(ok){S.correct++;S.score+=100;S.qscore+=100;SFX.ok()}else{S.wrong++;SFX.no()}curQ.ok=ok;
+ const b=$('qb');b.className='fb '+(ok?'ok':'no');b.textContent=ok?'✔ BETUL! +100 · IMMUNITY 8s 🛡':'✘ SALAH! Jawapan betul: '+ans;$('qe').textContent=curQ.e;$('qf').style.display='block';$('qs').style.display='none'}
+$('qc').onclick=()=>{$('quiz').classList.remove('on');st='play';if(curQ.ok)startImm()};
+function endGame(win){st='over';hudHide();const n=S.ans,acc=n?Math.round(S.correct/n*100):0,r={id:Date.now(),name:S.name,ch:CH[S.ch].n,score:S.score,lvl:win?4:lvl+1,correct:S.correct,acc};
+ let a=LB();a.push(r);a.sort(cmp);try{localStorage.setItem('edu_lb',JSON.stringify(a.slice(0,50)))}catch(e){}
+ const rk=a.findIndex(x=>x.id==r.id)+1;
+ $('rt').textContent=win?'TAHNIAH! ANDA MASTER OF THE MAZE!':'GAME OVER';if(win)SFX.win();
+ $('rs').innerHTML=`👤 <b>${esc(S.name)}</b> · Karakter: ${CH[S.ch].n}<br>Markah keseluruhan: <b>${S.score}</b> · Markah kuiz: <b>${S.qscore}</b><br>Point dikutip: <b>${S.dots}</b><br>Soalan dijawab: ${n} · Betul: <b>${S.correct}</b> · Salah: <b>${S.wrong}</b> · Ketepatan: <b>${acc}%</b><br>${win?'Level diselesaikan: 4/4':'Level tertinggi dicapai: '+(lvl+1)+' (diselesaikan: '+lvl+')'}<br>Kedudukan leaderboard: <b>${rk?'#'+rk:'-'}</b>`;
+ $('rb').innerHTML=boardHTML(r.id);show('res')}
+// ===== Leaderboard =====
+const cmp=(a,b)=>b.score-a.score||b.acc-a.acc,esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function LB(){try{return JSON.parse(localStorage.getItem('edu_lb')||'[]')}catch(e){return[]}}
+function boardHTML(id){const a=LB().slice(0,10);if(!a.length)return'<p>Belum ada rekod.</p>';return'<table><tr><th>#</th><th>Nama</th><th>Markah</th><th>Level</th><th>Betul</th><th>Tepat</th></tr>'+a.map((r,i)=>`<tr${r.id==id?' style="color:#ffd400"':''}><td>${i+1}</td><td>${esc(r.name)}</td><td>${r.score}</td><td>${r.lvl}</td><td>${r.correct}</td><td>${r.acc}%</td></tr>`).join('')+'</table>'}
+// ===== UI =====
+function show(id){document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on'));if(id)$(id).classList.add('on')}
+function hudHide(){$('hud').style.display='none';$('pad').classList.remove('on');layout()}
+function intro(){const L=LV[lvl];$('il').textContent=`LEVEL ${lvl+1} – ${L.n}`;$('id').textContent=L.d;$('it').textContent=L.t;show('intro')}
+function newGame(){S={name:$('nm').value.trim(),ch:selCh,score:0,lives:3,dots:0,qscore:0,correct:0,wrong:0,ans:0,time:0};loadLevel(0);intro()}
+$('go').onclick=()=>{if(!$('nm').value.trim()){$('er').textContent='Sila masukkan nama pelajar dahulu!';$('nm').focus();return}$('er').textContent='';AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume();newGame()};
+$('st').onclick=()=>{AC&&AC.resume();show(null);$('hud').style.display='flex';$('pad').classList.add('on');layout();st='play'};
+$('nx').onclick=()=>{if(lvl==3)return endGame(true);loadLevel(lvl+1);intro()};
+$('lb').onclick=$('rlb').onclick=()=>{$('bt').innerHTML=boardHTML();show('board')};
+$('hw').onclick=()=>show('how');
+document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>show(st=='over'?'res':'menu'));
+$('home').onclick=()=>{st='menu';show('menu')};
+$('again').onclick=()=>{AC&&AC.resume();newGame()};
+$('mu').onclick=()=>{muted=!muted;$('mu').textContent=muted?'🔇':'🔊';if(muted){if(AC&&AC.state==='running')AC.suspend().catch(()=>{});}else{if(AC&&AC.state==='suspended')AC.resume().catch(()=>{});}};
+const cs=$('chars');CH.forEach((c,i)=>{const b=document.createElement('button');b.className='ch'+(i?'':' sel');b.innerHTML=`<i style="background:${c.h};box-shadow:0 0 10px ${c.h}"></i>${c.n}`;b.onclick=()=>{selCh=i;[...cs.children].forEach((x,k)=>x.classList.toggle('sel',k==i))};cs.appendChild(b)});
+// ===== Input =====
+const KM={ArrowUp:[0,-1],w:[0,-1],W:[0,-1],ArrowDown:[0,1],s:[0,1],S:[0,1],ArrowLeft:[-1,0],a:[-1,0],A:[-1,0],ArrowRight:[1,0],d:[1,0],D:[1,0]};
+addEventListener('keydown',e=>{if(e.target.tagName=='INPUT')return;if(e.key=='m'||e.key=='M')$('mu').click();const d=KM[e.key];if(d){e.preventDefault();setWant(d)}});
+document.querySelectorAll('#pad button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();setWant(b.dataset.d.split(',').map(Number))}));
+G.addEventListener('touchstart',e=>lastPos=[e.touches[0].clientX,e.touches[0].clientY],{passive:true});
+G.addEventListener('touchmove',e=>{if(!lastPos)return;const dx=e.touches[0].clientX-lastPos[0],dy=e.touches[0].clientY-lastPos[1];if(Math.hypot(dx,dy)>28){setWant(Math.abs(dx)>Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)]);lastPos=[e.touches[0].clientX,e.touches[0].clientY]}},{passive:true});
+// ===== Render loop =====
+let last=0;
+function anim(dt){if(!pac)return;
+ const mv=st=='play'&&pac.mv,op=mv?Math.abs(Math.sin(T*16))*.6:.12;pac.top.rotation.z=op;pac.bot.rotation.z=op;
+ pac.mesh.position.set(X(pac.x),.45,Z(pac.y));if(pac.dir[0]||pac.dir[1])pac.f.rotation.y+=((Math.atan2(-pac.dir[1],pac.dir[0])-pac.f.rotation.y+Math.PI*3)%(Math.PI*2)-Math.PI)*Math.min(1,dt*14);
+ const im=imm>0,bl=im&&imm<2&&Math.floor(T*8)%2;pac.aura.visible=im&&!bl;pac.aura.scale.setScalar(1+Math.sin(T*8)*.08);
+ pac.m.color.setHex(im?0x66ffff:CH[S.ch].c);pac.m.emissive.setHex(im?0x22ddff:CH[S.ch].c);pac.m.emissiveIntensity=im?.7+Math.sin(T*10)*.3:.25;
+ pac.mesh.visible=!(grace>0&&st=='play'&&Math.floor(T*10)%2);pl.position.set(X(pac.x),2.2,Z(pac.y));pl.color.setHex(im?0x55ffff:0xffdd55);
+ ghosts.forEach((o,k)=>{o.mesh.position.set(X(o.x),.15+Math.sin(T*4+k)*.08,Z(o.y));if(o.dir)o.f.rotation.y=Math.atan2(-o.dir[1],o.dir[0]);
+  const c=im?(bl?0xffffff:0x2a3bff):o.c;o.m.color.setHex(c);o.m.emissive.setHex(c)});
+ orbs.forEach((o,k)=>{if(o.got)return;o.s.rotation.y=T*2;o.rg.rotation.x=T*2;o.rg.rotation.y=T*1.3;o.m.position.y=.6+Math.sin(T*3+k)*.12});
+ let n=0;const few=S.left<=10;dots.forEach(m=>{let s=.85+.3*Math.sin(T*6+n++);if(few){s*=1.7;if(!m.userData.b){const b=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,3,8),new THREE.MeshBasicMaterial({color:0xffe14a,transparent:true,opacity:.5,blending:THREE.AdditiveBlending,depthWrite:false}));b.position.set(0,1.5,0);m.add(b);m.userData.b=b}}m.scale.setScalar(s)});
+ for(const p of PT)if(p.l>0){p.l-=dt;p.v.y-=9*dt;p.m.position.addScaledVector(p.v,dt);p.m.scale.setScalar(Math.max(.01,p.l/.6));if(p.l<=0)p.m.visible=false}
+ if(st=='play'||st=='dead'){$('hn').textContent=S.name;$('hl').textContent=lvl+1;$('hs').textContent=S.score;$('hd').textContent=S.dots;$('hb').textContent=S.left+(S.left<=10?' ✨ cari cahaya kuning!':'');$('hb').style.color=S.left<=10?'#ff4d6d':'';$('hb').parentNode.firstChild.textContent='BAKI ';
+  $('hv').textContent='❤'.repeat(Math.max(0,S.lives));$('hv').style.color='#ff4d6d';$('hi').innerHTML=im?`🛡 IMMUNITY <b style="color:#5ff">${imm.toFixed(1)}s</b>`:'🛡 —';
+  const t=S.time|0;$('ht').textContent=((t/60)|0)+':'+String(t%60).padStart(2,'0')}}
+function loop(ts){requestAnimationFrame(loop);const dt=Math.min(.05,(ts-last)/1000||0);last=ts;T+=dt;
+ if(st=='play')update(dt);else if(st=='dead'){deadT-=dt;pac.mesh.scale.setScalar(Math.max(.01,deadT/1.5));pac.f.rotation.y+=dt*14;
+  if(deadT<=0){if(S.lives<=0)endGame(false);else{respawn();st='play'}}}
+ anim(dt);if(h)rd.render(sc,cam)}
+document.addEventListener('visibilitychange',()=>{last=0});
+layout();requestAnimationFrame(loop);
+</script></body></html>
